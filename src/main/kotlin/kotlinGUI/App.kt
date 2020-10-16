@@ -7,28 +7,12 @@ import tornadofx.*
 //import ExternalDevices
 
 fun main(args: Array<String>) {
-    //launch<VisualApplication>(args)
-    launch<MyApp>(args)
+    launch<VisualApplication>(args)
     println("hello")
     var port = PortCOM(SettingsCOM())
-    port.OpenPort()
+    //port.OpenPort()
 }
 
 
-/* class VisualApplication: App(MainForm::class)
+class VisualApplication: App(MainForm::class)
 
-class MainForm: View()
-{
-    override val root = vbox {
-        button("big red btn")
-    }
-} */
-
-class MyApp: App(MyView::class)
-
-class MyView: View() {
-    override val root = vbox {
-        button("big red btn")
-        label("Waiting")
-    }
-}

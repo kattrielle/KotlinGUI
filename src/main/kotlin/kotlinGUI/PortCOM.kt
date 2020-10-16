@@ -5,18 +5,22 @@ import jssc.SerialPort
 
 class PortCOM (settings : SettingsCOM ) : SerialPort(settings.name), IPort {
     override var isOpen : Boolean = false //fix???
-    get() = false
+    get() = false //есть ли свойство, определяющее, открыт ли данный порт?
 
     override fun OpenPort() : Boolean
     {
         println("Opening...")
-        return true
+        if ( isOpen )
+        {
+            return true
+        }
+        return openPort()
     }
 
     override fun ClosePort() : Boolean
     {
         println("Closing...")
-        return true
+        return closePort()
     }
 
     override fun SendMessage(message: String, delay: Int) : Boolean 

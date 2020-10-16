@@ -3,6 +3,7 @@ package kotlinGUI
 
 interface IPort {
 
+    //var settings : IPortSettings
     var isOpen : Boolean //как сделать доступным только Гет?
     
     fun OpenPort() : Boolean

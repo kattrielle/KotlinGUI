@@ -2,5 +2,9 @@
 package kotlinGUI
 
 open class Device {
-    //protected port: IPort
+    protected open val maxIterations: Int = 1
+
+    protected open lateinit var port: IPort
+
+
 }
