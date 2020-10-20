@@ -1,7 +1,6 @@
-//package ExternalDevices
-package kotlinGUI
+package externalDevices
 
-class SettingsCOM : IPortSettings
+open class SettingsCOM : PortSettings()
 {
 	var baudRate : Int = 9600;
 	var dataBits : Int = 8;
@@ -13,7 +12,7 @@ class SettingsCOM : IPortSettings
 
 	var name : String = "";
 
-	override var description : String = ""
+	override val description : String
     get() = name
 
 	override fun CheckName() : Boolean

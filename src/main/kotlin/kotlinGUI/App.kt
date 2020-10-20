@@ -3,8 +3,9 @@
  */
 package kotlinGUI
 
+import externalDevices.PortCOM
+import externalDevices.SettingsCOM
 import tornadofx.*
-//import ExternalDevices
 
 fun main(args: Array<String>) {
     launch<VisualApplication>(args)

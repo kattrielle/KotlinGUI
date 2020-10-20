@@ -1,9 +1,8 @@
-package kotlinGUI
+package externalDevices
 
 import java.nio.ByteBuffer
 import java.nio.ByteOrder
 import kotlin.math.ceil
-
 
 open class Modbus : Device() {
     val READMANY_COIL : Byte = 0x01
@@ -29,9 +28,8 @@ open class Modbus : Device() {
         return emptyArray()
     }
 
-    protected open fun CreateMessageWrite( // Создание пакета множественной записи (0х10 функция)
+    protected open fun CreateMessageMultipleWrite( // Создание пакета множественной записи (0х10 функция)
             register: Int, //Стартовый регистр
-            len: Int, //Количество отправляемых значений
             values: Array<Byte> //Набор значений для записи
     ) : Array<Byte> //Сгенерированный пакет для отправки на внешнее устройство
     {
@@ -55,15 +53,32 @@ open class Modbus : Device() {
             values:Array<Int> //Набор величин, которые требуется отправить в регистры
     ):Array<Byte>
     {
-        return emptyArray()
+        val result: Array<Byte> = Array( values.size * 2) {0}
+        var byteBuffer = ByteBuffer.allocate(2)
+        for ( i in values.indices) {
+            byteBuffer.putShort(values[i].toShort())
+            result[2 * i + 1] = byteBuffer[0]
+            result[2 * i] = byteBuffer[1]
+            byteBuffer.clear()
+        }
+        return result
+    }
+
+    protected fun ConvertValueToBytes( value:Int ) : Array<Byte> {
+        val result: Array<Byte> = Array(2) { 0 }
+        val byteBuffer = ByteBuffer.allocate(2)
+        byteBuffer.putShort(value.toShort())
+        result[1] = byteBuffer[0]
+        result[0] = byteBuffer[1]
+        return result
     }
 
     protected fun CountAnswerLength( //Подсчёт длины получаемого ответа, чистых значений
-            type: Int, //Отправленная на устройство функция
+            funct: Int, //Отправленная на устройство функция
             length: Int //Число запрошенных регистров
     ) : Int //Число значимых байт ответа
     {
-        return when ( type ) {
+        return when ( funct ) {
             READMANY_DISCRETEINPUTS.toInt(), READMANY_COIL.toInt() ->
                 ceil( length.toDouble() / 8.0 ).toInt()
             READMANY_HOLDING.toInt(), READMANY_INPUT.toInt() ->
@@ -84,7 +99,7 @@ open class Modbus : Device() {
             READMANY_HOLDING, READMANY_INPUT -> {
                 result = Array(answerLength / 2) { 0 }
                 val tmp = ByteArray(2) { 0 }
-                for (i in 0..((responseBytes - answerStart) / 2 - skipAtEnd)) {
+                for (i in 0 until (responseBytes - answerStart) / 2 - skipAtEnd) {
                     tmp[0] = response[1 + i * 2 + answerStart]
                     tmp[1] = response[i * 2 + answerStart]
                     result[i] = ByteBuffer.wrap(tmp).order(ByteOrder.LITTLE_ENDIAN).short.toInt()
@@ -104,10 +119,9 @@ open class Modbus : Device() {
 
     fun GetOneCoilValue( //Запрос 1 coil-регистра ( 0х01 )
             register: Int, //Запрашиваемый регистр
-            delayAnswer: Int //Время ожидания ответа
     ) : Pair<Boolean,Boolean> //Значение логического регистра
     {
-        val (succeed, answer) = GetCoilValue( register, 1, delayAnswer )
+        val (succeed, answer) = GetCoilValue( register, 1 )
         return if (succeed) {
             Pair(succeed, answer[0])
         } else {
@@ -118,19 +132,17 @@ open class Modbus : Device() {
     fun GetCoilValue( //Запрос coil-регистров ( 0х01 )
             register: Int, //Стартовый регистр
             length: Int, //Требуемое число регистров
-            delayAnswer: Int //Время ожидания ответа
     ) : Pair<Boolean,Array<Boolean>> //Набор значений логических регистров
     {
-        val (succeed,answer) = GetValue(READMANY_COIL, register, length, delayAnswer)
-        return return Pair(succeed,ConvertToFlagValues(length,answer))
+        val (succeed,answer) = GetValue(READMANY_COIL, register, length)
+        return Pair(succeed,ConvertToFlagValues(length,answer))
     }
 
     fun GetOneDiscreteInputValue( //Запрос 1 дискретного входа ( 0х02 )
             register: Int, //Запрашиваемый регистр
-            delayAnswer: Int //Время ожидания ответа
     ) : Pair<Boolean, Boolean> //Значение логического регистра
     {
-        val (succeed, answer) = GetDiscreteInputValue( register, 1, delayAnswer )
+        val (succeed, answer) = GetDiscreteInputValue( register, 1 )
         return if (succeed) {
             Pair(succeed, answer[0])
         } else {
@@ -141,20 +153,23 @@ open class Modbus : Device() {
     fun GetDiscreteInputValue( //Запрос дискретных входов ( 0х02 )
             register: Int, //Стартовый регистр
             length: Int, //Требуемое число регистров
-            delayAnswer: Int //Время ожидания ответа
     ) :Pair<Boolean, Array<Boolean>> //Набор значений дискретных входов
     {
-        val (succeed, answer) = GetValue(READMANY_DISCRETEINPUTS,register, length, delayAnswer)
+        val (succeed, answer) = GetValue(READMANY_DISCRETEINPUTS,register, length)
         return Pair(succeed,ConvertToFlagValues(length,answer))
     }
 
     fun GetOneHoldingValue( //Запрос 1 регистра хранения ( 0х03 )
             register: Int, //Запрашиваемый регистр
-            delayAnswer: Int //Время ожидания ответа
     ) : Pair<Boolean,Int> //Значение регистра
     {
-        val (succeed, answer) = GetHoldingValue(register, 1, delayAnswer)
-        return if (succeed) {
+        val (succeed, answer) = GetHoldingValue(register, 1)
+        /*return if (succeed) {
+            Pair(succeed,answer[0])
+        } else {
+            Pair(succeed, 0)
+        }*/
+        return if (answer.isNotEmpty()) {
             Pair(succeed,answer[0])
         } else {
             Pair(succeed, 0)
@@ -164,18 +179,16 @@ open class Modbus : Device() {
     fun GetHoldingValue( //Запрос регистров хранения ( 0х03 )
             register: Int, //Стартовый регистр
             length: Int, //Требуемое число регистров
-            delayAnswer: Int //Время ожидания ответа
     ) : Pair<Boolean,Array<Int>> //Набор значений регистров
     {
-        return GetValue(READMANY_HOLDING, register, length, delayAnswer)
+        return GetValue(READMANY_HOLDING, register, length)
     }
 
     fun GetOneInputValue( //Запрос 1 регистра ввода ( 0х04 )
             register: Int, //Запрашиваемый регистр
-            delayAnswer: Int //Время ожидания ответа
     ) : Pair<Boolean,Int> //Значение регистра
     {
-        val (succeed, answer) = GetInputValue(register, 1, delayAnswer)
+        val (succeed, answer) = GetInputValue(register, 1)
         return if (succeed) {
             Pair(succeed, answer[0])
         } else {
@@ -186,21 +199,19 @@ open class Modbus : Device() {
     fun GetInputValue( //Запрос регистров ввода ( 0х04 )
             register: Int, //Стартовый регистр
             length: Int, //Требуемое число регистров
-            delayAnswer: Int //Время ожидания ответа
     ) : Pair<Boolean, Array<Int>> //Набор значений регистров
     {
-        return GetValue(READMANY_INPUT, register, length, delayAnswer)
+        return GetValue(READMANY_INPUT, register, length)
     }
 
     fun GetFloat( //Запрос float-значения из регистра
              funct: Byte, //Отправленная на устройство функция
              register: Int, //Запрашиваемый регистр
-             delayAnswer: Int //Время ожидания ответа
     ): Pair<Boolean,Float> {
-        val (succeed, answer) = GetClearAnswer(funct, register, 2, delayAnswer)
+        val (succeed, answer) = GetClearAnswer(funct, register, 2 )
         return if (succeed) {
             var tmp: ByteArray = ByteArray(4) { 0 }
-            for (i: Int in 0..2) {
+            for (i: Int in 0 until 2) {
                 tmp[2 * i] = answer[answerStart + 2 * i + 1]
                 tmp[2 * i + 1] = answer[answerStart + 2 * i]
             }
@@ -214,16 +225,16 @@ open class Modbus : Device() {
     fun GetSwFloat( //Запрос switched-float-значения из регистра
             funct: Byte, //Отправленная на устройство функция
             register: Int, //Запрашиваемый регистр
-            delayAnswer: Int //Время ожидания ответа
     ):Pair<Boolean,Float> {
-        val (succeed, answer) = GetClearAnswer(funct, register, 2, delayAnswer)
+        val (succeed, answer) = GetClearAnswer(funct, register, 2 )
         return if (succeed) {
-            var tmp: ByteArray = ByteArray(4) { 0 }
-            for (i: Int in 0..2) {
+            val tmp = ByteArray(4) { 0 }
+            for (i: Int in 0 until 2) {
                 tmp[2 * i] = answer[answerStart + 2 * i]
                 tmp[2 * i + 1] = answer[answerStart + 2 * i + 1]
             }
-            Pair(succeed, ByteBuffer.wrap(tmp).order(ByteOrder.LITTLE_ENDIAN).float)
+            //Pair(succeed, ByteBuffer.wrap(tmp).order(ByteOrder.LITTLE_ENDIAN).float)
+            Pair(succeed, ByteBuffer.wrap(tmp).float)
         } else {
             //logging of unsuccessful reading
             Pair(succeed, 0F)
@@ -232,94 +243,84 @@ open class Modbus : Device() {
 
     fun GetHoldingFloat( //Запрос float-значения из регистра хранения
             register: Int, //Запрашиваемый регистр
-            delayAnswer: Int //Время ожидания ответа
     ):Pair<Boolean,Float>
     {
-        return GetFloat( READMANY_HOLDING, register, delayAnswer )
+        return GetFloat( READMANY_HOLDING, register )
     }
 
     fun GetInputFloat( //Запрос float-значения из регистра ввода
             register: Int, //Запрашиваемый регистр
-            delayAnswer: Int //Время ожидания ответа
     ):Pair<Boolean,Float>
     {
-        return GetFloat( READMANY_INPUT, register, delayAnswer )
+        return GetFloat( READMANY_INPUT, register )
     }
 
     fun GetHoldingSwFloat( //Запрос switched-float-значения из регистра хранения
             register: Int, //Запрашиваемый регистр
-            delayAnswer: Int //Время ожидания ответа
     ):Pair<Boolean,Float>
     {
-        return GetSwFloat( READMANY_HOLDING, register, delayAnswer )
+        return GetSwFloat( READMANY_HOLDING, register )
     }
 
     fun GetInputSwFloat( //Запрос switched-float-значения из регистра ввода
             register: Int, //Запрашиваемый регистр
-            delayAnswer: Int //Время ожидания ответа
     ):Pair<Boolean,Float>
     {
-        return GetSwFloat( READMANY_INPUT, register, delayAnswer )
+        return GetSwFloat( READMANY_INPUT, register )
     }
 
     fun GetClearAnswer( //Получение чистого ответа устройства (без убирания доп. части пакета)
             funct: Byte, //Отправленная на устройство функция
             register: Int, //Стартовый регистр
             length: Int, //Число регистров
-            delayAnswer: Int //Время ожидания ответа
     ) : Pair< Boolean, Array<Byte>> //Успешность операции & Ответ устройства
     {
         val message = CreateMessage(funct, register, length )
         val answerLength = CountAnswerLength( funct.toInt(), length )
-        return port.SendQuery(message, delayAnswer,
-                answerStart + 2 * skipAtEnd + answerLength, maxIterations)
+        return port.SendQuery(message, answerStart + 2 * skipAtEnd + answerLength,
+                maxIterations)
     }
 
     fun GetValue( // Запрос значений с устройства
             funct: Byte, //Отправленная на устройство функция
             register: Int, //Стартовый регистр
             length: Int, //Число регистров
-            delayAnswer: Int //Время ожидания ответа
     ) : Pair<Boolean, Array<Int>> //Успешность операции & Набор значений регистров
     {
         val answerLength = CountAnswerLength( funct.toInt(), length)
-        val (succeed, answer) = GetClearAnswer( funct, register, length, delayAnswer )
+        val (succeed, answer) = GetClearAnswer( funct, register, length )
         return Pair(succeed, ConvertBytes( answer, funct, answerLength ))
     }
 
     fun SetFlag( //Установка (запись значения) coil-регистра
             register: Int, //Изменяемый регистр
             value: Boolean, //Отправляемый флаг
-            delayAnswer: Int //Время ожидания ответа
     ):Boolean //Ответ устройства на операцию записи
     {
         val flag = if (value) WRITEVALUE_TRUE else WRITEVALUE_FALSE
-        return SetValue(WRITEONE_FLAG, register, flag, delayAnswer)
+        return SetValue(WRITEONE_FLAG, register, flag)
     }
 
     fun SetHoldingValue( //Установка (запись значения) регистра хранения
             register: Int, //Изменяемый регистр
             value: Int, //Отправляемое значение
-            delayAnswer: Int //Время ожидания ответа
     ):Boolean //Ответ устройства на операцию записи
     {
-        return SetValue( WRITEONE_HOLDING, register, value, delayAnswer )
+        return SetValue( WRITEONE_HOLDING, register, value )
     }
 
     open fun SetValue( //Отправка пакета записи
             funct: Byte, //Отправляемая на устройство функция
             register: Int, //Изменяемый регистр
             value: Int, //Отправляемое значение
-            delayAnswer: Int //Время ожидания ответа
     ):Boolean //Ответ устройства на операцию записи
     {
         return false
     }
 
-    open fun SetMultipleHoldingValues( //Отправка пакета множественной записи регистров хранения (0х10)
+    protected open fun SetMultipleHoldingValues( //Отправка пакета множественной записи регистров хранения (0х10)
             register: Int, //Стартовый регистр
             values: Array<Byte>, //Отправляемое значение
-            delayAnswer: Int //Время ожидания ответа
     ):Boolean //Ответ устройства на операцию записи
     {
         return false
@@ -328,37 +329,45 @@ open class Modbus : Device() {
     fun SetMultipleHoldingValues( //Отправка пакета множественной записи регистров хранения (0х10)
             register: Int, //Стартовый регистр
             values: Array<Int>, //Отправляемое значение
-            delayAnswer: Int //Время ожидания ответа
     ):Boolean //Ответ устройства на операцию записи
     {
         val registerPoints = ConvertToBytes(values)
-        return SetMultipleHoldingValues(register, registerPoints, delayAnswer)
+        return SetMultipleHoldingValues(register, registerPoints)
     }
 
     fun SetHoldingFloat( //отправка на устройство float-величины
             register: Int, //адрес регистра
             value: Float, //записываемое значение
-            delayAnswer: Int //время ожидания ответа
     ) : Boolean //Ответ устройства на операцию записи
     {
         //int[] tmp = new int[ 2 ];
         //tmp[ 0 ] = (int) BitConverter.ToInt16( BitConverter.GetBytes( value ), 0 );
         //tmp[ 1 ] = (int) BitConverter.ToInt16( BitConverter.GetBytes( value ), 2 );
         val tmp: Array<Byte> = Array(4) { 0 }
-        return SetMultipleHoldingValues(register, tmp, delayAnswer)
+        val byteBuffer = ByteBuffer.allocate(4)
+        byteBuffer.putFloat( value )
+        for ( i in 0..1 ) {
+            tmp[2 * i] = byteBuffer[2 * (1 - i) + 1]
+            tmp[2 * i + 1] = byteBuffer[2 * (1 - i)]
+        }
+        return SetMultipleHoldingValues(register, tmp)
     }
 
     fun SetHoldingSwFloat( //отправка на устройство float-величины
             register: Int, //адрес регистра
             value: Float, //записываемое значение
-            delayAnswer: Int //время ожидания ответа
     ) : Boolean //Ответ устройства на операцию записи
     {
         //int[] tmp = new int[ 2 ];
         //tmp[ 0 ] = (int) BitConverter.ToInt16( BitConverter.GetBytes( value ), 2 );
         //tmp[ 1 ] = (int) BitConverter.ToInt16( BitConverter.GetBytes( value ), 0 );
-        //return SetMultipleValue( address, register, tmp, sleep );
         val tmp: Array<Byte> = Array(4) { 0 }
-        return SetMultipleHoldingValues(register, tmp, delayAnswer)
+        val byteBuffer = ByteBuffer.allocate(4)
+        byteBuffer.putFloat( value )
+        for ( i in 0..1 ) {
+            tmp[2 * i] = byteBuffer[2 * i + 1]
+            tmp[2 * i + 1] = byteBuffer[2 * i]
+        }
+        return SetMultipleHoldingValues(register, tmp)
     }
 }

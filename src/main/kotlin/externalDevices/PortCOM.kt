@@ -1,11 +1,19 @@
 //package ExternalDevices
-package kotlinGUI
+package externalDevices
 
 import jssc.SerialPort
 
-class PortCOM (settings : SettingsCOM ) : SerialPort(settings.name), IPort {
+class PortCOM (settings : SettingsCOM) : SerialPort(settings.name), IPort {
     override var isOpen : Boolean = false //fix???
     get() = false //есть ли свойство, определяющее, открыт ли данный порт?
+
+    override var delayAnswerRead: Int
+        get() = TODO("Not yet implemented")
+        set(value) {}
+
+    override var delayAnswerWrite: Int
+        get() = TODO("Not yet implemented")
+        set(value) {}
 
     override fun OpenPort() : Boolean
     {
@@ -23,13 +31,13 @@ class PortCOM (settings : SettingsCOM ) : SerialPort(settings.name), IPort {
         return closePort()
     }
 
-    override fun SendMessage(message: String, delay: Int) : Boolean 
+    override fun SendMessage(message: String) : Boolean
     {
         println("sending $message")
         return true
     }
 
-    override fun SendMessage(message: Array<Byte>, delay: Int) : Boolean
+    override fun SendMessage(message: Array<Byte>) : Boolean
     {
         println( "sending some bytes..." )
         return true
@@ -41,8 +49,8 @@ class PortCOM (settings : SettingsCOM ) : SerialPort(settings.name), IPort {
         return Pair(true,"")
     }
 
-    override fun SendQuery(message: Array<Byte>, delay:Int, 
-        answerLen: Int, attempts: Int): Pair<Boolean,Array<Byte>>
+    override fun SendQuery(message: Array<Byte>, answerLen: Int,
+                           attempts: Int): Pair<Boolean,Array<Byte>>
     {
         println("sending some bytes...")
         val result = arrayOf<Byte>(0,1)

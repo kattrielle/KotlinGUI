@@ -36,13 +36,15 @@ dependencies {
     implementation(platform("org.jetbrains.kotlin:kotlin-bom"))
 
     // Use the Kotlin JDK 8 standard library.
-    //implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
+    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
+
+    implementation("org.junit.jupiter:junit-jupiter:5.4.2")
 
     // Use the Kotlin test library.
-    //testImplementation("org.jetbrains.kotlin:kotlin-test")
+    testImplementation("org.jetbrains.kotlin:kotlin-test")
 
     // Use the Kotlin JUnit integration.
-    //testImplementation("org.jetbrains.kotlin:kotlin-test-junit")
+    testImplementation("org.jetbrains.kotlin:kotlin-test-junit")
 
     implementation("no.tornado:tornadofx:1.7.20")
 
