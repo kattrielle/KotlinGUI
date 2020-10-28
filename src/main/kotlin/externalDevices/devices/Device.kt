@@ -1,7 +1,7 @@
-//package ExternalDevices
-package externalDevices
+package externalDevices.devices
 
-import externalDevices.IPort
+import externalDevices.settings.PortSettings
+import externalDevices.ports.IPort
 
 open class Device {
     protected open val maxIterations: Int = 1

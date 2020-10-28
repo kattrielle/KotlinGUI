@@ -1,4 +1,4 @@
-package externalDevices
+package externalDevices.devices
 
 import java.nio.ByteBuffer
 import java.nio.ByteOrder

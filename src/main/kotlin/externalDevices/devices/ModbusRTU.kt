@@ -1,23 +1,27 @@
-package externalDevices
+package externalDevices.devices
 
+import externalDevices.settings.SettingsCOM
+import externalDevices.settings.SettingsModbusRTU
+import externalDevices.ports.PortCOM
 
-class ModbusRTU () : Modbus() {
+class ModbusRTU ( portName: String ) : Modbus() {
     init{
-        settings = SettingsModbusRTU()
+        settings = SettingsModbusRTU( portName )
+        port = PortCOM ( portName )
     }
-    private val LEN_WRITEMESSAGE_RTU: Int = 8;
+    private val LEN_WRITEMESSAGE_RTU: Int = 8
 
     override val maxIterations: Int = 25
     override val answerStart: Int = 3
     override val skipAtEnd: Int = 1
 
     //override var port --- аналогично
-    constructor(_address: Byte, _baudrate: Int) : this() {
-        //settings = SettingsModbusRTU()
+    constructor(portName: String, _address: Byte, _baudrate: Int) : this( portName ) {
         (settings as SettingsModbusRTU).address = _address
         (settings as SettingsModbusRTU).baudRate = _baudrate
 
         //init of PortCOM
+        port = PortCOM( settings as SettingsCOM)
     }
 
     private fun GetCRC(message: Array<Byte>) : Array<Byte>
@@ -41,10 +45,9 @@ class ModbusRTU () : Modbus() {
     override fun CreateMessage(funct: Byte, register: Int, value: Int): Array<Byte>
     {
         val result: Array<Byte> = Array(LEN_WRITEMESSAGE_RTU) { 0 }
-        var tmp: Array<Byte> = Array(2) { 0 }
         result[0] = (settings as SettingsModbusRTU).address
         result[1] = funct
-        tmp = ConvertValueToBytes(register - 1)
+        var tmp = ConvertValueToBytes(register - 1)
         result[2] = tmp[1]
         result[3] = tmp[0]
         tmp = ConvertValueToBytes(value)

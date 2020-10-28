@@ -30,7 +30,8 @@ class MainForm: View()
         {
             textFill = Color.RED
             action {
-                openInternalWindow<FormSettings>()
+                //openInternalWindow<FormSettings>()
+                openInternalWindow<FormSetValuesToDevice>()
             }
         }
     }
