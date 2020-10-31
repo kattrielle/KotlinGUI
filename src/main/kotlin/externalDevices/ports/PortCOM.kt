@@ -12,17 +12,15 @@ class PortCOM (name: String) : SerialPort(name), IPort {
     override var isOpen : Boolean = false //fix???
     get() = isOpened
 
-    override var delayAnswerRead: Int
-        get() = TODO("Not yet implemented")
-        set(value) {}
+    override var delayAnswerRead: Int = 100
 
-    override var delayAnswerWrite: Int
-        get() = TODO("Not yet implemented")
-        set(value) {}
+    override var delayAnswerWrite: Int = 100
 
     fun SetPortParameters( settings: SettingsCOM) : Boolean
     {
         //как установить параметры, если они только к открытому порту применяются?
+        delayAnswerRead = settings.readTimeout
+        delayAnswerWrite = settings.writeTimeout
         if (!OpenPort()) {
             return false
         }
@@ -50,6 +48,10 @@ class PortCOM (name: String) : SerialPort(name), IPort {
     override fun ClosePort() : Boolean
     {
         println("Closing...")
+        if ( !isOpen )
+        {
+            return true
+        }
         return closePort()
     }
 
@@ -58,6 +60,7 @@ class PortCOM (name: String) : SerialPort(name), IPort {
         println("sending $message")
         writeString( message )
         //Sleep(delayAnswerWrite) --- что делать с этим куском кода?
+        Thread.sleep( delayAnswerWrite.toLong() )
         return true
     }
 
@@ -67,6 +70,7 @@ class PortCOM (name: String) : SerialPort(name), IPort {
         //нужны ли тут дискардбуфферс?
         writeBytes( message.toByteArray() )
         //Sleep(delayAnswerWrite)
+        Thread.sleep( delayAnswerWrite.toLong() )
         return true
     }
 

@@ -1,37 +1,78 @@
 package kotlinGUI
 
+import externalDevices.devices.ModbusRTU
 import externalDevices.ports.IPort
 import externalDevices.ports.PortCOM
+import javafx.beans.property.SimpleIntegerProperty
 import javafx.beans.property.SimpleStringProperty
 import javafx.collections.FXCollections
-import javafx.scene.control.ComboBox
 import jssc.SerialPortList
 import tornadofx.*
 
 class FormSetValuesToDevice : View( "проверка порта" ) {
     private val comPorts = FXCollections.observableArrayList(SerialPortList.getPortNames())
-    private lateinit var port : IPort
-    private val select = SimpleStringProperty()
-    private val textVal = SimpleStringProperty()
-    //private val box = combobox ( values = comPorts )
-    private val box = combobox( select, SerialPortList.getPortNames().toList() )
-    //private val box = combobox( select, listOf( "COM1", "COM2", "COM3" ) )
-    private val text = textfield(textVal)
+    private var device = ModbusRTU( "" )
+    private val selectPort = SimpleStringProperty()
+    private val textValConnecting = SimpleStringProperty()
+    private val textRegister = SimpleIntegerProperty()
+    private val textReadedVal = SimpleStringProperty()
+    private val textValueToWrite = SimpleIntegerProperty()
+    private val textSendSuccess = SimpleStringProperty()
 
     override val root = gridpane {
-        row( "1" ) {
-            add( box )
+        row( "Выбор порта" ) {
+            combobox( selectPort, SerialPortList.getPortNames().toList() )
         }
-        row("2") {
+        row("Подключение") {
             button ( "Connect" ) {
                 action{
-                    port = PortCOM( select.value )
-                    val success = port.OpenPort()
-                    textVal.set( "Connecting to ${select.value}... $success" )
+                    device = ModbusRTU(selectPort.value)
+                    val success = device.OpenConnection()
+                    textValConnecting.set( "Connecting to ${selectPort.value}... $success" )
                     println( success )
                 }
             }
-            add(text)
+            label(textValConnecting)
+        }
+        row("Регистр") {
+            textfield( textRegister )
+        }
+        row( "" ) {
+            button( "Считать holding" ) {
+                action {
+                    val ( success, answer ) = device.GetOneHoldingValue( textRegister.value )
+                    textReadedVal.set( answer.toString() )
+                }
+            }
+            label(textReadedVal)
+
+        }
+        row("") {
+            button( "Записать holding")
+            {
+                action {
+                    val success = device.SetHoldingValue( textRegister.value,
+                            textValueToWrite.value )
+                    textSendSuccess.set( "Sending... $success" )
+                }
+            }
+            textfield( textValueToWrite )
+            label( textSendSuccess )
+        }
+        row( "" ) {
+            button( "Close" )
+            {
+                action {
+                    device.CloseConnection()
+                    close()
+                }
+            }
+        }
+    }
+
+    override fun onDock() {
+        currentWindow?.setOnCloseRequest {
+            println("Closing")
         }
     }
 }

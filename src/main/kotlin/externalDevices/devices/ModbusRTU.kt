@@ -7,7 +7,7 @@ import externalDevices.ports.PortCOM
 class ModbusRTU ( portName: String ) : Modbus() {
     init{
         settings = SettingsModbusRTU( portName )
-        port = PortCOM ( portName )
+        port = PortCOM( settings as SettingsCOM )
     }
     private val LEN_WRITEMESSAGE_RTU: Int = 8
 
@@ -15,13 +15,12 @@ class ModbusRTU ( portName: String ) : Modbus() {
     override val answerStart: Int = 3
     override val skipAtEnd: Int = 1
 
-    //override var port --- аналогично
     constructor(portName: String, _address: Byte, _baudrate: Int) : this( portName ) {
         (settings as SettingsModbusRTU).address = _address
         (settings as SettingsModbusRTU).baudRate = _baudrate
 
         //init of PortCOM
-        port = PortCOM( settings as SettingsCOM)
+        port = PortCOM( settings as SettingsCOM )
     }
 
     private fun GetCRC(message: Array<Byte>) : Array<Byte>

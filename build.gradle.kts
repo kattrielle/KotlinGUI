@@ -51,11 +51,14 @@ dependencies {
     implementation("io.github.java-native:jssc:2.9.2")
 
     //implementation("org.scream3r:jssc:2.8.0")
+
+    implementation("com.fasterxml.jackson.dataformat:jackson-dataformat-xml:2.11.3")
 }
 
 val compileKotlin: KotlinCompile by tasks
 
-compileKotlin.kotlinOptions.jvmTarget = "11"
+//compileKotlin.kotlinOptions.jvmTarget = "11"
+compileKotlin.kotlinOptions.jvmTarget = "1.8"
 
 application {
     // Define the main class for the application.

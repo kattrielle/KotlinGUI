@@ -1,0 +1,1887 @@
+<?xml version="1.0"?>
+<SerializableCellsContainer xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <CellsArray>
+    <CellData>
+      <Type>HoldingRegister</Type>
+      <Format>Int</Format>
+      <Status>Value</Status>
+      <Represent>Dec</Represent>
+      <Adress>1</Adress>
+      <AdapterId>0</AdapterId>
+      <DeviceAdress>1</DeviceAdress>
+      <Value>50</Value>
+      <isHaveData>true</isHaveData>
+      <Name>Квитирование</Name>
+      <Tag>Вкладка 1</Tag>
+      <IsEnabled>1</IsEnabled>
+    </CellData>
+    <CellData>
+      <Type>HoldingRegister</Type>
+      <Format>Int</Format>
+      <Status>Value</Status>
+      <Represent>Dec</Represent>
+      <Adress>2</Adress>
+      <AdapterId>0</AdapterId>
+      <DeviceAdress>1</DeviceAdress>
+      <Value>0</Value>
+      <isHaveData>true</isHaveData>
+      <Name>Команда</Name>
+      <Tag>Вкладка 1</Tag>
+      <IsEnabled>1</IsEnabled>
+    </CellData>
+    <CellData>
+      <Type>HoldingRegister</Type>
+      <Format>Int</Format>
+      <Status>Value</Status>
+      <Represent>Dec</Represent>
+      <Adress>10</Adress>
+      <AdapterId>0</AdapterId>
+      <DeviceAdress>1</DeviceAdress>
+      <Value>1</Value>
+      <isHaveData>true</isHaveData>
+      <Name>Modbus адрес</Name>
+      <Tag>Вкладка 1</Tag>
+      <IsEnabled>1</IsEnabled>
+    </CellData>
+    <CellData>
+      <Type>HoldingRegister</Type>
+      <Format>Int</Format>
+      <Status>Value</Status>
+      <Represent>Dec</Represent>
+      <Adress>11</Adress>
+      <AdapterId>0</AdapterId>
+      <DeviceAdress>1</DeviceAdress>
+      <Value>96</Value>
+      <isHaveData>true</isHaveData>
+      <Name>Modbus скорость</Name>
+      <Tag>Вкладка 1</Tag>
+      <FormulaData>
+        <Kcoeff>100</Kcoeff>
+        <Scoeff>0</Scoeff>
+        <DigitsAfterPointCount>0</DigitsAfterPointCount>
+      </FormulaData>
+      <IsEnabled>1</IsEnabled>
+    </CellData>
+    <CellData>
+      <Type>HoldingRegister</Type>
+      <Format>Int</Format>
+      <Status>Value</Status>
+      <Represent>Dec</Represent>
+      <Adress>40</Adress>
+      <AdapterId>0</AdapterId>
+      <DeviceAdress>1</DeviceAdress>
+      <Value>1009</Value>
+      <isHaveData>true</isHaveData>
+      <Name>Виброключ 1 - адрес</Name>
+      <Tag>Вкладка 1</Tag>
+      <IsEnabled>1</IsEnabled>
+    </CellData>
+    <CellData>
+      <Type>HoldingRegister</Type>
+      <Format>swFloat</Format>
+      <Status>Value</Status>
+      <Represent>Signed</Represent>
+      <Adress>41</Adress>
+      <AdapterId>0</AdapterId>
+      <DeviceAdress>1</DeviceAdress>
+      <Value>0</Value>
+      <isHaveData>true</isHaveData>
+      <Name>Виброключ 1 - значение</Name>
+      <Tag>Вкладка 1</Tag>
+      <IsEnabled>1</IsEnabled>
+    </CellData>
+    <CellData>
+      <Type>HoldingRegister</Type>
+      <Format>Int</Format>
+      <Status>Value</Status>
+      <Represent>Dec</Represent>
+      <Adress>43</Adress>
+      <AdapterId>0</AdapterId>
+      <DeviceAdress>1</DeviceAdress>
+      <Value>0</Value>
+      <isHaveData>true</isHaveData>
+      <Name>Виброключ 1 - время установки</Name>
+      <Tag>Вкладка 1</Tag>
+      <IsEnabled>1</IsEnabled>
+    </CellData>
+    <CellData>
+      <Type>HoldingRegister</Type>
+      <Format>Int</Format>
+      <Status>Value</Status>
+      <Represent>Dec</Represent>
+      <Adress>44</Adress>
+      <AdapterId>0</AdapterId>
+      <DeviceAdress>1</DeviceAdress>
+      <Value>0</Value>
+      <isHaveData>true</isHaveData>
+      <Name>Виброключ 1 - время снятия</Name>
+      <Tag>Вкладка 1</Tag>
+      <IsEnabled>1</IsEnabled>
+    </CellData>
+    <CellData>
+      <Type>HoldingRegister</Type>
+      <Format>Int</Format>
+      <Status>Value</Status>
+      <Represent>Signed</Represent>
+      <Adress>45</Adress>
+      <AdapterId>0</AdapterId>
+      <DeviceAdress>1</DeviceAdress>
+      <Value>0</Value>
+      <isHaveData>true</isHaveData>
+      <Name>Виброключ 1 - вес</Name>
+      <Tag>Вкладка 1</Tag>
+      <IsEnabled>1</IsEnabled>
+    </CellData>
+    <CellData>
+      <Type>HoldingRegister</Type>
+      <Format>Int</Format>
+      <Status>Value</Status>
+      <Represent>Dec</Represent>
+      <Adress>46</Adress>
+      <AdapterId>0</AdapterId>
+      <DeviceAdress>1</DeviceAdress>
+      <Value>0</Value>
+      <isHaveData>true</isHaveData>
+      <Name>Виброключ 2 - адрес</Name>
+      <Tag>Вкладка 1</Tag>
+      <IsEnabled>1</IsEnabled>
+    </CellData>
+    <CellData>
+      <Type>HoldingRegister</Type>
+      <Format>swFloat</Format>
+      <Status>Value</Status>
+      <Represent>Signed</Represent>
+      <Adress>47</Adress>
+      <AdapterId>0</AdapterId>
+      <DeviceAdress>1</DeviceAdress>
+      <Value>0</Value>
+      <isHaveData>true</isHaveData>
+      <Name>Виброключ 2 - значение</Name>
+      <Tag>Вкладка 1</Tag>
+      <IsEnabled>1</IsEnabled>
+    </CellData>
+    <CellData>
+      <Type>HoldingRegister</Type>
+      <Format>Int</Format>
+      <Status>Value</Status>
+      <Represent>Dec</Represent>
+      <Adress>49</Adress>
+      <AdapterId>0</AdapterId>
+      <DeviceAdress>1</DeviceAdress>
+      <Value>0</Value>
+      <isHaveData>true</isHaveData>
+      <Name>Виброключ 2 - время установки</Name>
+      <Tag>Вкладка 1</Tag>
+      <IsEnabled>1</IsEnabled>
+    </CellData>
+    <CellData>
+      <Type>HoldingRegister</Type>
+      <Format>Int</Format>
+      <Status>Value</Status>
+      <Represent>Dec</Represent>
+      <Adress>50</Adress>
+      <AdapterId>0</AdapterId>
+      <DeviceAdress>1</DeviceAdress>
+      <Value>0</Value>
+      <isHaveData>true</isHaveData>
+      <Name>Виброключ 2 - время снятия</Name>
+      <Tag>Вкладка 1</Tag>
+      <IsEnabled>1</IsEnabled>
+    </CellData>
+    <CellData>
+      <Type>HoldingRegister</Type>
+      <Format>Int</Format>
+      <Status>Value</Status>
+      <Represent>Signed</Represent>
+      <Adress>51</Adress>
+      <AdapterId>0</AdapterId>
+      <DeviceAdress>1</DeviceAdress>
+      <Value>0</Value>
+      <isHaveData>true</isHaveData>
+      <Name>Виброключ 2 - вес</Name>
+      <Tag>Вкладка 1</Tag>
+      <IsEnabled>1</IsEnabled>
+    </CellData>
+    <CellData>
+      <Type>HoldingRegister</Type>
+      <Format>Int</Format>
+      <Status>Value</Status>
+      <Represent>Dec</Represent>
+      <Adress>52</Adress>
+      <AdapterId>0</AdapterId>
+      <DeviceAdress>1</DeviceAdress>
+      <Value>0</Value>
+      <isHaveData>true</isHaveData>
+      <Name>Виброключ 3 - адрес</Name>
+      <Tag>Вкладка 1</Tag>
+      <IsEnabled>1</IsEnabled>
+    </CellData>
+    <CellData>
+      <Type>HoldingRegister</Type>
+      <Format>swFloat</Format>
+      <Status>Value</Status>
+      <Represent>Signed</Represent>
+      <Adress>53</Adress>
+      <AdapterId>0</AdapterId>
+      <DeviceAdress>1</DeviceAdress>
+      <Value>0</Value>
+      <isHaveData>true</isHaveData>
+      <Name>Виброключ 3 - значение</Name>
+      <Tag>Вкладка 1</Tag>
+      <IsEnabled>1</IsEnabled>
+    </CellData>
+    <CellData>
+      <Type>HoldingRegister</Type>
+      <Format>Int</Format>
+      <Status>Value</Status>
+      <Represent>Dec</Represent>
+      <Adress>55</Adress>
+      <AdapterId>0</AdapterId>
+      <DeviceAdress>1</DeviceAdress>
+      <Value>0</Value>
+      <isHaveData>true</isHaveData>
+      <Name>Виброключ 3 - время установки</Name>
+      <Tag>Вкладка 1</Tag>
+      <IsEnabled>1</IsEnabled>
+    </CellData>
+    <CellData>
+      <Type>HoldingRegister</Type>
+      <Format>Int</Format>
+      <Status>Value</Status>
+      <Represent>Dec</Represent>
+      <Adress>56</Adress>
+      <AdapterId>0</AdapterId>
+      <DeviceAdress>1</DeviceAdress>
+      <Value>0</Value>
+      <isHaveData>true</isHaveData>
+      <Name>Виброключ 3 - время снятия</Name>
+      <Tag>Вкладка 1</Tag>
+      <IsEnabled>1</IsEnabled>
+    </CellData>
+    <CellData>
+      <Type>HoldingRegister</Type>
+      <Format>Int</Format>
+      <Status>Value</Status>
+      <Represent>Signed</Represent>
+      <Adress>57</Adress>
+      <AdapterId>0</AdapterId>
+      <DeviceAdress>1</DeviceAdress>
+      <Value>0</Value>
+      <isHaveData>true</isHaveData>
+      <Name>Виброключ 3 - вес</Name>
+      <Tag>Вкладка 1</Tag>
+      <IsEnabled>1</IsEnabled>
+    </CellData>
+    <CellData>
+      <Type>HoldingRegister</Type>
+      <Format>Int</Format>
+      <Status>Value</Status>
+      <Represent>Dec</Represent>
+      <Adress>58</Adress>
+      <AdapterId>0</AdapterId>
+      <DeviceAdress>1</DeviceAdress>
+      <Value>0</Value>
+      <isHaveData>true</isHaveData>
+      <Name>Виброключ 4 - адрес</Name>
+      <Tag>Вкладка 1</Tag>
+      <IsEnabled>1</IsEnabled>
+    </CellData>
+    <CellData>
+      <Type>HoldingRegister</Type>
+      <Format>swFloat</Format>
+      <Status>Value</Status>
+      <Represent>Signed</Represent>
+      <Adress>59</Adress>
+      <AdapterId>0</AdapterId>
+      <DeviceAdress>1</DeviceAdress>
+      <Value>0</Value>
+      <isHaveData>true</isHaveData>
+      <Name>Виброключ 4 - значение</Name>
+      <Tag>Вкладка 1</Tag>
+      <IsEnabled>1</IsEnabled>
+    </CellData>
+    <CellData>
+      <Type>HoldingRegister</Type>
+      <Format>Int</Format>
+      <Status>Value</Status>
+      <Represent>Dec</Represent>
+      <Adress>61</Adress>
+      <AdapterId>0</AdapterId>
+      <DeviceAdress>1</DeviceAdress>
+      <Value>0</Value>
+      <isHaveData>true</isHaveData>
+      <Name>Виброключ 4 - время установки</Name>
+      <Tag>Вкладка 1</Tag>
+      <IsEnabled>1</IsEnabled>
+    </CellData>
+    <CellData>
+      <Type>HoldingRegister</Type>
+      <Format>Int</Format>
+      <Status>Value</Status>
+      <Represent>Dec</Represent>
+      <Adress>62</Adress>
+      <AdapterId>0</AdapterId>
+      <DeviceAdress>1</DeviceAdress>
+      <Value>0</Value>
+      <isHaveData>true</isHaveData>
+      <Name>Виброключ 4 - время снятия</Name>
+      <Tag>Вкладка 1</Tag>
+      <IsEnabled>1</IsEnabled>
+    </CellData>
+    <CellData>
+      <Type>HoldingRegister</Type>
+      <Format>Int</Format>
+      <Status>Value</Status>
+      <Represent>Signed</Represent>
+      <Adress>63</Adress>
+      <AdapterId>0</AdapterId>
+      <DeviceAdress>1</DeviceAdress>
+      <Value>0</Value>
+      <isHaveData>true</isHaveData>
+      <Name>Виброключ 4 - вес</Name>
+      <Tag>Вкладка 1</Tag>
+      <IsEnabled>1</IsEnabled>
+    </CellData>
+    <CellData>
+      <Type>HoldingRegister</Type>
+      <Format>Int</Format>
+      <Status>Value</Status>
+      <Represent>Dec</Represent>
+      <Adress>64</Adress>
+      <AdapterId>0</AdapterId>
+      <DeviceAdress>1</DeviceAdress>
+      <Value>0</Value>
+      <isHaveData>true</isHaveData>
+      <Name>Виброключ 5 - адрес</Name>
+      <Tag>Вкладка 1</Tag>
+      <IsEnabled>1</IsEnabled>
+    </CellData>
+    <CellData>
+      <Type>HoldingRegister</Type>
+      <Format>swFloat</Format>
+      <Status>Value</Status>
+      <Represent>Signed</Represent>
+      <Adress>65</Adress>
+      <AdapterId>0</AdapterId>
+      <DeviceAdress>1</DeviceAdress>
+      <Value>0</Value>
+      <isHaveData>true</isHaveData>
+      <Name>Виброключ 5 - значение</Name>
+      <Tag>Вкладка 1</Tag>
+      <IsEnabled>1</IsEnabled>
+    </CellData>
+    <CellData>
+      <Type>HoldingRegister</Type>
+      <Format>Int</Format>
+      <Status>Value</Status>
+      <Represent>Dec</Represent>
+      <Adress>67</Adress>
+      <AdapterId>0</AdapterId>
+      <DeviceAdress>1</DeviceAdress>
+      <Value>0</Value>
+      <isHaveData>true</isHaveData>
+      <Name>Виброключ 5 - время установки</Name>
+      <Tag>Вкладка 1</Tag>
+      <IsEnabled>1</IsEnabled>
+    </CellData>
+    <CellData>
+      <Type>HoldingRegister</Type>
+      <Format>Int</Format>
+      <Status>Value</Status>
+      <Represent>Dec</Represent>
+      <Adress>68</Adress>
+      <AdapterId>0</AdapterId>
+      <DeviceAdress>1</DeviceAdress>
+      <Value>0</Value>
+      <isHaveData>true</isHaveData>
+      <Name>Виброключ 5 - время снятия</Name>
+      <Tag>Вкладка 1</Tag>
+      <IsEnabled>1</IsEnabled>
+    </CellData>
+    <CellData>
+      <Type>HoldingRegister</Type>
+      <Format>Int</Format>
+      <Status>Value</Status>
+      <Represent>Signed</Represent>
+      <Adress>69</Adress>
+      <AdapterId>0</AdapterId>
+      <DeviceAdress>1</DeviceAdress>
+      <Value>0</Value>
+      <isHaveData>true</isHaveData>
+      <Name>Виброключ 5 - вес</Name>
+      <Tag>Вкладка 1</Tag>
+      <IsEnabled>1</IsEnabled>
+    </CellData>
+    <CellData>
+      <Type>HoldingRegister</Type>
+      <Format>Int</Format>
+      <Status>Value</Status>
+      <Represent>Dec</Represent>
+      <Adress>70</Adress>
+      <AdapterId>0</AdapterId>
+      <DeviceAdress>1</DeviceAdress>
+      <Value>0</Value>
+      <isHaveData>true</isHaveData>
+      <Name>Виброключ 6 - адрес</Name>
+      <Tag>Вкладка 1</Tag>
+      <IsEnabled>1</IsEnabled>
+    </CellData>
+    <CellData>
+      <Type>HoldingRegister</Type>
+      <Format>swFloat</Format>
+      <Status>Value</Status>
+      <Represent>Signed</Represent>
+      <Adress>71</Adress>
+      <AdapterId>0</AdapterId>
+      <DeviceAdress>1</DeviceAdress>
+      <Value>0</Value>
+      <isHaveData>true</isHaveData>
+      <Name>Виброключ 6 - значение</Name>
+      <Tag>Вкладка 1</Tag>
+      <IsEnabled>1</IsEnabled>
+    </CellData>
+    <CellData>
+      <Type>HoldingRegister</Type>
+      <Format>Int</Format>
+      <Status>Value</Status>
+      <Represent>Dec</Represent>
+      <Adress>73</Adress>
+      <AdapterId>0</AdapterId>
+      <DeviceAdress>1</DeviceAdress>
+      <Value>0</Value>
+      <isHaveData>true</isHaveData>
+      <Name>Виброключ 6 - время установки</Name>
+      <Tag>Вкладка 1</Tag>
+      <IsEnabled>1</IsEnabled>
+    </CellData>
+    <CellData>
+      <Type>HoldingRegister</Type>
+      <Format>Int</Format>
+      <Status>Value</Status>
+      <Represent>Dec</Represent>
+      <Adress>74</Adress>
+      <AdapterId>0</AdapterId>
+      <DeviceAdress>1</DeviceAdress>
+      <Value>0</Value>
+      <isHaveData>true</isHaveData>
+      <Name>Виброключ 6 - время снятия</Name>
+      <Tag>Вкладка 1</Tag>
+      <IsEnabled>1</IsEnabled>
+    </CellData>
+    <CellData>
+      <Type>HoldingRegister</Type>
+      <Format>Int</Format>
+      <Status>Value</Status>
+      <Represent>Signed</Represent>
+      <Adress>75</Adress>
+      <AdapterId>0</AdapterId>
+      <DeviceAdress>1</DeviceAdress>
+      <Value>0</Value>
+      <isHaveData>true</isHaveData>
+      <Name>Виброключ 6 - вес</Name>
+      <Tag>Вкладка 1</Tag>
+      <IsEnabled>1</IsEnabled>
+    </CellData>
+    <CellData>
+      <Type>HoldingRegister</Type>
+      <Format>Int</Format>
+      <Status>Value</Status>
+      <Represent>Dec</Represent>
+      <Adress>76</Adress>
+      <AdapterId>0</AdapterId>
+      <DeviceAdress>1</DeviceAdress>
+      <Value>0</Value>
+      <isHaveData>true</isHaveData>
+      <Name>Виброключ 7 - адрес</Name>
+      <Tag>Вкладка 1</Tag>
+      <IsEnabled>1</IsEnabled>
+    </CellData>
+    <CellData>
+      <Type>HoldingRegister</Type>
+      <Format>swFloat</Format>
+      <Status>Value</Status>
+      <Represent>Signed</Represent>
+      <Adress>77</Adress>
+      <AdapterId>0</AdapterId>
+      <DeviceAdress>1</DeviceAdress>
+      <Value>0</Value>
+      <isHaveData>true</isHaveData>
+      <Name>Виброключ 7 - значение</Name>
+      <Tag>Вкладка 1</Tag>
+      <IsEnabled>1</IsEnabled>
+    </CellData>
+    <CellData>
+      <Type>HoldingRegister</Type>
+      <Format>Int</Format>
+      <Status>Value</Status>
+      <Represent>Dec</Represent>
+      <Adress>79</Adress>
+      <AdapterId>0</AdapterId>
+      <DeviceAdress>1</DeviceAdress>
+      <Value>0</Value>
+      <isHaveData>true</isHaveData>
+      <Name>Виброключ 7 - время установки</Name>
+      <Tag>Вкладка 1</Tag>
+      <IsEnabled>1</IsEnabled>
+    </CellData>
+    <CellData>
+      <Type>HoldingRegister</Type>
+      <Format>Int</Format>
+      <Status>Value</Status>
+      <Represent>Dec</Represent>
+      <Adress>80</Adress>
+      <AdapterId>0</AdapterId>
+      <DeviceAdress>1</DeviceAdress>
+      <Value>0</Value>
+      <isHaveData>true</isHaveData>
+      <Name>Виброключ 7 - время снятия</Name>
+      <Tag>Вкладка 1</Tag>
+      <IsEnabled>1</IsEnabled>
+    </CellData>
+    <CellData>
+      <Type>HoldingRegister</Type>
+      <Format>Int</Format>
+      <Status>Value</Status>
+      <Represent>Signed</Represent>
+      <Adress>81</Adress>
+      <AdapterId>0</AdapterId>
+      <DeviceAdress>1</DeviceAdress>
+      <Value>0</Value>
+      <isHaveData>true</isHaveData>
+      <Name>Виброключ 7 - вес</Name>
+      <Tag>Вкладка 1</Tag>
+      <IsEnabled>1</IsEnabled>
+    </CellData>
+    <CellData>
+      <Type>HoldingRegister</Type>
+      <Format>Int</Format>
+      <Status>Value</Status>
+      <Represent>Dec</Represent>
+      <Adress>82</Adress>
+      <AdapterId>0</AdapterId>
+      <DeviceAdress>1</DeviceAdress>
+      <Value>0</Value>
+      <isHaveData>true</isHaveData>
+      <Name>Виброключ 8 - адрес</Name>
+      <Tag>Вкладка 1</Tag>
+      <IsEnabled>1</IsEnabled>
+    </CellData>
+    <CellData>
+      <Type>HoldingRegister</Type>
+      <Format>swFloat</Format>
+      <Status>Value</Status>
+      <Represent>Signed</Represent>
+      <Adress>83</Adress>
+      <AdapterId>0</AdapterId>
+      <DeviceAdress>1</DeviceAdress>
+      <Value>0</Value>
+      <isHaveData>true</isHaveData>
+      <Name>Виброключ 8 - значение</Name>
+      <Tag>Вкладка 1</Tag>
+      <IsEnabled>1</IsEnabled>
+    </CellData>
+    <CellData>
+      <Type>HoldingRegister</Type>
+      <Format>Int</Format>
+      <Status>Value</Status>
+      <Represent>Dec</Represent>
+      <Adress>85</Adress>
+      <AdapterId>0</AdapterId>
+      <DeviceAdress>1</DeviceAdress>
+      <Value>0</Value>
+      <isHaveData>true</isHaveData>
+      <Name>Виброключ 8 - время установки</Name>
+      <Tag>Вкладка 1</Tag>
+      <IsEnabled>1</IsEnabled>
+    </CellData>
+    <CellData>
+      <Type>HoldingRegister</Type>
+      <Format>Int</Format>
+      <Status>Value</Status>
+      <Represent>Dec</Represent>
+      <Adress>86</Adress>
+      <AdapterId>0</AdapterId>
+      <DeviceAdress>1</DeviceAdress>
+      <Value>0</Value>
+      <isHaveData>true</isHaveData>
+      <Name>Виброключ 8 - время снятия</Name>
+      <Tag>Вкладка 1</Tag>
+      <IsEnabled>1</IsEnabled>
+    </CellData>
+    <CellData>
+      <Type>HoldingRegister</Type>
+      <Format>Int</Format>
+      <Status>Value</Status>
+      <Represent>Signed</Represent>
+      <Adress>87</Adress>
+      <AdapterId>0</AdapterId>
+      <DeviceAdress>1</DeviceAdress>
+      <Value>0</Value>
+      <isHaveData>true</isHaveData>
+      <Name>Виброключ 8 - вес</Name>
+      <Tag>Вкладка 1</Tag>
+      <IsEnabled>1</IsEnabled>
+    </CellData>
+    <CellData>
+      <Type>HoldingRegister</Type>
+      <Format>Int</Format>
+      <Status>Value</Status>
+      <Represent>Dec</Represent>
+      <Adress>88</Adress>
+      <AdapterId>0</AdapterId>
+      <DeviceAdress>1</DeviceAdress>
+      <Value>0</Value>
+      <isHaveData>true</isHaveData>
+      <Name>Виброключ 9 - адрес</Name>
+      <Tag>Вкладка 1</Tag>
+      <IsEnabled>1</IsEnabled>
+    </CellData>
+    <CellData>
+      <Type>HoldingRegister</Type>
+      <Format>swFloat</Format>
+      <Status>Value</Status>
+      <Represent>Signed</Represent>
+      <Adress>89</Adress>
+      <AdapterId>0</AdapterId>
+      <DeviceAdress>1</DeviceAdress>
+      <Value>0</Value>
+      <isHaveData>true</isHaveData>
+      <Name>Виброключ 9 - значение</Name>
+      <Tag>Вкладка 1</Tag>
+      <IsEnabled>1</IsEnabled>
+    </CellData>
+    <CellData>
+      <Type>HoldingRegister</Type>
+      <Format>Int</Format>
+      <Status>Value</Status>
+      <Represent>Dec</Represent>
+      <Adress>91</Adress>
+      <AdapterId>0</AdapterId>
+      <DeviceAdress>1</DeviceAdress>
+      <Value>0</Value>
+      <isHaveData>true</isHaveData>
+      <Name>Виброключ 9 - время установки</Name>
+      <Tag>Вкладка 1</Tag>
+      <IsEnabled>1</IsEnabled>
+    </CellData>
+    <CellData>
+      <Type>HoldingRegister</Type>
+      <Format>Int</Format>
+      <Status>Value</Status>
+      <Represent>Dec</Represent>
+      <Adress>92</Adress>
+      <AdapterId>0</AdapterId>
+      <DeviceAdress>1</DeviceAdress>
+      <Value>0</Value>
+      <isHaveData>true</isHaveData>
+      <Name>Виброключ 9 - время снятия</Name>
+      <Tag>Вкладка 1</Tag>
+      <IsEnabled>1</IsEnabled>
+    </CellData>
+    <CellData>
+      <Type>HoldingRegister</Type>
+      <Format>Int</Format>
+      <Status>Value</Status>
+      <Represent>Signed</Represent>
+      <Adress>93</Adress>
+      <AdapterId>0</AdapterId>
+      <DeviceAdress>1</DeviceAdress>
+      <Value>0</Value>
+      <isHaveData>true</isHaveData>
+      <Name>Виброключ 9 - вес</Name>
+      <Tag>Вкладка 1</Tag>
+      <IsEnabled>1</IsEnabled>
+    </CellData>
+    <CellData>
+      <Type>HoldingRegister</Type>
+      <Format>Int</Format>
+      <Status>Value</Status>
+      <Represent>Dec</Represent>
+      <Adress>94</Adress>
+      <AdapterId>0</AdapterId>
+      <DeviceAdress>1</DeviceAdress>
+      <Value>0</Value>
+      <isHaveData>true</isHaveData>
+      <Name>Виброключ 10 - адрес</Name>
+      <Tag>Вкладка 1</Tag>
+      <IsEnabled>1</IsEnabled>
+    </CellData>
+    <CellData>
+      <Type>HoldingRegister</Type>
+      <Format>swFloat</Format>
+      <Status>Value</Status>
+      <Represent>Signed</Represent>
+      <Adress>95</Adress>
+      <AdapterId>0</AdapterId>
+      <DeviceAdress>1</DeviceAdress>
+      <Value>0</Value>
+      <isHaveData>true</isHaveData>
+      <Name>Виброключ 10 - значение</Name>
+      <Tag>Вкладка 1</Tag>
+      <IsEnabled>1</IsEnabled>
+    </CellData>
+    <CellData>
+      <Type>HoldingRegister</Type>
+      <Format>Int</Format>
+      <Status>Value</Status>
+      <Represent>Dec</Represent>
+      <Adress>97</Adress>
+      <AdapterId>0</AdapterId>
+      <DeviceAdress>1</DeviceAdress>
+      <Value>0</Value>
+      <isHaveData>true</isHaveData>
+      <Name>Виброключ 10 - время установки</Name>
+      <Tag>Вкладка 1</Tag>
+      <IsEnabled>1</IsEnabled>
+    </CellData>
+    <CellData>
+      <Type>HoldingRegister</Type>
+      <Format>Int</Format>
+      <Status>Value</Status>
+      <Represent>Dec</Represent>
+      <Adress>98</Adress>
+      <AdapterId>0</AdapterId>
+      <DeviceAdress>1</DeviceAdress>
+      <Value>0</Value>
+      <isHaveData>true</isHaveData>
+      <Name>Виброключ 10 - время снятия</Name>
+      <Tag>Вкладка 1</Tag>
+      <IsEnabled>1</IsEnabled>
+    </CellData>
+    <CellData>
+      <Type>HoldingRegister</Type>
+      <Format>Int</Format>
+      <Status>Value</Status>
+      <Represent>Signed</Represent>
+      <Adress>99</Adress>
+      <AdapterId>0</AdapterId>
+      <DeviceAdress>1</DeviceAdress>
+      <Value>0</Value>
+      <isHaveData>true</isHaveData>
+      <Name>Виброключ 10 - вес</Name>
+      <Tag>Вкладка 1</Tag>
+      <IsEnabled>1</IsEnabled>
+    </CellData>
+    <CellData>
+      <Type>HoldingRegister</Type>
+      <Format>Int</Format>
+      <Status>Value</Status>
+      <Represent>Dec</Represent>
+      <Adress>100</Adress>
+      <AdapterId>0</AdapterId>
+      <DeviceAdress>1</DeviceAdress>
+      <Value>0</Value>
+      <isHaveData>true</isHaveData>
+      <Name>Виброключ 11 - адрес</Name>
+      <Tag>Вкладка 1</Tag>
+      <IsEnabled>1</IsEnabled>
+    </CellData>
+    <CellData>
+      <Type>HoldingRegister</Type>
+      <Format>swFloat</Format>
+      <Status>Value</Status>
+      <Represent>Signed</Represent>
+      <Adress>101</Adress>
+      <AdapterId>0</AdapterId>
+      <DeviceAdress>1</DeviceAdress>
+      <Value>0</Value>
+      <isHaveData>true</isHaveData>
+      <Name>Виброключ 11 - значение</Name>
+      <Tag>Вкладка 1</Tag>
+      <IsEnabled>1</IsEnabled>
+    </CellData>
+    <CellData>
+      <Type>HoldingRegister</Type>
+      <Format>Int</Format>
+      <Status>Value</Status>
+      <Represent>Dec</Represent>
+      <Adress>103</Adress>
+      <AdapterId>0</AdapterId>
+      <DeviceAdress>1</DeviceAdress>
+      <Value>0</Value>
+      <isHaveData>true</isHaveData>
+      <Name>Виброключ 11 - время установки</Name>
+      <Tag>Вкладка 1</Tag>
+      <IsEnabled>1</IsEnabled>
+    </CellData>
+    <CellData>
+      <Type>HoldingRegister</Type>
+      <Format>Int</Format>
+      <Status>Value</Status>
+      <Represent>Dec</Represent>
+      <Adress>104</Adress>
+      <AdapterId>0</AdapterId>
+      <DeviceAdress>1</DeviceAdress>
+      <Value>0</Value>
+      <isHaveData>true</isHaveData>
+      <Name>Виброключ 11 - время снятия</Name>
+      <Tag>Вкладка 1</Tag>
+      <IsEnabled>1</IsEnabled>
+    </CellData>
+    <CellData>
+      <Type>HoldingRegister</Type>
+      <Format>Int</Format>
+      <Status>Value</Status>
+      <Represent>Signed</Represent>
+      <Adress>105</Adress>
+      <AdapterId>0</AdapterId>
+      <DeviceAdress>1</DeviceAdress>
+      <Value>0</Value>
+      <isHaveData>true</isHaveData>
+      <Name>Виброключ 11,  вес</Name>
+      <Tag>Вкладка 1</Tag>
+      <IsEnabled>1</IsEnabled>
+    </CellData>
+    <CellData>
+      <Type>HoldingRegister</Type>
+      <Format>Int</Format>
+      <Status>Value</Status>
+      <Represent>Dec</Represent>
+      <Adress>106</Adress>
+      <AdapterId>0</AdapterId>
+      <DeviceAdress>1</DeviceAdress>
+      <Value>0</Value>
+      <isHaveData>true</isHaveData>
+      <Name>Виброключ 12 - адрес</Name>
+      <Tag>Вкладка 1</Tag>
+      <IsEnabled>1</IsEnabled>
+    </CellData>
+    <CellData>
+      <Type>HoldingRegister</Type>
+      <Format>swFloat</Format>
+      <Status>Value</Status>
+      <Represent>Signed</Represent>
+      <Adress>107</Adress>
+      <AdapterId>0</AdapterId>
+      <DeviceAdress>1</DeviceAdress>
+      <Value>0</Value>
+      <isHaveData>true</isHaveData>
+      <Name>Виброключ 12 - значение</Name>
+      <Tag>Вкладка 1</Tag>
+      <IsEnabled>1</IsEnabled>
+    </CellData>
+    <CellData>
+      <Type>HoldingRegister</Type>
+      <Format>Int</Format>
+      <Status>Value</Status>
+      <Represent>Dec</Represent>
+      <Adress>109</Adress>
+      <AdapterId>0</AdapterId>
+      <DeviceAdress>1</DeviceAdress>
+      <Value>0</Value>
+      <isHaveData>true</isHaveData>
+      <Name>Виброключ 12 - время установки</Name>
+      <Tag>Вкладка 1</Tag>
+      <IsEnabled>1</IsEnabled>
+    </CellData>
+    <CellData>
+      <Type>HoldingRegister</Type>
+      <Format>Int</Format>
+      <Status>Value</Status>
+      <Represent>Dec</Represent>
+      <Adress>110</Adress>
+      <AdapterId>0</AdapterId>
+      <DeviceAdress>1</DeviceAdress>
+      <Value>0</Value>
+      <isHaveData>true</isHaveData>
+      <Name>Виброключ 12 - время снятия</Name>
+      <Tag>Вкладка 1</Tag>
+      <IsEnabled>1</IsEnabled>
+    </CellData>
+    <CellData>
+      <Type>HoldingRegister</Type>
+      <Format>Int</Format>
+      <Status>Value</Status>
+      <Represent>Dec</Represent>
+      <Adress>111</Adress>
+      <AdapterId>0</AdapterId>
+      <DeviceAdress>1</DeviceAdress>
+      <Value>0</Value>
+      <isHaveData>true</isHaveData>
+      <Name>Виброключ 13 - адрес</Name>
+      <Tag>Вкладка 1</Tag>
+      <IsEnabled>1</IsEnabled>
+    </CellData>
+    <CellData>
+      <Type>HoldingRegister</Type>
+      <Format>swFloat</Format>
+      <Status>Value</Status>
+      <Represent>Signed</Represent>
+      <Adress>113</Adress>
+      <AdapterId>0</AdapterId>
+      <DeviceAdress>1</DeviceAdress>
+      <Value>0</Value>
+      <isHaveData>true</isHaveData>
+      <Name>Виброключ 13 - значение</Name>
+      <Tag>Вкладка 1</Tag>
+      <IsEnabled>1</IsEnabled>
+    </CellData>
+    <CellData>
+      <Type>HoldingRegister</Type>
+      <Format>Int</Format>
+      <Status>Value</Status>
+      <Represent>Dec</Represent>
+      <Adress>115</Adress>
+      <AdapterId>0</AdapterId>
+      <DeviceAdress>1</DeviceAdress>
+      <Value>0</Value>
+      <isHaveData>true</isHaveData>
+      <Name>Виброключ 13 - время установки</Name>
+      <Tag>Вкладка 1</Tag>
+      <IsEnabled>1</IsEnabled>
+    </CellData>
+    <CellData>
+      <Type>HoldingRegister</Type>
+      <Format>Int</Format>
+      <Status>Value</Status>
+      <Represent>Dec</Represent>
+      <Adress>116</Adress>
+      <AdapterId>0</AdapterId>
+      <DeviceAdress>1</DeviceAdress>
+      <Value>0</Value>
+      <isHaveData>true</isHaveData>
+      <Name>Виброключ 13 - время снятия</Name>
+      <Tag>Вкладка 1</Tag>
+      <IsEnabled>1</IsEnabled>
+    </CellData>
+    <CellData>
+      <Type>HoldingRegister</Type>
+      <Format>Int</Format>
+      <Status>Value</Status>
+      <Represent>Dec</Represent>
+      <Adress>117</Adress>
+      <AdapterId>0</AdapterId>
+      <DeviceAdress>1</DeviceAdress>
+      <Value>0</Value>
+      <isHaveData>true</isHaveData>
+      <Name>Виброключ 14 - адрес</Name>
+      <Tag>Вкладка 1</Tag>
+      <IsEnabled>1</IsEnabled>
+    </CellData>
+    <CellData>
+      <Type>HoldingRegister</Type>
+      <Format>swFloat</Format>
+      <Status>Value</Status>
+      <Represent>Signed</Represent>
+      <Adress>118</Adress>
+      <AdapterId>0</AdapterId>
+      <DeviceAdress>1</DeviceAdress>
+      <Value>0</Value>
+      <isHaveData>true</isHaveData>
+      <Name>Виброключ 14 - значение</Name>
+      <Tag>Вкладка 1</Tag>
+      <IsEnabled>1</IsEnabled>
+    </CellData>
+    <CellData>
+      <Type>HoldingRegister</Type>
+      <Format>Int</Format>
+      <Status>Value</Status>
+      <Represent>Dec</Represent>
+      <Adress>120</Adress>
+      <AdapterId>0</AdapterId>
+      <DeviceAdress>1</DeviceAdress>
+      <Value>0</Value>
+      <isHaveData>true</isHaveData>
+      <Name>Виброключ 14 - время установки</Name>
+      <Tag>Вкладка 1</Tag>
+      <IsEnabled>1</IsEnabled>
+    </CellData>
+    <CellData>
+      <Type>HoldingRegister</Type>
+      <Format>Int</Format>
+      <Status>Value</Status>
+      <Represent>Dec</Represent>
+      <Adress>121</Adress>
+      <AdapterId>0</AdapterId>
+      <DeviceAdress>1</DeviceAdress>
+      <Value>0</Value>
+      <isHaveData>true</isHaveData>
+      <Name>Виброключ 14 - время снятия</Name>
+      <Tag>Вкладка 1</Tag>
+      <IsEnabled>1</IsEnabled>
+    </CellData>
+    <CellData>
+      <Type>HoldingRegister</Type>
+      <Format>Int</Format>
+      <Status>Value</Status>
+      <Represent>Dec</Represent>
+      <Adress>122</Adress>
+      <AdapterId>0</AdapterId>
+      <DeviceAdress>1</DeviceAdress>
+      <Value>0</Value>
+      <isHaveData>true</isHaveData>
+      <Name>Виброключ 15 - адрес</Name>
+      <Tag>Вкладка 1</Tag>
+      <IsEnabled>1</IsEnabled>
+    </CellData>
+    <CellData>
+      <Type>HoldingRegister</Type>
+      <Format>swFloat</Format>
+      <Status>Value</Status>
+      <Represent>Signed</Represent>
+      <Adress>123</Adress>
+      <AdapterId>0</AdapterId>
+      <DeviceAdress>1</DeviceAdress>
+      <Value>0</Value>
+      <isHaveData>true</isHaveData>
+      <Name>Виброключ 15 - значение</Name>
+      <Tag>Вкладка 1</Tag>
+      <IsEnabled>1</IsEnabled>
+    </CellData>
+    <CellData>
+      <Type>HoldingRegister</Type>
+      <Format>Int</Format>
+      <Status>Value</Status>
+      <Represent>Dec</Represent>
+      <Adress>125</Adress>
+      <AdapterId>0</AdapterId>
+      <DeviceAdress>1</DeviceAdress>
+      <Value>0</Value>
+      <isHaveData>true</isHaveData>
+      <Name>Виброключ 15 - время установки</Name>
+      <Tag>Вкладка 1</Tag>
+      <IsEnabled>1</IsEnabled>
+    </CellData>
+    <CellData>
+      <Type>HoldingRegister</Type>
+      <Format>Int</Format>
+      <Status>Value</Status>
+      <Represent>Dec</Represent>
+      <Adress>126</Adress>
+      <AdapterId>0</AdapterId>
+      <DeviceAdress>1</DeviceAdress>
+      <Value>0</Value>
+      <isHaveData>true</isHaveData>
+      <Name>Виброключ 15 - время снятия</Name>
+      <Tag>Вкладка 1</Tag>
+      <IsEnabled>1</IsEnabled>
+    </CellData>
+    <CellData>
+      <Type>HoldingRegister</Type>
+      <Format>Int</Format>
+      <Status>Value</Status>
+      <Represent>Dec</Represent>
+      <Adress>127</Adress>
+      <AdapterId>0</AdapterId>
+      <DeviceAdress>1</DeviceAdress>
+      <Value>0</Value>
+      <isHaveData>true</isHaveData>
+      <Name>Виброключ 16 - адрес</Name>
+      <Tag>Вкладка 1</Tag>
+      <IsEnabled>1</IsEnabled>
+    </CellData>
+    <CellData>
+      <Type>HoldingRegister</Type>
+      <Format>swFloat</Format>
+      <Status>Value</Status>
+      <Represent>Signed</Represent>
+      <Adress>128</Adress>
+      <AdapterId>0</AdapterId>
+      <DeviceAdress>1</DeviceAdress>
+      <Value>0</Value>
+      <isHaveData>true</isHaveData>
+      <Name>Виброключ 16 - значение</Name>
+      <Tag>Вкладка 1</Tag>
+      <IsEnabled>1</IsEnabled>
+    </CellData>
+    <CellData>
+      <Type>HoldingRegister</Type>
+      <Format>Int</Format>
+      <Status>Value</Status>
+      <Represent>Dec</Represent>
+      <Adress>130</Adress>
+      <AdapterId>0</AdapterId>
+      <DeviceAdress>1</DeviceAdress>
+      <Value>0</Value>
+      <isHaveData>true</isHaveData>
+      <Name>Виброключ 16 - время установки</Name>
+      <Tag>Вкладка 1</Tag>
+      <IsEnabled>1</IsEnabled>
+    </CellData>
+    <CellData>
+      <Type>HoldingRegister</Type>
+      <Format>Int</Format>
+      <Status>Value</Status>
+      <Represent>Dec</Represent>
+      <Adress>131</Adress>
+      <AdapterId>0</AdapterId>
+      <DeviceAdress>1</DeviceAdress>
+      <Value>0</Value>
+      <isHaveData>true</isHaveData>
+      <Name>Виброключ 16 - время снятия</Name>
+      <Tag>Вкладка 1</Tag>
+      <IsEnabled>1</IsEnabled>
+    </CellData>
+    <CellData>
+      <Type>HoldingRegister</Type>
+      <Format>Int</Format>
+      <Status>Value</Status>
+      <Represent>Dec</Represent>
+      <Adress>132</Adress>
+      <AdapterId>0</AdapterId>
+      <DeviceAdress>1</DeviceAdress>
+      <Value>0</Value>
+      <isHaveData>true</isHaveData>
+      <Name>Виброключ 17 - адрес</Name>
+      <Tag>Вкладка 1</Tag>
+      <IsEnabled>1</IsEnabled>
+    </CellData>
+    <CellData>
+      <Type>HoldingRegister</Type>
+      <Format>swFloat</Format>
+      <Status>Value</Status>
+      <Represent>Signed</Represent>
+      <Adress>133</Adress>
+      <AdapterId>0</AdapterId>
+      <DeviceAdress>1</DeviceAdress>
+      <Value>0</Value>
+      <isHaveData>true</isHaveData>
+      <Name>Виброключ 17 - значение</Name>
+      <Tag>Вкладка 1</Tag>
+      <IsEnabled>1</IsEnabled>
+    </CellData>
+    <CellData>
+      <Type>HoldingRegister</Type>
+      <Format>Int</Format>
+      <Status>Value</Status>
+      <Represent>Dec</Represent>
+      <Adress>135</Adress>
+      <AdapterId>0</AdapterId>
+      <DeviceAdress>1</DeviceAdress>
+      <Value>0</Value>
+      <isHaveData>true</isHaveData>
+      <Name>Виброключ 17 - время установки</Name>
+      <Tag>Вкладка 1</Tag>
+      <IsEnabled>1</IsEnabled>
+    </CellData>
+    <CellData>
+      <Type>HoldingRegister</Type>
+      <Format>Int</Format>
+      <Status>Value</Status>
+      <Represent>Dec</Represent>
+      <Adress>136</Adress>
+      <AdapterId>0</AdapterId>
+      <DeviceAdress>1</DeviceAdress>
+      <Value>0</Value>
+      <isHaveData>true</isHaveData>
+      <Name>Виброключ 17 - время снятия</Name>
+      <Tag>Вкладка 1</Tag>
+      <IsEnabled>1</IsEnabled>
+    </CellData>
+    <CellData>
+      <Type>HoldingRegister</Type>
+      <Format>Int</Format>
+      <Status>Value</Status>
+      <Represent>Dec</Represent>
+      <Adress>137</Adress>
+      <AdapterId>0</AdapterId>
+      <DeviceAdress>1</DeviceAdress>
+      <Value>0</Value>
+      <isHaveData>true</isHaveData>
+      <Name>Виброключ 18 - адрес</Name>
+      <Tag>Вкладка 1</Tag>
+      <IsEnabled>1</IsEnabled>
+    </CellData>
+    <CellData>
+      <Type>HoldingRegister</Type>
+      <Format>swFloat</Format>
+      <Status>Value</Status>
+      <Represent>Signed</Represent>
+      <Adress>138</Adress>
+      <AdapterId>0</AdapterId>
+      <DeviceAdress>1</DeviceAdress>
+      <Value>0</Value>
+      <isHaveData>true</isHaveData>
+      <Name>Виброключ 18 - значение</Name>
+      <Tag>Вкладка 1</Tag>
+      <IsEnabled>1</IsEnabled>
+    </CellData>
+    <CellData>
+      <Type>HoldingRegister</Type>
+      <Format>Int</Format>
+      <Status>Value</Status>
+      <Represent>Dec</Represent>
+      <Adress>140</Adress>
+      <AdapterId>0</AdapterId>
+      <DeviceAdress>1</DeviceAdress>
+      <Value>0</Value>
+      <isHaveData>true</isHaveData>
+      <Name>Виброключ 18 - время установки</Name>
+      <Tag>Вкладка 1</Tag>
+      <IsEnabled>1</IsEnabled>
+    </CellData>
+    <CellData>
+      <Type>HoldingRegister</Type>
+      <Format>Int</Format>
+      <Status>Value</Status>
+      <Represent>Dec</Represent>
+      <Adress>141</Adress>
+      <AdapterId>0</AdapterId>
+      <DeviceAdress>1</DeviceAdress>
+      <Value>0</Value>
+      <isHaveData>true</isHaveData>
+      <Name>Виброключ 18 - время снятия</Name>
+      <Tag>Вкладка 1</Tag>
+      <IsEnabled>1</IsEnabled>
+    </CellData>
+    <CellData>
+      <Type>HoldingRegister</Type>
+      <Format>Int</Format>
+      <Status>Value</Status>
+      <Represent>Dec</Represent>
+      <Adress>142</Adress>
+      <AdapterId>0</AdapterId>
+      <DeviceAdress>1</DeviceAdress>
+      <Value>0</Value>
+      <isHaveData>true</isHaveData>
+      <Name>Виброключ 19 - адрес</Name>
+      <Tag>Вкладка 1</Tag>
+      <IsEnabled>1</IsEnabled>
+    </CellData>
+    <CellData>
+      <Type>HoldingRegister</Type>
+      <Format>swFloat</Format>
+      <Status>Value</Status>
+      <Represent>Signed</Represent>
+      <Adress>143</Adress>
+      <AdapterId>0</AdapterId>
+      <DeviceAdress>1</DeviceAdress>
+      <Value>0</Value>
+      <isHaveData>true</isHaveData>
+      <Name>Виброключ 19 - значение</Name>
+      <Tag>Вкладка 1</Tag>
+      <IsEnabled>1</IsEnabled>
+    </CellData>
+    <CellData>
+      <Type>HoldingRegister</Type>
+      <Format>Int</Format>
+      <Status>Value</Status>
+      <Represent>Dec</Represent>
+      <Adress>145</Adress>
+      <AdapterId>0</AdapterId>
+      <DeviceAdress>1</DeviceAdress>
+      <Value>0</Value>
+      <isHaveData>true</isHaveData>
+      <Name>Виброключ 19 - время установки</Name>
+      <Tag>Вкладка 1</Tag>
+      <IsEnabled>1</IsEnabled>
+    </CellData>
+    <CellData>
+      <Type>HoldingRegister</Type>
+      <Format>Int</Format>
+      <Status>Value</Status>
+      <Represent>Dec</Represent>
+      <Adress>146</Adress>
+      <AdapterId>0</AdapterId>
+      <DeviceAdress>1</DeviceAdress>
+      <Value>0</Value>
+      <isHaveData>true</isHaveData>
+      <Name>Виброключ 19 - время снятия</Name>
+      <Tag>Вкладка 1</Tag>
+      <IsEnabled>1</IsEnabled>
+    </CellData>
+    <CellData>
+      <Type>HoldingRegister</Type>
+      <Format>Int</Format>
+      <Status>Value</Status>
+      <Represent>Dec</Represent>
+      <Adress>147</Adress>
+      <AdapterId>0</AdapterId>
+      <DeviceAdress>1</DeviceAdress>
+      <Value>0</Value>
+      <isHaveData>true</isHaveData>
+      <Name>Виброключ 20 - адрес</Name>
+      <Tag>Вкладка 1</Tag>
+      <IsEnabled>1</IsEnabled>
+    </CellData>
+    <CellData>
+      <Type>HoldingRegister</Type>
+      <Format>swFloat</Format>
+      <Status>Value</Status>
+      <Represent>Signed</Represent>
+      <Adress>148</Adress>
+      <AdapterId>0</AdapterId>
+      <DeviceAdress>1</DeviceAdress>
+      <Value>0</Value>
+      <isHaveData>true</isHaveData>
+      <Name>Виброключ 20 - значение</Name>
+      <Tag>Вкладка 1</Tag>
+      <IsEnabled>1</IsEnabled>
+    </CellData>
+    <CellData>
+      <Type>HoldingRegister</Type>
+      <Format>Int</Format>
+      <Status>Value</Status>
+      <Represent>Dec</Represent>
+      <Adress>150</Adress>
+      <AdapterId>0</AdapterId>
+      <DeviceAdress>1</DeviceAdress>
+      <Value>0</Value>
+      <isHaveData>true</isHaveData>
+      <Name>Виброключ 20 - время установки</Name>
+      <Tag>Вкладка 1</Tag>
+      <IsEnabled>1</IsEnabled>
+    </CellData>
+    <CellData>
+      <Type>HoldingRegister</Type>
+      <Format>Int</Format>
+      <Status>Value</Status>
+      <Represent>Dec</Represent>
+      <Adress>151</Adress>
+      <AdapterId>0</AdapterId>
+      <DeviceAdress>1</DeviceAdress>
+      <Value>0</Value>
+      <isHaveData>true</isHaveData>
+      <Name>Виброключ 20 - время снятия</Name>
+      <Tag>Вкладка 1</Tag>
+      <IsEnabled>1</IsEnabled>
+    </CellData>
+    <CellData>
+      <Type>InputRegister</Type>
+      <Format>Int</Format>
+      <Status>Value</Status>
+      <Represent>Dec</Represent>
+      <Adress>980</Adress>
+      <AdapterId>0</AdapterId>
+      <DeviceAdress>1</DeviceAdress>
+      <Value>0</Value>
+      <isHaveData>true</isHaveData>
+      <Name>DVA выходное значение</Name>
+      <Tag>Вкладка 1</Tag>
+      <FormulaData>
+        <Kcoeff>0.01</Kcoeff>
+        <Scoeff>0</Scoeff>
+        <DigitsAfterPointCount>0</DigitsAfterPointCount>
+      </FormulaData>
+      <IsEnabled>1</IsEnabled>
+    </CellData>
+    <CellData>
+      <Type>InputRegister</Type>
+      <Format>Int</Format>
+      <Status>Value</Status>
+      <Represent>Hex</Represent>
+      <Adress>982</Adress>
+      <AdapterId>0</AdapterId>
+      <DeviceAdress>1</DeviceAdress>
+      <Value>0</Value>
+      <isHaveData>true</isHaveData>
+      <Name>DVA код ошибки</Name>
+      <Tag>Вкладка 1</Tag>
+      <IsEnabled>1</IsEnabled>
+    </CellData>
+    <CellData>
+      <Type>InputRegister</Type>
+      <Format>Int</Format>
+      <Status>Value</Status>
+      <Represent>Dec</Represent>
+      <Adress>983</Adress>
+      <AdapterId>0</AdapterId>
+      <DeviceAdress>1</DeviceAdress>
+      <Value>0</Value>
+      <isHaveData>true</isHaveData>
+      <Name>DVA Значение  по оси X</Name>
+      <Tag>Вкладка 1</Tag>
+      <FormulaData>
+        <Kcoeff>0.01</Kcoeff>
+        <Scoeff>0</Scoeff>
+        <DigitsAfterPointCount>0</DigitsAfterPointCount>
+      </FormulaData>
+      <IsEnabled>1</IsEnabled>
+    </CellData>
+    <CellData>
+      <Type>InputRegister</Type>
+      <Format>Int</Format>
+      <Status>Value</Status>
+      <Represent>Dec</Represent>
+      <Adress>984</Adress>
+      <AdapterId>0</AdapterId>
+      <DeviceAdress>1</DeviceAdress>
+      <Value>0</Value>
+      <isHaveData>true</isHaveData>
+      <Name>DVA Значение  по оси Y</Name>
+      <Tag>Вкладка 1</Tag>
+      <FormulaData>
+        <Kcoeff>0.01</Kcoeff>
+        <Scoeff>0</Scoeff>
+        <DigitsAfterPointCount>0</DigitsAfterPointCount>
+      </FormulaData>
+      <IsEnabled>1</IsEnabled>
+    </CellData>
+    <CellData>
+      <Type>InputRegister</Type>
+      <Format>Int</Format>
+      <Status>Value</Status>
+      <Represent>Dec</Represent>
+      <Adress>990</Adress>
+      <AdapterId>0</AdapterId>
+      <DeviceAdress>1</DeviceAdress>
+      <Value>1</Value>
+      <isHaveData>true</isHaveData>
+      <Name>Версия прошивки загрузчика</Name>
+      <Tag>Вкладка 1</Tag>
+      <IsEnabled>1</IsEnabled>
+    </CellData>
+    <CellData>
+      <Type>InputRegister</Type>
+      <Format>Int</Format>
+      <Status>Value</Status>
+      <Represent>Dec</Represent>
+      <Adress>991</Adress>
+      <AdapterId>0</AdapterId>
+      <DeviceAdress>1</DeviceAdress>
+      <Value>7</Value>
+      <isHaveData>true</isHaveData>
+      <Name>Версия прошивки приложения</Name>
+      <Tag>Вкладка 1</Tag>
+      <IsEnabled>1</IsEnabled>
+    </CellData>
+    <CellData>
+      <Type>InputRegister</Type>
+      <Format>swFloat</Format>
+      <Status>Value</Status>
+      <Represent>Signed</Represent>
+      <Adress>1000</Adress>
+      <AdapterId>0</AdapterId>
+      <DeviceAdress>1</DeviceAdress>
+      <Value>0</Value>
+      <isHaveData>true</isHaveData>
+      <Name>ось X ускорение амплитуда м/с^2</Name>
+      <Tag>Вкладка 1</Tag>
+      <IsEnabled>1</IsEnabled>
+    </CellData>
+    <CellData>
+      <Type>InputRegister</Type>
+      <Format>swFloat</Format>
+      <Status>Value</Status>
+      <Represent>Signed</Represent>
+      <Adress>1002</Adress>
+      <AdapterId>0</AdapterId>
+      <DeviceAdress>1</DeviceAdress>
+      <Value>0</Value>
+      <isHaveData>true</isHaveData>
+      <Name>ось X ускорение СКЗ м/с^2</Name>
+      <Tag>Вкладка 1</Tag>
+      <IsEnabled>1</IsEnabled>
+    </CellData>
+    <CellData>
+      <Type>InputRegister</Type>
+      <Format>swFloat</Format>
+      <Status>Value</Status>
+      <Represent>Signed</Represent>
+      <Adress>1004</Adress>
+      <AdapterId>0</AdapterId>
+      <DeviceAdress>1</DeviceAdress>
+      <Value>0</Value>
+      <isHaveData>true</isHaveData>
+      <Name>ось X ускорение размах м/с^2</Name>
+      <Tag>Вкладка 1</Tag>
+      <IsEnabled>1</IsEnabled>
+    </CellData>
+    <CellData>
+      <Type>InputRegister</Type>
+      <Format>swFloat</Format>
+      <Status>Value</Status>
+      <Represent>Signed</Represent>
+      <Adress>1006</Adress>
+      <AdapterId>0</AdapterId>
+      <DeviceAdress>1</DeviceAdress>
+      <Value>0</Value>
+      <isHaveData>true</isHaveData>
+      <Name>ось X скорость Амплитуда мм/c</Name>
+      <Tag>Вкладка 1</Tag>
+      <IsEnabled>1</IsEnabled>
+    </CellData>
+    <CellData>
+      <Type>InputRegister</Type>
+      <Format>swFloat</Format>
+      <Status>Value</Status>
+      <Represent>Signed</Represent>
+      <Adress>1008</Adress>
+      <AdapterId>0</AdapterId>
+      <DeviceAdress>1</DeviceAdress>
+      <Value>0</Value>
+      <isHaveData>true</isHaveData>
+      <Name>ось X скорость СКЗ мм/c</Name>
+      <Tag>Вкладка 1</Tag>
+      <IsEnabled>1</IsEnabled>
+    </CellData>
+    <CellData>
+      <Type>InputRegister</Type>
+      <Format>swFloat</Format>
+      <Status>Value</Status>
+      <Represent>Signed</Represent>
+      <Adress>1010</Adress>
+      <AdapterId>0</AdapterId>
+      <DeviceAdress>1</DeviceAdress>
+      <Value>0</Value>
+      <isHaveData>true</isHaveData>
+      <Name>ось X скорость размах мм/c</Name>
+      <Tag>Вкладка 1</Tag>
+      <IsEnabled>1</IsEnabled>
+    </CellData>
+    <CellData>
+      <Type>InputRegister</Type>
+      <Format>swFloat</Format>
+      <Status>Value</Status>
+      <Represent>Signed</Represent>
+      <Adress>1012</Adress>
+      <AdapterId>0</AdapterId>
+      <DeviceAdress>1</DeviceAdress>
+      <Value>0</Value>
+      <isHaveData>true</isHaveData>
+      <Name>ось X  перемещение Амплитуда мкм</Name>
+      <Tag>Вкладка 1</Tag>
+      <IsEnabled>1</IsEnabled>
+    </CellData>
+    <CellData>
+      <Type>InputRegister</Type>
+      <Format>swFloat</Format>
+      <Status>Value</Status>
+      <Represent>Signed</Represent>
+      <Adress>1014</Adress>
+      <AdapterId>0</AdapterId>
+      <DeviceAdress>1</DeviceAdress>
+      <Value>0</Value>
+      <isHaveData>true</isHaveData>
+      <Name>ось X  перемещение СКЗ мкм</Name>
+      <Tag>Вкладка 1</Tag>
+      <IsEnabled>1</IsEnabled>
+    </CellData>
+    <CellData>
+      <Type>InputRegister</Type>
+      <Format>swFloat</Format>
+      <Status>Value</Status>
+      <Represent>Signed</Represent>
+      <Adress>1016</Adress>
+      <AdapterId>0</AdapterId>
+      <DeviceAdress>1</DeviceAdress>
+      <Value>0</Value>
+      <isHaveData>true</isHaveData>
+      <Name>ось X  перемещение размах мкм</Name>
+      <Tag>Вкладка 1</Tag>
+      <IsEnabled>1</IsEnabled>
+    </CellData>
+    <CellData>
+      <Type>InputRegister</Type>
+      <Format>swFloat</Format>
+      <Status>Value</Status>
+      <Represent>Signed</Represent>
+      <Adress>1018</Adress>
+      <AdapterId>0</AdapterId>
+      <DeviceAdress>1</DeviceAdress>
+      <Value>0</Value>
+      <isHaveData>true</isHaveData>
+      <Name>ось Y ускорение амплитуда м/с^2</Name>
+      <Tag>Вкладка 1</Tag>
+      <IsEnabled>1</IsEnabled>
+    </CellData>
+    <CellData>
+      <Type>InputRegister</Type>
+      <Format>swFloat</Format>
+      <Status>Value</Status>
+      <Represent>Signed</Represent>
+      <Adress>1020</Adress>
+      <AdapterId>0</AdapterId>
+      <DeviceAdress>1</DeviceAdress>
+      <Value>0</Value>
+      <isHaveData>true</isHaveData>
+      <Name>ось Y ускорение СКЗ м/с^2</Name>
+      <Tag>Вкладка 1</Tag>
+      <IsEnabled>1</IsEnabled>
+    </CellData>
+    <CellData>
+      <Type>InputRegister</Type>
+      <Format>swFloat</Format>
+      <Status>Value</Status>
+      <Represent>Signed</Represent>
+      <Adress>1022</Adress>
+      <AdapterId>0</AdapterId>
+      <DeviceAdress>1</DeviceAdress>
+      <Value>0</Value>
+      <isHaveData>true</isHaveData>
+      <Name>ось Y ускорение размах м/с^2</Name>
+      <Tag>Вкладка 1</Tag>
+      <IsEnabled>1</IsEnabled>
+    </CellData>
+    <CellData>
+      <Type>InputRegister</Type>
+      <Format>swFloat</Format>
+      <Status>Value</Status>
+      <Represent>Signed</Represent>
+      <Adress>1024</Adress>
+      <AdapterId>0</AdapterId>
+      <DeviceAdress>1</DeviceAdress>
+      <Value>0</Value>
+      <isHaveData>true</isHaveData>
+      <Name>ось Y скорость Амплитуда мм/c</Name>
+      <Tag>Вкладка 1</Tag>
+      <IsEnabled>1</IsEnabled>
+    </CellData>
+    <CellData>
+      <Type>InputRegister</Type>
+      <Format>swFloat</Format>
+      <Status>Value</Status>
+      <Represent>Signed</Represent>
+      <Adress>1026</Adress>
+      <AdapterId>0</AdapterId>
+      <DeviceAdress>1</DeviceAdress>
+      <Value>0</Value>
+      <isHaveData>true</isHaveData>
+      <Name>ось Y скорость СКЗ мм/c</Name>
+      <Tag>Вкладка 1</Tag>
+      <IsEnabled>1</IsEnabled>
+    </CellData>
+    <CellData>
+      <Type>InputRegister</Type>
+      <Format>swFloat</Format>
+      <Status>Value</Status>
+      <Represent>Signed</Represent>
+      <Adress>1028</Adress>
+      <AdapterId>0</AdapterId>
+      <DeviceAdress>1</DeviceAdress>
+      <Value>0</Value>
+      <isHaveData>true</isHaveData>
+      <Name>ось Y скорость размах мм/c</Name>
+      <Tag>Вкладка 1</Tag>
+      <IsEnabled>1</IsEnabled>
+    </CellData>
+    <CellData>
+      <Type>InputRegister</Type>
+      <Format>swFloat</Format>
+      <Status>Value</Status>
+      <Represent>Signed</Represent>
+      <Adress>1030</Adress>
+      <AdapterId>0</AdapterId>
+      <DeviceAdress>1</DeviceAdress>
+      <Value>0</Value>
+      <isHaveData>true</isHaveData>
+      <Name>ось Y перемещение Амплитуда мкм</Name>
+      <Tag>Вкладка 1</Tag>
+      <IsEnabled>1</IsEnabled>
+    </CellData>
+    <CellData>
+      <Type>InputRegister</Type>
+      <Format>swFloat</Format>
+      <Status>Value</Status>
+      <Represent>Signed</Represent>
+      <Adress>1032</Adress>
+      <AdapterId>0</AdapterId>
+      <DeviceAdress>1</DeviceAdress>
+      <Value>0</Value>
+      <isHaveData>true</isHaveData>
+      <Name>ось Y перемещение СКЗ мкм</Name>
+      <Tag>Вкладка 1</Tag>
+      <IsEnabled>1</IsEnabled>
+    </CellData>
+    <CellData>
+      <Type>InputRegister</Type>
+      <Format>swFloat</Format>
+      <Status>Value</Status>
+      <Represent>Signed</Represent>
+      <Adress>1034</Adress>
+      <AdapterId>0</AdapterId>
+      <DeviceAdress>1</DeviceAdress>
+      <Value>0</Value>
+      <isHaveData>true</isHaveData>
+      <Name>ось Y перемещение размах мкм</Name>
+      <Tag>Вкладка 1</Tag>
+      <IsEnabled>1</IsEnabled>
+    </CellData>
+    <CellData>
+      <Type>InputRegister</Type>
+      <Format>swFloat</Format>
+      <Status>Value</Status>
+      <Represent>Signed</Represent>
+      <Adress>1054</Adress>
+      <AdapterId>0</AdapterId>
+      <DeviceAdress>1</DeviceAdress>
+      <Value>82,28321</Value>
+      <isHaveData>true</isHaveData>
+      <Name>Угол X</Name>
+      <Tag>Вкладка 1</Tag>
+      <IsEnabled>1</IsEnabled>
+    </CellData>
+    <CellData>
+      <Type>InputRegister</Type>
+      <Format>swFloat</Format>
+      <Status>Value</Status>
+      <Represent>Signed</Represent>
+      <Adress>1056</Adress>
+      <AdapterId>0</AdapterId>
+      <DeviceAdress>1</DeviceAdress>
+      <Value>-5,438023</Value>
+      <isHaveData>true</isHaveData>
+      <Name>Угол Y</Name>
+      <Tag>Вкладка 1</Tag>
+      <IsEnabled>1</IsEnabled>
+    </CellData>
+    <CellData>
+      <Type>InputRegister</Type>
+      <Format>swFloat</Format>
+      <Status>Value</Status>
+      <Represent>Signed</Represent>
+      <Adress>1058</Adress>
+      <AdapterId>0</AdapterId>
+      <DeviceAdress>1</DeviceAdress>
+      <Value>5,458206</Value>
+      <isHaveData>true</isHaveData>
+      <Name>Угол Z</Name>
+      <Tag>Вкладка 1</Tag>
+      <IsEnabled>1</IsEnabled>
+    </CellData>
+    <CellData>
+      <Type>InputRegister</Type>
+      <Format>swFloat</Format>
+      <Status>Value</Status>
+      <Represent>Signed</Represent>
+      <Adress>1060</Adress>
+      <AdapterId>0</AdapterId>
+      <DeviceAdress>1</DeviceAdress>
+      <Value>27,52026</Value>
+      <isHaveData>true</isHaveData>
+      <Name>Температура контроллера</Name>
+      <Tag>Вкладка 1</Tag>
+      <IsEnabled>1</IsEnabled>
+    </CellData>
+    <CellData>
+      <Type>InputRegister</Type>
+      <Format>swFloat</Format>
+      <Status>Value</Status>
+      <Represent>Signed</Represent>
+      <Adress>1062</Adress>
+      <AdapterId>0</AdapterId>
+      <DeviceAdress>1</DeviceAdress>
+      <Value>0</Value>
+      <isHaveData>true</isHaveData>
+      <Name>Общий вес сработавших уставок</Name>
+      <Tag>Вкладка 1</Tag>
+      <IsEnabled>1</IsEnabled>
+    </CellData>
+    <CellData>
+      <Type>InputRegister</Type>
+      <Format>swFloat</Format>
+      <Status>Value</Status>
+      <Represent>Signed</Represent>
+      <Adress>1064</Adress>
+      <AdapterId>0</AdapterId>
+      <DeviceAdress>1</DeviceAdress>
+      <Value>0</Value>
+      <isHaveData>true</isHaveData>
+      <Name>СКЗ ускорения по 2 осям</Name>
+      <Tag>Вкладка 1</Tag>
+      <IsEnabled>1</IsEnabled>
+    </CellData>
+    <CellData>
+      <Type>InputRegister</Type>
+      <Format>swFloat</Format>
+      <Status>Value</Status>
+      <Represent>Signed</Represent>
+      <Adress>1066</Adress>
+      <AdapterId>0</AdapterId>
+      <DeviceAdress>1</DeviceAdress>
+      <Value>0</Value>
+      <isHaveData>true</isHaveData>
+      <Name>СКЗ скорости по 2 осям</Name>
+      <Tag>Вкладка 1</Tag>
+      <IsEnabled>1</IsEnabled>
+    </CellData>
+    <CellData>
+      <Type>InputRegister</Type>
+      <Format>swFloat</Format>
+      <Status>Value</Status>
+      <Represent>Signed</Represent>
+      <Adress>1068</Adress>
+      <AdapterId>0</AdapterId>
+      <DeviceAdress>1</DeviceAdress>
+      <Value>0</Value>
+      <isHaveData>true</isHaveData>
+      <Name>СКЗ перемещения по 2 осям</Name>
+      <Tag>Вкладка 1</Tag>
+      <IsEnabled>1</IsEnabled>
+    </CellData>
+    <CellData>
+      <Type>InputRegister</Type>
+      <Format>swFloat</Format>
+      <Status>Value</Status>
+      <Represent>Signed</Represent>
+      <Adress>1070</Adress>
+      <AdapterId>0</AdapterId>
+      <DeviceAdress>1</DeviceAdress>
+      <Value>0</Value>
+      <isHaveData>true</isHaveData>
+      <Name>СКЗ ускорения в проскости</Name>
+      <Tag>Вкладка 1</Tag>
+      <IsEnabled>1</IsEnabled>
+    </CellData>
+    <CellData>
+      <Type>InputRegister</Type>
+      <Format>swFloat</Format>
+      <Status>Value</Status>
+      <Represent>Signed</Represent>
+      <Adress>1072</Adress>
+      <AdapterId>0</AdapterId>
+      <DeviceAdress>1</DeviceAdress>
+      <Value>0</Value>
+      <isHaveData>true</isHaveData>
+      <Name>СКЗ скорости в плоскости</Name>
+      <Tag>Вкладка 1</Tag>
+      <IsEnabled>1</IsEnabled>
+    </CellData>
+    <CellData>
+      <Type>InputRegister</Type>
+      <Format>swFloat</Format>
+      <Status>Value</Status>
+      <Represent>Signed</Represent>
+      <Adress>1074</Adress>
+      <AdapterId>0</AdapterId>
+      <DeviceAdress>1</DeviceAdress>
+      <Value>0</Value>
+      <isHaveData>true</isHaveData>
+      <Name>СКЗ перемещения в плоскости</Name>
+      <Tag>Вкладка 1</Tag>
+      <IsEnabled>1</IsEnabled>
+    </CellData>
+  </CellsArray>
+  <AdaptersArray>
+    <AdapterData>
+      <FullAdapterInf>1;COM3;COM6;9600;0;1;8;500;500;800</FullAdapterInf>
+      <Devices>
+        <Device>
+          <Adress>1</Adress>
+          <Name>DVA-141</Name>
+        </Device>
+      </Devices>
+      <DefaultDeviceAdress>1</DefaultDeviceAdress>
+    </AdapterData>
+  </AdaptersArray>
+  <TabsArray>
+    <TabsData>
+      <Tag>Вкладка 1</Tag>
+      <ColumnsWidths>
+        <int>135</int>
+        <int>100</int>
+        <int>100</int>
+        <int>61</int>
+        <int>371</int>
+        <int>39</int>
+        <int>41</int>
+        <int>118</int>
+      </ColumnsWidths>
+    </TabsData>
+  </TabsArray>
+  <GuiData>
+    <DataGridColsWidths>
+      <int>135</int>
+      <int>100</int>
+      <int>100</int>
+      <int>61</int>
+      <int>371</int>
+      <int>39</int>
+      <int>41</int>
+      <int>118</int>
+    </DataGridColsWidths>
+    <CoeffsShowing>true</CoeffsShowing>
+    <FormatShowing>true</FormatShowing>
+    <ColorsShowing>false</ColorsShowing>
+  </GuiData>
+</SerializableCellsContainer>
