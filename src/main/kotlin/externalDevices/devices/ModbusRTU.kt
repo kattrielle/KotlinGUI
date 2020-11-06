@@ -19,7 +19,6 @@ class ModbusRTU ( portName: String ) : Modbus() {
         (settings as SettingsModbusRTU).address = _address
         (settings as SettingsModbusRTU).baudRate = _baudrate
 
-        //init of PortCOM
         port = PortCOM( settings as SettingsCOM )
     }
 
@@ -89,21 +88,13 @@ class ModbusRTU ( portName: String ) : Modbus() {
         {
             return false
         }
-        //тут костыль для устройств с багами связи. Лютый кодище под исправление!
-        for (i in 0 until LEN_WRITEMESSAGE_RTU)
-        {
-            if ( message[i]==response[i])
-            {
-                continue
-            }
-            if ( GetOneHoldingValue(register) == Pair(true, value))
-            {
-                break;
-            }
-            return false;
-        }
 
-        return true
+        return if ( message contentEquals response )
+        {
+            true
+        } else {
+            GetOneHoldingValue(register) == Pair(true, value)
+        }
     }
 
     override fun SetMultipleHoldingValues(register: Int, values: Array<Byte>): Boolean {

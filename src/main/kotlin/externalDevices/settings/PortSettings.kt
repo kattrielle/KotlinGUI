@@ -1,7 +1,7 @@
 package externalDevices.settings
 
 open class PortSettings {
-    open val description : String = "" // её с геттером сделать?
+    open val description : String = "" // @todo её с геттером сделать?
 
     open fun CheckName() : Boolean = true
 }

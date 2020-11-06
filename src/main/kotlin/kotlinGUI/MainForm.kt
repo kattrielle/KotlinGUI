@@ -35,7 +35,6 @@ class MainForm: View()
             {
                 textFill = Color.RED
                 action {
-                    //openInternalWindow<FormSettings>()
                     openInternalWindow<FormSetValuesToDevice>()
                 }
             }
@@ -43,10 +42,6 @@ class MainForm: View()
             {
                 action {
                     val xmlMapper = XmlMapper()
-                            //xmlMapper.setPropertyNamingStrategy(
-                            //TikModscanNamingStrategy()
-                            //PropertyNamingStrategy.LOWER_CAMEL_CASE )
-                    //xmlMapper.propertyNamingStrategy = PropertyNamingStrategy.LOWER_CASE
                     val map = xmlMapper.readValue(
                             File("/home/kate/Загрузки/Telegram Desktop/пользовательская_карта_регистров_v6.xml"),
                             SerializableCellsContainer::class.java)

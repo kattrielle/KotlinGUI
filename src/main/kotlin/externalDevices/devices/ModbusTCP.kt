@@ -51,7 +51,7 @@ class ModbusTCP(IP: String, portConnection: Int ) : Modbus() {
     override fun SetValue(funct: Byte, register: Int, value: Int): Boolean {
         val message = CreateMessage( funct, register, value )
         val (succeed, response ) = port.SendQuery( message, answerStart + 2, maxIterations )
-        //надо ли обрабатывать response?
+        // @TODO надо ли обрабатывать response?
         return succeed
     }
 
@@ -59,7 +59,7 @@ class ModbusTCP(IP: String, portConnection: Int ) : Modbus() {
         val message = CreateMessageMultipleWrite( register, values )
         val ( succeed, response ) = port.SendQuery( message,
                 answerStart + values.size, maxIterations )
-        //надо ли обрабатывать response?
+        // @TODO надо ли обрабатывать response?
         return succeed
     }
 }

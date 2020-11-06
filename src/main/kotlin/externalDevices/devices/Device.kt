@@ -6,9 +6,9 @@ import externalDevices.ports.IPort
 open class Device {
     protected open val maxIterations: Int = 1
 
-    //protected open lateinit var port: IPort
+    // @TODO make protected open lateinit var port: IPort
     open lateinit var port: IPort
-    //protected
+    // @TODO make settings protected?
     open lateinit var settings: PortSettings
 
     open fun OpenConnection() : Boolean

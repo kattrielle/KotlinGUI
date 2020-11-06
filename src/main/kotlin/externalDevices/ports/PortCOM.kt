@@ -9,7 +9,7 @@ class PortCOM (name: String) : SerialPort(name), IPort {
     {
         SetPortParameters( settings )
     }
-    override var isOpen : Boolean = false //fix???
+    override var isOpen : Boolean = false // @todo fix??? или тут всё уже хорошо?
     get() = isOpened
 
     override var delayAnswerRead: Int = 100
@@ -18,7 +18,6 @@ class PortCOM (name: String) : SerialPort(name), IPort {
 
     fun SetPortParameters( settings: SettingsCOM) : Boolean
     {
-        //как установить параметры, если они только к открытому порту применяются?
         delayAnswerRead = settings.readTimeout
         delayAnswerWrite = settings.writeTimeout
         if (!OpenPort()) {
@@ -32,7 +31,7 @@ class PortCOM (name: String) : SerialPort(name), IPort {
 
     override fun OpenPort() : Boolean
     {
-        //нужен ли мне тут трай-кэч, как в старой версии софта?
+        // @todo нужен ли мне тут трай-кэч, как в старой версии софта?
         println("Opening $portName...")
         return try {
             if (isOpen) {
@@ -59,7 +58,7 @@ class PortCOM (name: String) : SerialPort(name), IPort {
     {
         println("sending $message")
         writeString( message )
-        //Sleep(delayAnswerWrite) --- что делать с этим куском кода?
+        // @todo Sleep(delayAnswerWrite) --- что делать с этим куском кода?
         Thread.sleep( delayAnswerWrite.toLong() )
         return true
     }
@@ -67,9 +66,9 @@ class PortCOM (name: String) : SerialPort(name), IPort {
     override fun SendMessage(message: Array<Byte>) : Boolean
     {
         println( "sending some bytes..." )
-        //нужны ли тут дискардбуфферс?
+        // @todo нужны ли тут дискардбуфферс?
         writeBytes( message.toByteArray() )
-        //Sleep(delayAnswerWrite)
+        // @todo Sleep(delayAnswerWrite)
         Thread.sleep( delayAnswerWrite.toLong() )
         return true
     }
@@ -106,10 +105,5 @@ class PortCOM (name: String) : SerialPort(name), IPort {
         }
         val result = arrayOf<Byte>(0,1)
         return Pair(false,result)
-    }
-    
-    private fun WaitPortAnswer() : Boolean
-    {
-        return false
     }
 }

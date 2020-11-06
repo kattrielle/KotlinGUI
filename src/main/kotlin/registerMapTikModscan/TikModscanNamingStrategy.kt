@@ -29,7 +29,5 @@ class TikModscanNamingStrategy : PropertyNamingStrategy() {
             defaultName: String?
     ): String {
         TODO("Find how to save naming as-is")
-        //val test = method?.name?.drop(3).toString()
-        //return method?.name?.drop(3).toString()
     }
 }
