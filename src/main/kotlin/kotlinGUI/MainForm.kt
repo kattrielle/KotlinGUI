@@ -1,7 +1,11 @@
 package kotlinGUI
 
+import com.fasterxml.jackson.databind.PropertyNamingStrategy
+import com.fasterxml.jackson.dataformat.xml.XmlMapper
 import javafx.scene.paint.Color
+import registerMapTikModscan.SerializableCellsContainer
 import tornadofx.*
+import java.io.File
 
 class MainMenu: Fragment()
 {
@@ -26,12 +30,25 @@ class MainForm: View()
 {
     override val root = borderpane {
         top<MainMenu>()
-        bottom = button("big red btn")
-        {
-            textFill = Color.RED
-            action {
-                openInternalWindow<FormSettings>()
+        center = vbox {
+            button("big red btn")
+            {
+                textFill = Color.RED
+                action {
+                    openInternalWindow<FormSetValuesToDevice>()
+                }
+            }
+            button("Parse xml")
+            {
+                action {
+                    val xmlMapper = XmlMapper()
+                    val map = xmlMapper.readValue(
+                            File("/home/kate/Загрузки/Telegram Desktop/пользовательская_карта_регистров_v6.xml"),
+                            SerializableCellsContainer::class.java)
+                    println( map.guiData?.formatShowing )
+                }
             }
         }
+        setMinSize(500.0, 300.0)
     }
 }

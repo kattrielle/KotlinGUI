@@ -1,5 +1,4 @@
-//package ExternalDevices
-package externalDevices
+package externalDevices.ports
 
 interface IPort {
 

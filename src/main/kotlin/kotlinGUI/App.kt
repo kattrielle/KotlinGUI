@@ -3,17 +3,19 @@
  */
 package kotlinGUI
 
-import externalDevices.PortCOM
-import externalDevices.SettingsCOM
+import externalDevices.ports.PortCOM
+import externalDevices.settings.SettingsCOM
 import tornadofx.*
+import countSetpoints.CountSetpointVariant
+import countSetpoints.CountSetpoints
 
 fun main(args: Array<String>) {
     launch<VisualApplication>(args)
     println("hello")
-    var port = PortCOM(SettingsCOM())
+    var port = PortCOM(SettingsCOM("COM1"))
     //port.OpenPort()
+    //CountSetpoints.count( CountSetpointVariant.Average )
 }
-
 
 class VisualApplication: App(MainForm::class)
 

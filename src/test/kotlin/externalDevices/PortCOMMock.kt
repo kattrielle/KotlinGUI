@@ -1,5 +1,7 @@
 package externalDevices
 
+import externalDevices.ports.IPort
+
 class PortCOMMock(private val messageToGetString : String) : IPort {
     private var messageToWriteBytes : Array<Byte> = emptyArray()
     private var messageToGetBytes : Array<Byte> = emptyArray()
