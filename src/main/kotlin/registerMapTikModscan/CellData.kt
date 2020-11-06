@@ -7,7 +7,7 @@ class CellData {
     @JsonProperty("Format") var format: ElementFormat? = null
     @JsonProperty("Status") var status: ElementStatus? = null
     @JsonProperty("Represent") var represent: ElementPresentation? = null
-    @JsonProperty("Adress") var address = 0
+    @JsonProperty("Adress") var address = 0 //"чистый" адрес: номер регистра - 1
     @JsonProperty("AdapterId") var adapterId = 0
     @JsonProperty("DeviceAdress") var deviceAddress = 0
     @JsonProperty("Value") var value: String = ""

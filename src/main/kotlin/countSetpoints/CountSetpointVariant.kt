@@ -1,6 +1,8 @@
 package countSetpoints
 
 enum class CountSetpointVariant {
-    MAXIMUM,
-    AVERAGE
+    Maximum,
+    Average,
+    MaximumMSD, //среднеквадратичное отклонение от максимума
+    AverageMSD
 }

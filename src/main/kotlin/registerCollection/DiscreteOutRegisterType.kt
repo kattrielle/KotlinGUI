@@ -1,6 +1,6 @@
 package registerCollection
 
-enum class DiscreteOutRegisterTypes {
+enum class DiscreteOutRegisterType {
     Value,
     Setpoint,
     TimeSet,

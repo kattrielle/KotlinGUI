@@ -14,9 +14,8 @@ fun main(args: Array<String>) {
     println("hello")
     var port = PortCOM(SettingsCOM("COM1"))
     //port.OpenPort()
-    CountSetpoints.count( CountSetpointVariant.AVERAGE )
+    //CountSetpoints.count( CountSetpointVariant.Average )
 }
-
 
 class VisualApplication: App(MainForm::class)
 
