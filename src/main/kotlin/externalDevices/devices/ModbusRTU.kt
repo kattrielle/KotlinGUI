@@ -22,6 +22,13 @@ class ModbusRTU ( portName: String ) : Modbus() {
         port = PortCOM( settings as SettingsCOM )
     }
 
+    constructor( parametersCOM : SettingsModbusRTU ) : this( parametersCOM.name )
+    {
+        settings = parametersCOM
+
+        port = PortCOM( settings as SettingsCOM )
+    }
+
     private fun GetCRC(message: Array<Byte>) : Array<Byte>
     {
         val result: Array<Byte> = Array(2){0}

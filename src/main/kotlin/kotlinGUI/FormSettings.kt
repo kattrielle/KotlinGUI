@@ -1,17 +1,34 @@
 package kotlinGUI
 
-import javafx.collections.FXCollections
+import externalDevices.devices.ModbusRTU
 import jssc.SerialPortList
 import tornadofx.*
 
 class FormSettings: View("Параметры") {
-    private val comPorts = FXCollections.observableArrayList(SerialPortList.getPortNames())
+    private val dataComConnection : DataComConnection by inject()
 
     override val root = form {
-        fieldset("Параметры связи") {
+        fieldset("Устройство") {
+            field("Порт:") {
+                combobox( dataComConnection.selectPort, SerialPortList.getPortNames().toList() )
+            }
             field("Адрес устройства:") {
-                combobox(values = comPorts)
-                //listview(comPorts)
+                textfield( dataComConnection.deviceAddress )
+            }
+
+        }
+        fieldset("Параметры соединения") {
+            field("Скорость:") {
+                combobox( dataComConnection.selectBaudrate, dataComConnection.baudrate )
+            }
+            field( "Чётность:" ) {
+                combobox( dataComConnection.selectParity, dataComConnection.parity )
+            }
+            field("Биты данных:") {
+                combobox( dataComConnection.selectDataBits, dataComConnection.dataBits )
+            }
+            field("Стоп-бит:") {
+                combobox( dataComConnection.selectStopBits, dataComConnection.stopBits )
             }
         }
         hbox {
@@ -19,6 +36,9 @@ class FormSettings: View("Параметры") {
             {
                 action {
                     println("Button pressed!")
+                    FormValues.settings = dataComConnection.setModbusParameters()
+                    FormValues.device = ModbusRTU( FormValues.settings )
+                    close()
                 }
             }
             button("Close")
@@ -26,6 +46,7 @@ class FormSettings: View("Параметры") {
                 action {
                     close()
                 }
+                shortcut("Esc")
             }
         }
     }

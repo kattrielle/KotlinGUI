@@ -11,6 +11,18 @@ class DiscreteOut {
     var timeSet : CellData? = null
     var timeUnset : CellData? = null
 
+    var descriptionValues : String = ""
+    get() = values?.name ?: ""
+
+    var descriptionSetpoint : String = ""
+        get() = setpoint?.name ?: ""
+
+    var descriptionTimeSet : String = ""
+        get() = timeSet?.name ?: ""
+
+    var descriptionTimeUnset : String = ""
+        get() = timeUnset?.name ?: ""
+
     var registerValues : Int
         get() = values?.address?.plus(1) ?: 0
         set(value) {values?.address = value - 1 }
@@ -42,6 +54,42 @@ class DiscreteOut {
             }
         }
         return result
+    }
+
+    fun writeSetpointValue( value : Double, device : Modbus ) : Boolean
+    {
+        return writeHoldingValue( value, device, setpoint?.format!!, registerSetpoint )
+    }
+
+    fun writeTimeSetValue( value : Int, device: Modbus ) : Boolean
+    {
+        return writeHoldingValue( value.toDouble(), device, timeSet?.format!!, registerTimeSet)
+    }
+
+    fun writeTimeUnsetValue( value : Int, device : Modbus ) : Boolean
+    {
+        return writeHoldingValue(value.toDouble(),device,timeUnset?.format!!, registerTimeUnset)
+    }
+
+    private fun writeHoldingValue(
+            value: Double,
+            device: Modbus,
+            format: ElementFormat,
+            register: Int
+    ) : Boolean
+    {
+        return when (format ) {
+            ElementFormat.Int -> {
+                device.SetHoldingValue(register, value.toInt())
+            }
+            ElementFormat.Float -> {
+                device.SetHoldingSwFloat( register, value.toFloat() )
+            }
+            ElementFormat.swFloat -> {
+                device.SetHoldingFloat(register, value.toFloat() )
+            }
+            else -> false
+        }
     }
 
     private fun getHoldingValue(device : Modbus ) : Double
