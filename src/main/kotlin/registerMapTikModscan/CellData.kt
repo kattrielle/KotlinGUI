@@ -12,7 +12,7 @@ class CellData {
     @JsonProperty("DeviceAdress") var deviceAddress = 0
     @JsonProperty("Value") var value: String = ""
     @JsonProperty("isHaveData") var isHaveData: Boolean = false
-    @JsonProperty("Name") var name: String = ""
+    @JsonProperty("Name") var name: String? = ""
     @JsonProperty("Tag") var tag: String = ""
     @JsonProperty("FormulaData") var formulaData: CellFormulaData? = null
     @JsonProperty("IsEnabled") var isEnabled = 0 // Int - for support old reg maps

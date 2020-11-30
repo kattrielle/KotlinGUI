@@ -1,31 +1,51 @@
 package kotlinGUI
 
+import javafx.beans.property.SimpleStringProperty
 import registerCollection.DiscreteOut
-import registerMapTikModscan.CellData
 import tornadofx.*
 
 class FormSelectRegisters : View( "Задание параметров цифровых выходов" )
 {
+    private val selectDefence = SimpleStringProperty()
+
+    init {
+        FormValues.setpoints.items.clear()
+
+        selectDefence.onChange {
+            FormValues.setpoints.registerWriteDefence =
+                    FormValues.findRegister( selectDefence.value )
+        }
+    }
+
     override val root = gridpane {
         /*val registers = FormValues.tikModscanMap?.сellsArray.asList().asObservable()
         tableview ( registers ) {
             readonlyColumn("Регистр", CellData::address)
             readonlyColumn("Название", CellData::name)
         }*/
-
         vbox {
-            button("Close") {
+            button("Закрыть") {
                 action {
-                    println( FormValues.setpoints.items.first().descriptionValues)
                     find(MainForm::class).reloadForm()
                     close()
                 }
             }
-            button("+") {
+            vbox {
+                text("Регистр защиты от записи")
+                combobox( selectDefence, FormValues.getRegisterMapDescriptions())
+            }
+        }
+
+        vbox {
+
+            button("Добавить уставку") {
                 action {
                     FormValues.setpoints.items.add( DiscreteOut())
                     this@vbox.add(DiscreteOutFragment(FormValues.setpoints.items.last()))
                 }
+            }
+            gridpaneConstraints {
+                columnRowIndex(1,0)
             }
         }
 

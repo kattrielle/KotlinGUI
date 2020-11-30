@@ -19,6 +19,7 @@ class CountSetpointFragment : Fragment() {
     private val countResult = SimpleDoubleProperty()
     private val timeSet = SimpleIntegerProperty()
     private val timeUnset = SimpleIntegerProperty()
+    private val weight = SimpleIntegerProperty()
     private var discreteOut : DiscreteOut? = null
     private var sample : List<Double> = listOf()
 
@@ -36,9 +37,12 @@ class CountSetpointFragment : Fragment() {
                 action {
                     val btn = discreteOutGroup.selectedToggle as RadioButton
                     discreteOut = FormValues.findSetpoint( btn.text )
-                    style { backgroundColor += Color.GRAY }
+                    isDisable = true
+                    println( FormValues.getCurrentTime() + "getting sample begin")
                     sample = discreteOut?.getSample( sampleLen.value, FormValues.device )!!
-                    style { backgroundColor += Color.WHITE }
+                    FormValues.device.CloseConnection()
+                    println( FormValues.getCurrentTime() + "getting sample done")
+                    isDisable = false
                 }
             }
         }
@@ -64,13 +68,22 @@ class CountSetpointFragment : Fragment() {
             textfield( timeSet )
             text("Время снятия")
             textfield( timeUnset )
+            text("Весовой коэффициент")
+            textfield( weight )
             button("Записать") {
                 action {
-                    style { backgroundColor += Color.GRAY }
+                    isDisable = true
+                    println( FormValues.getCurrentTime() + "write setpoint parameters")
+                    FormValues.setpoints.unlockWrite( FormValues.device )
                     discreteOut?.writeSetpointValue( countResult.value, FormValues.device )
+                    discreteOut?.writeSetpointSampleValue( FormValues.device )
                     discreteOut?.writeTimeSetValue( timeSet.value, FormValues.device )
                     discreteOut?.writeTimeUnsetValue( timeUnset.value, FormValues.device )
-                    style { backgroundColor += Color.WHITE }
+                    discreteOut?.writeWeightValue( weight.value, FormValues.device )
+                    FormValues.setpoints.lockWrite( FormValues.device )
+                    FormValues.device.CloseConnection()
+                    println( FormValues.getCurrentTime() + "write setpoint complete" )
+                    isDisable = false
                 }
             }
         }

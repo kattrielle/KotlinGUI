@@ -42,14 +42,14 @@ class DataComConnection : Controller()
             "1.5", // SerialPort.STOPBITS_1_5
             "2" ) // SerialPort.STOPBITS_2
 
-
-
     val selectPort = SimpleStringProperty( FormValues.settings.name )
     val deviceAddress = SimpleIntegerProperty( FormValues.settings.address.toInt() )
     val selectBaudrate = SimpleIntegerProperty( FormValues.settings.baudRate )
     val selectParity = SimpleStringProperty( "None" )
     val selectDataBits = SimpleIntegerProperty( FormValues.settings.dataBits )
     val selectStopBits = SimpleStringProperty( "1" )
+    val selectDelayAnswerRead = SimpleIntegerProperty( FormValues.settings.delayAnswerRead )
+    val selectDelayAnswerWrite = SimpleIntegerProperty( FormValues.settings.delayAnswerWrite )
 
     fun setModbusParameters() : SettingsModbusRTU
     {
@@ -57,6 +57,8 @@ class DataComConnection : Controller()
         settings.address = deviceAddress.value.toByte()
         settings.baudRate = selectBaudrate.value
         settings.dataBits = selectDataBits.value
+        settings.delayAnswerRead = selectDelayAnswerRead.value
+        settings.delayAnswerWrite = selectDelayAnswerWrite.value
 
         when ( selectParity.value )
         {

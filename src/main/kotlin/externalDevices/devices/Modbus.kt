@@ -1,5 +1,6 @@
 package externalDevices.devices
 
+import kotlinGUI.FormValues
 import java.nio.ByteBuffer
 import java.nio.ByteOrder
 import kotlin.math.ceil
@@ -73,7 +74,7 @@ open class Modbus : Device() {
         return result
     }
 
-    protected fun CountAnswerLength( //Подсчёт длины получаемого ответа, чистых значений
+    private fun CountAnswerLength( //Подсчёт длины получаемого ответа, чистых значений
             funct: Int, //Отправленная на устройство функция
             length: Int //Число запрошенных регистров
     ) : Int //Число значимых байт ответа
@@ -123,8 +124,10 @@ open class Modbus : Device() {
     {
         val (succeed, answer) = GetCoilValue( register, 1 )
         return if (succeed) {
+            println( FormValues.getCurrentTime() + "successfully got ${answer[0]}")
             Pair(succeed, answer[0])
         } else {
+            println(FormValues.getCurrentTime() + "reading unsuccessful")
             Pair(succeed,false)
         }
     }
@@ -135,6 +138,7 @@ open class Modbus : Device() {
     ) : Pair<Boolean,Array<Boolean>> //Набор значений логических регистров
     {
         val (succeed,answer) = GetValue(READMANY_COIL, register, length)
+        println( FormValues.getCurrentTime() + "getting coils: $succeed" )
         return Pair(succeed,ConvertToFlagValues(length,answer))
     }
 
@@ -144,8 +148,10 @@ open class Modbus : Device() {
     {
         val (succeed, answer) = GetDiscreteInputValue( register, 1 )
         return if (succeed) {
+            println( FormValues.getCurrentTime() + "successfully got ${answer[0]}")
             Pair(succeed, answer[0])
         } else {
+            println(FormValues.getCurrentTime() + "reading unsuccessful")
             Pair(succeed,false)
         }
     }
@@ -156,6 +162,7 @@ open class Modbus : Device() {
     ) :Pair<Boolean, Array<Boolean>> //Набор значений дискретных входов
     {
         val (succeed, answer) = GetValue(READMANY_DISCRETEINPUTS,register, length)
+        println( FormValues.getCurrentTime() + "getting discrete inputs: $succeed" )
         return Pair(succeed,ConvertToFlagValues(length,answer))
     }
 
@@ -164,14 +171,11 @@ open class Modbus : Device() {
     ) : Pair<Boolean,Int> //Значение регистра
     {
         val (succeed, answer) = GetHoldingValue(register, 1)
-        /*return if (succeed) {
-            Pair(succeed,answer[0])
-        } else {
-            Pair(succeed, 0)
-        }*/
         return if (answer.isNotEmpty()) {
+            println( FormValues.getCurrentTime() + "getting holding: ${answer[0]}")
             Pair(succeed,answer[0])
         } else {
+            println(FormValues.getCurrentTime() + "reading unsuccessful")
             Pair(succeed, 0)
         }
     }
@@ -190,8 +194,10 @@ open class Modbus : Device() {
     {
         val (succeed, answer) = GetInputValue(register, 1)
         return if (succeed) {
+            println( FormValues.getCurrentTime() + "getting input: ${answer[0]}")
             Pair(succeed, answer[0])
         } else {
+            println(FormValues.getCurrentTime() + "reading unsuccessful")
             Pair(succeed, 0)
         }
     }
@@ -210,14 +216,16 @@ open class Modbus : Device() {
     ): Pair<Boolean,Float> {
         val (succeed, answer) = GetClearAnswer(funct, register, 2 )
         return if (succeed) {
-            var tmp: ByteArray = ByteArray(4) { 0 }
+            var tmp = ByteArray(4) { 0 }
             for (i: Int in 0 until 2) {
                 tmp[2 * i] = answer[answerStart + 2 * i + 1]
                 tmp[2 * i + 1] = answer[answerStart + 2 * i]
             }
-            Pair(succeed, ByteBuffer.wrap(tmp).order(ByteOrder.LITTLE_ENDIAN).float)
+            val result = ByteBuffer.wrap(tmp).order(ByteOrder.LITTLE_ENDIAN).float
+            println( FormValues.getCurrentTime() + "getting float value: $result")
+            Pair(succeed, result)
         } else {
-            //logging of unsuccessful reading
+            println(FormValues.getCurrentTime() + "reading unsuccessful")
             Pair(succeed, 0F)
         }
     }
@@ -233,10 +241,11 @@ open class Modbus : Device() {
                 tmp[2 * i] = answer[answerStart + 2 * i]
                 tmp[2 * i + 1] = answer[answerStart + 2 * i + 1]
             }
-            //Pair(succeed, ByteBuffer.wrap(tmp).order(ByteOrder.LITTLE_ENDIAN).float)
-            Pair(succeed, ByteBuffer.wrap(tmp).float)
+            val result = ByteBuffer.wrap(tmp).float
+            println( FormValues.getCurrentTime() + "getting float value: $result")
+            Pair(succeed, result )
         } else {
-            //logging of unsuccessful reading
+            println(FormValues.getCurrentTime() + "reading unsuccessful")
             Pair(succeed, 0F)
         }
     }
@@ -289,6 +298,8 @@ open class Modbus : Device() {
     {
         val answerLength = CountAnswerLength( funct.toInt(), length)
         val (succeed, answer) = GetClearAnswer( funct, register, length )
+        println( FormValues.getCurrentTime() +
+                "getting value from register $register with function $funct: $succeed")
         return Pair(succeed, ConvertBytes( answer, funct, answerLength ))
     }
 
@@ -306,6 +317,7 @@ open class Modbus : Device() {
             value: Int, //Отправляемое значение
     ):Boolean //Ответ устройства на операцию записи
     {
+        println( FormValues.getCurrentTime() + "writing $value to holding $register" )
         return SetValue( WRITEONE_HOLDING, register, value )
     }
 
@@ -340,9 +352,6 @@ open class Modbus : Device() {
             value: Float, //записываемое значение
     ) : Boolean //Ответ устройства на операцию записи
     {
-        //int[] tmp = new int[ 2 ];
-        //tmp[ 0 ] = (int) BitConverter.ToInt16( BitConverter.GetBytes( value ), 0 );
-        //tmp[ 1 ] = (int) BitConverter.ToInt16( BitConverter.GetBytes( value ), 2 );
         val tmp: Array<Byte> = Array(4) { 0 }
         val byteBuffer = ByteBuffer.allocate(4)
         byteBuffer.putFloat( value )
@@ -350,6 +359,7 @@ open class Modbus : Device() {
             tmp[2 * i] = byteBuffer[2 * (1 - i) + 1]
             tmp[2 * i + 1] = byteBuffer[2 * (1 - i)]
         }
+        println( FormValues.getCurrentTime() + "writing $value to holding $register" )
         return SetMultipleHoldingValues(register, tmp)
     }
 
@@ -358,9 +368,6 @@ open class Modbus : Device() {
             value: Float, //записываемое значение
     ) : Boolean //Ответ устройства на операцию записи
     {
-        //int[] tmp = new int[ 2 ];
-        //tmp[ 0 ] = (int) BitConverter.ToInt16( BitConverter.GetBytes( value ), 2 );
-        //tmp[ 1 ] = (int) BitConverter.ToInt16( BitConverter.GetBytes( value ), 0 );
         val tmp: Array<Byte> = Array(4) { 0 }
         val byteBuffer = ByteBuffer.allocate(4)
         byteBuffer.putFloat( value )
@@ -368,6 +375,7 @@ open class Modbus : Device() {
             tmp[2 * i] = byteBuffer[2 * i + 1]
             tmp[2 * i + 1] = byteBuffer[2 * i]
         }
+        println( FormValues.getCurrentTime() + "writing $value to holding $register" )
         return SetMultipleHoldingValues(register, tmp)
     }
 }

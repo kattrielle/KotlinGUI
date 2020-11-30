@@ -30,18 +30,23 @@ class FormSettings: View("Параметры") {
             field("Стоп-бит:") {
                 combobox( dataComConnection.selectStopBits, dataComConnection.stopBits )
             }
+            field("Задержка чтения") {
+                textfield( dataComConnection.selectDelayAnswerRead )
+            }
+            field("Зажержка записи"){
+                textfield( dataComConnection.selectDelayAnswerWrite )
+            }
         }
         hbox {
             button("OK")
             {
                 action {
-                    println("Button pressed!")
                     FormValues.settings = dataComConnection.setModbusParameters()
                     FormValues.device = ModbusRTU( FormValues.settings )
                     close()
                 }
             }
-            button("Close")
+            button("Закрыть")
             {
                 action {
                     close()

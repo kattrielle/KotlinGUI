@@ -11,10 +11,6 @@ import countSetpoints.CountSetpoints
 
 fun main(args: Array<String>) {
     launch<VisualApplication>(args)
-    println("hello")
-    var port = PortCOM(SettingsCOM("COM1"))
-    //port.OpenPort()
-    //CountSetpoints.count( CountSetpointVariant.Average )
 }
 
 class VisualApplication: App(MainForm::class)

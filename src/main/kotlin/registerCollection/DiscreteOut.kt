@@ -6,13 +6,19 @@ import registerMapTikModscan.ElementFormat
 import registerMapTikModscan.ElementType
 
 class DiscreteOut {
-    var values : CellData? = null
-    var setpoint : CellData? = null
-    var timeSet : CellData? = null
-    var timeUnset : CellData? = null
+    var values : CellData? = null //регистр выборки
+    var setpointSample : CellData? = null //регистр хранения адреса (номера регистра) выборки для уставки
+    var setpoint : CellData? = null //регистр величины уставки
+    var timeSet : CellData? = null //регистр времени устаноки для уставки
+    var timeUnset : CellData? = null //регистр времени снятия для уставки
+    var weight : CellData? = null //регистр весового коэффициента для уставки
 
+    // @TODO может быть, есть смысл вынести дескрипшн и регистр в CellData?ЧТо тогда делать с null?
     var descriptionValues : String = ""
-    get() = values?.name ?: ""
+        get() = values?.name ?: ""
+
+    var descriptionSetpointSample : String = ""
+        get() = setpointSample?.name ?: ""
 
     var descriptionSetpoint : String = ""
         get() = setpoint?.name ?: ""
@@ -23,6 +29,9 @@ class DiscreteOut {
     var descriptionTimeUnset : String = ""
         get() = timeUnset?.name ?: ""
 
+    var descriptionWeight : String = ""
+        get() = weight?.name ?: ""
+
     var registerValues : Int
         get() = values?.address?.plus(1) ?: 0
         set(value) {values?.address = value - 1 }
@@ -31,6 +40,10 @@ class DiscreteOut {
         get() = setpoint?.address?.plus(1) ?: 0
         set(value) { setpoint?.address = value - 1 }
 
+    var registerSetpointSample : Int
+        get() = setpointSample?.address?.plus(1) ?: 0
+        set(value) { setpointSample?.address = value - 1 }
+
     var registerTimeSet : Int
         get() = timeSet?.address?.plus(1) ?: 0
         set(value) { timeSet?.address = value - 1 }
@@ -38,6 +51,10 @@ class DiscreteOut {
     var registerTimeUnset : Int
         get() = timeUnset?.address?.plus(1) ?: 0
         set(value) { timeUnset?.address = value - 1 }
+
+    var registerWeigth : Int
+        get() = weight?.address?.plus(1) ?: 0
+        set(value) { weight?.address = value - 1 }
 
     fun getSample( n : Int, device : Modbus) : List<Double>
     {
@@ -61,6 +78,12 @@ class DiscreteOut {
         return writeHoldingValue( value, device, setpoint?.format!!, registerSetpoint )
     }
 
+    fun writeSetpointSampleValue ( device : Modbus ) : Boolean
+    {
+        return writeHoldingValue( registerValues.toDouble(), device,
+                setpointSample?.format!!, registerSetpointSample )
+    }
+
     fun writeTimeSetValue( value : Int, device: Modbus ) : Boolean
     {
         return writeHoldingValue( value.toDouble(), device, timeSet?.format!!, registerTimeSet)
@@ -68,7 +91,12 @@ class DiscreteOut {
 
     fun writeTimeUnsetValue( value : Int, device : Modbus ) : Boolean
     {
-        return writeHoldingValue(value.toDouble(),device,timeUnset?.format!!, registerTimeUnset)
+        return writeHoldingValue( value.toDouble(), device, timeUnset?.format!!, registerTimeUnset)
+    }
+
+    fun writeWeightValue ( value : Int, device : Modbus ) : Boolean
+    {
+        return writeHoldingValue( value.toDouble(), device, weight?.format!!, registerWeigth )
     }
 
     private fun writeHoldingValue(
@@ -78,7 +106,7 @@ class DiscreteOut {
             register: Int
     ) : Boolean
     {
-        return when (format ) {
+         return when (format ) {
             ElementFormat.Int -> {
                 device.SetHoldingValue(register, value.toInt())
             }

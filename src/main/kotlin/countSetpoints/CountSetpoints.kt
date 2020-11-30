@@ -1,5 +1,6 @@
 package countSetpoints
 
+import kotlinGUI.FormValues
 import kotlin.math.pow
 import kotlin.math.sqrt
 
@@ -11,7 +12,7 @@ class CountSetpoints {
                 n: Double
         ) : Double
         {
-            println( variant )
+            println( FormValues.getCurrentTime() + "counting " + variant )
             return when ( variant )
             {
                 CountSetpointVariant.Average ->
@@ -49,12 +50,16 @@ class CountSetpoints {
 
         private fun average( values : List<Double> ) : Double
         {
-            return values.sum() / values.size
+            val result = values.sum() / values.size
+            println("${FormValues.getCurrentTime()}average sample value = $result")
+            return result
         }
 
         private fun maximum( values : List<Double> ) : Double
         {
-            return values.maxOrNull() ?: 0.0
+            val result =  values.maxOrNull() ?: 0.0
+            println("${FormValues.getCurrentTime()}maximum sample value = $result")
+            return result
         }
 
         private fun countMSD( values: List<Double> ) : Double
@@ -63,6 +68,7 @@ class CountSetpoints {
             var sum = 0.0
             values.forEach { sum += (it - average).pow(2.0) }
             sum /= values.size
+            println("${FormValues.getCurrentTime()}standard deviation = ${sqrt(sum)}")
             return sqrt( sum )
         }
     }

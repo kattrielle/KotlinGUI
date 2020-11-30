@@ -3,6 +3,7 @@ package externalDevices.devices
 import externalDevices.settings.SettingsCOM
 import externalDevices.settings.SettingsModbusRTU
 import externalDevices.ports.PortCOM
+import kotlinGUI.FormValues
 
 class ModbusRTU ( portName: String ) : Modbus() {
     init{
@@ -93,13 +94,16 @@ class ModbusRTU ( portName: String ) : Modbus() {
                 LEN_WRITEMESSAGE_RTU, maxIterations)
         if ( !succeed)
         {
+            println( FormValues.getCurrentTime() + "writing value failed")
             return false
         }
 
         return if ( message contentEquals response )
         {
+            println( FormValues.getCurrentTime() + " success")
             true
         } else {
+            println( FormValues.getCurrentTime() + "check if value is written")
             GetOneHoldingValue(register) == Pair(true, value)
         }
     }
@@ -107,7 +111,7 @@ class ModbusRTU ( portName: String ) : Modbus() {
     override fun SetMultipleHoldingValues(register: Int, values: Array<Byte>): Boolean {
         val message = CreateMessageMultipleWrite( register, values )
         val ( succeed, response ) = port.SendQuery( message, LEN_WRITEMESSAGE_RTU, maxIterations )
-        //надо ли обрабатывать response?
+        println( FormValues.getCurrentTime() + "set multiple holdings: $succeed" )
         return succeed
     }
 

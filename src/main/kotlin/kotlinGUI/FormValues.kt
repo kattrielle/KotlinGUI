@@ -3,9 +3,13 @@ package kotlinGUI
 import externalDevices.devices.ModbusRTU
 import externalDevices.settings.SettingsModbusRTU
 import registerCollection.DiscreteOut
+import registerCollection.DiscreteOutCollection
 import registerMapTikModscan.CellData
 import registerMapTikModscan.SerializableCellsContainer
 import java.io.File
+import java.time.Instant
+import java.time.ZoneOffset
+import java.time.format.DateTimeFormatter
 
 class FormValues {
     companion object {
@@ -22,13 +26,14 @@ class FormValues {
         fun getRegisterMapDescriptions() : List<String>
         {
             val descriptions = mutableListOf<String>()
-            tikModscanMap?.сellsArray.forEach { descriptions.add( it.name ) }
+            tikModscanMap?.сellsArray.forEach { descriptions.add(it.name.toString()) }
 
             return descriptions
         }
 
         fun findRegister( name : String ) : CellData
         {
+            println( getCurrentTime() + "searching register \"$name\"")
             return tikModscanMap?.сellsArray.find { it.name == name } ?: CellData()
         }
 
@@ -36,10 +41,13 @@ class FormValues {
         {
             return setpoints.items.find { it?.descriptionValues == name }
         }
-    }
-}
 
-class DiscreteOutCollection
-{
-    val items = mutableListOf<DiscreteOut>()
+        fun getCurrentTime() : String
+        {
+            return DateTimeFormatter
+                    .ofPattern("dd.MM.yyyy HH:mm:ss.SSSSSS ")
+                    .withZone(ZoneOffset.ofHours(5))
+                    .format(Instant.now())
+        }
+    }
 }

@@ -12,6 +12,9 @@ open class SettingsCOM( var name : String ) : PortSettings()
     var readTimeout : Int = 750
     var writeTimeout : Int = 750
 
+    var delayAnswerRead: Int = 100
+    var delayAnswerWrite: Int = 100
+
 	override val description : String
     get() = name
 

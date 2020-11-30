@@ -2,6 +2,7 @@ package kotlinGUI
 
 import com.fasterxml.jackson.dataformat.xml.XmlMapper
 import javafx.stage.FileChooser
+import registerCollection.DiscreteOutCollection
 import registerMapTikModscan.SerializableCellsContainer
 import tornadofx.*
 
@@ -16,12 +17,10 @@ class MainMenu: Fragment()
             item("Открыть...","Shortcut+O") {
                 action {
                     loadDiscreteOutMap()
-                    println("Opening file")
                 }
             }
             item("Сохранить","Shortcut+S") {
                 action {
-                    println("Saving registers")
                     saveDiscreteOutMap()
                 }
 
@@ -35,6 +34,9 @@ class MainMenu: Fragment()
             item("Настройки")
             {
                 action { openInternalWindow<FormSettings>() }
+            }
+            item("Просмотр адресов регистров") {
+                action { openInternalWindow<FormShowRegisters>() }
             }
         }
     }
@@ -59,7 +61,7 @@ class MainMenu: Fragment()
     private fun loadDiscreteOutMap()
     {
         val extension = arrayOf(FileChooser.ExtensionFilter(
-                "Tik-Modscan Xml Map (*.xml)", "*.xml"))
+                "Xml Map (*.xml)", "*.xml"))
 
         var file = chooseFile( "", extension )
         if ( file.isNotEmpty() )
@@ -75,7 +77,7 @@ class MainMenu: Fragment()
     private fun saveDiscreteOutMap()
     {
         val extension = arrayOf(FileChooser.ExtensionFilter(
-                "Tik-Modscan Xml Map (*.xml)", "*.xml"))
+                "Xml Map (*.xml)", "*.xml"))
         var file = chooseFile( "", extension, mode = FileChooserMode.Save )
 
         if ( file.isNotEmpty() )

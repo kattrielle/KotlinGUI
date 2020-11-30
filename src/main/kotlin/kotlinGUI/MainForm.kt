@@ -4,6 +4,7 @@ import com.fasterxml.jackson.dataformat.xml.XmlMapper
 import javafx.scene.control.ToggleGroup
 import javafx.scene.paint.Color
 import javafx.stage.FileChooser
+import registerCollection.DiscreteOutCollection
 import registerMapTikModscan.SerializableCellsContainer
 import tornadofx.*
 
@@ -17,11 +18,10 @@ class MainForm: View()
             {
                 item("Загрузить карту регистров") {
                     action {
-                        loadTikModscanMap()
-                        //openInternalWindow<FormSelectRegisters>()
-                        val window = FormSelectRegisters()
-                        //window.openWindow()
-                        window.openModal( )
+                        if  (loadTikModscanMap()) {
+                            val window = FormSelectRegisters()
+                            window.openModal()
+                        }
                     }
                 }
                 item("Открыть...","Shortcut+O") {
@@ -47,7 +47,14 @@ class MainForm: View()
                 item("Настройки")
                 {
                     action {
-                        openInternalWindow<FormSettings>()
+                        val window = FormSettings()
+                        window.openModal()
+                    }
+                }
+                item("Просмотр адресов регистров") {
+                    action {
+                        val window = FormShowRegisters()
+                        window.openModal()
                     }
                 }
             }
@@ -68,19 +75,23 @@ class MainForm: View()
         setMinSize(500.0, 300.0)
     }
 
-    private fun loadTikModscanMap()
+    private fun loadTikModscanMap() : Boolean
     {
         val extension = arrayOf(FileChooser.ExtensionFilter(
                 "Tik-Modscan Xml Map (*.xml)", "*.xml"))
 
         var file = chooseFile( "", extension )
-        if ( file.isNotEmpty() )
+        return if ( file.isNotEmpty() )
         {
             FormValues.file = file.first()
+            println( FormValues.getCurrentTime() + "selected Tik-Modscan file:" + FormValues.file )
             val xmlMapper = XmlMapper()
             FormValues.tikModscanMap = xmlMapper.readValue(
                     FormValues.file,
                     SerializableCellsContainer::class.java)
+            true
+        } else {
+            false
         }
     }
 
@@ -117,7 +128,6 @@ class MainForm: View()
 
     fun reloadForm()
     {
-        println("redrawing")
         root.center.getChildList()?.clear()
         root.center.add( CountSetpointFragment() )
     }
