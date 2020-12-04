@@ -4,6 +4,7 @@ import externalDevices.devices.ModbusRTU
 import externalDevices.settings.SettingsModbusRTU
 import registerCollection.DiscreteOut
 import registerCollection.DiscreteOutCollection
+import registerCollection.DiscreteOutViewProperties
 import registerMapTikModscan.CellData
 import registerMapTikModscan.SerializableCellsContainer
 import java.io.File
@@ -18,6 +19,8 @@ class FormValues {
         var device = ModbusRTU( "" )
 
         var setpoints = DiscreteOutCollection()
+
+        val discreteOutProperties = mutableListOf<DiscreteOutViewProperties>()
 
         lateinit var file : File
 

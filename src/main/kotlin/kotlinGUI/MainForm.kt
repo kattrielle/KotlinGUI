@@ -28,7 +28,6 @@ class MainForm: View()
                     action {
                         loadDiscreteOutMap()
                         reloadForm()
-                        println("Opening file")
                     }
                 }
                 item("Сохранить","Shortcut+S") {
@@ -44,16 +43,23 @@ class MainForm: View()
                 }
             }
             menu("Параметры") {
+                item("Просмотр адресов регистров") {
+                    action {
+                        val window = FormShowRegisters()
+                        window.openModal()
+                    }
+                }
+                item("Инициализация уставок") {
+                    action {
+                        val window = FormInitSetpoints()
+                        window.openModal()
+                    }
+                }
+                separator()
                 item("Настройки")
                 {
                     action {
                         val window = FormSettings()
-                        window.openModal()
-                    }
-                }
-                item("Просмотр адресов регистров") {
-                    action {
-                        val window = FormShowRegisters()
                         window.openModal()
                     }
                 }
@@ -104,6 +110,7 @@ class MainForm: View()
         if ( file.isNotEmpty() )
         {
             FormValues.file = file.first()
+            println( FormValues.getCurrentTime() + "selected SetpointsMap file:" + FormValues.file )
             val xmlMapper = XmlMapper()
             FormValues.setpoints = xmlMapper.readValue(
                     FormValues.file,
@@ -120,6 +127,7 @@ class MainForm: View()
         if ( file.isNotEmpty() )
         {
             FormValues.file = file.first()
+            println( FormValues.getCurrentTime() + "selected SetpointsMap file:" + FormValues.file )
             val xmlMapper = XmlMapper()
             xmlMapper.writeValue(
                     FormValues.file, FormValues.setpoints)
