@@ -1,17 +1,30 @@
 package registerCollection
 
 import externalDevices.devices.Modbus
+import javafx.beans.property.*
 import registerMapTikModscan.CellData
 import registerMapTikModscan.ElementFormat
 import registerMapTikModscan.ElementType
+import tornadofx.getProperty
+import tornadofx.property
 
-class DiscreteOut {
+class DiscreteOut () {
     var values : CellData? = null //регистр выборки
     var setpointSample : CellData? = null //регистр хранения адреса (номера регистра) выборки для уставки
     var setpoint : CellData? = null //регистр величины уставки
     var timeSet : CellData? = null //регистр времени устаноки для уставки
     var timeUnset : CellData? = null //регистр времени снятия для уставки
     var weight : CellData? = null //регистр весового коэффициента для уставки
+    lateinit var sample : List<Double>
+
+    constructor ( mapper : DiscreteOutMapper ) : this() {
+        values = mapper.values //регистр выборки
+        setpointSample = mapper.setpointSample //регистр хранения адреса (номера регистра) выборки для уставки
+        setpoint = mapper.setpoint //регистр величины уставки
+        timeSet = mapper.timeSet //регистр времени устаноки для уставки
+        timeUnset = mapper.timeUnset //регистр времени снятия для уставки
+        weight = mapper.weight //регистр весового коэффициента для уставки
+    }
 
     // @TODO может быть, есть смысл вынести дескрипшн и регистр в CellData?ЧТо тогда делать с null?
     var descriptionValues : String = ""
@@ -56,20 +69,64 @@ class DiscreteOut {
         get() = weight?.address?.plus(1) ?: 0
         set(value) { weight?.address = value - 1 }
 
+    var valueSetpointSample by property( 0 )
+    fun valueSetpointSampleProperty() = getProperty( DiscreteOut:: valueSetpointSample )
+
+    var valueSetpoint by property( 0.0 )
+    fun valueSetpointProperty() = getProperty( DiscreteOut::valueSetpoint )
+
+    var valueTimeSet by property( 0 )
+    fun valueTimeSetProperty() = getProperty( DiscreteOut::valueTimeSet )
+
+    var valueTimeUnset by property( 0 )
+    fun valueTimeUnsetProperty() = getProperty( DiscreteOut::valueTimeUnset )
+
+    var valueWeight by property( 0 )
+    fun valueWeightProperty() = getProperty( DiscreteOut:: valueWeight )
+
     fun getSample( n : Int, device : Modbus) : List<Double>
     {
         val result = mutableListOf<Double>()
 
         for ( i in 0 until n )
         {
-            when (values?.type ) {
-                ElementType.InputRegister ->
-                    result.add(getInputValue(device))
-                ElementType.HoldingRegister ->
-                    result.add(getHoldingValue(device))
-                else -> {}
+            val sampleVal = getValue( values, device)
+            if ( sampleVal != Double.NEGATIVE_INFINITY )
+            {
+                result.add( sampleVal )
             }
         }
+        return result
+    }
+
+    fun getDiscreteOutValues( device : Modbus )
+    {
+        valueSetpointSample = getValue( setpointSample, device ).toInt()
+        valueSetpoint = getValue( setpoint, device )
+        valueTimeSet = getValue ( timeSet, device ).toInt()
+        valueTimeUnset = getValue ( timeUnset, device ).toInt()
+        valueWeight = getValue ( weight, device ).toInt()
+
+        /*valueSetpointSample = 1
+        Thread.sleep(500)
+        valueSetpoint = 2.0
+        Thread.sleep(500)
+        valueTimeSet = 3
+        Thread.sleep(500)
+        valueTimeUnset = 4
+        Thread.sleep(500)
+        valueWeight = 5
+        Thread.sleep(500)*/
+    }
+
+    fun writeDiscreteOutValues( device : Modbus ) : Boolean
+    {
+        var result = true
+        result = result && writeSetpointSampleValue( device )
+        result = result && writeSetpointValue( valueSetpoint, device )
+        result = result && writeTimeSetValue( valueTimeSet, device )
+        result = result && writeTimeUnsetValue( valueTimeUnset, device )
+        result = result && writeWeightValue( valueWeight, device )
         return result
     }
 
@@ -120,19 +177,30 @@ class DiscreteOut {
         }
     }
 
-    private fun getHoldingValue(device : Modbus ) : Double
+    private fun getValue( register: CellData?, device : Modbus ) : Double
     {
-        return when (values?.format ) {
+        return when (register?.type ) {
+            ElementType.InputRegister ->
+                return getInputValue(register, device)
+            ElementType.HoldingRegister ->
+                return getHoldingValue(register, device)
+            else -> return Double.NEGATIVE_INFINITY
+        }
+    }
+
+    private fun getHoldingValue(register: CellData?, device : Modbus ) : Double
+    {
+        return when (register?.format ) {
             ElementFormat.Int -> {
-                val (_, value) = device.GetOneHoldingValue(registerValues)
+                val (_, value) = device.GetOneHoldingValue(register?.address + 1)
                 value.toDouble()
             }
             ElementFormat.Float -> {
-                val (_, value) = device.GetHoldingSwFloat(registerValues)
+                val (_, value) = device.GetHoldingSwFloat(register?.address + 1)
                 value.toDouble()
             }
             ElementFormat.swFloat -> {
-                val (_, value ) = device.GetHoldingFloat(registerValues)
+                val (_, value ) = device.GetHoldingFloat(register?.address + 1)
                 value.toDouble()
             }
             else ->
@@ -140,19 +208,19 @@ class DiscreteOut {
         }
     }
 
-     private fun getInputValue( device : Modbus ) : Double
+     private fun getInputValue( register : CellData?, device : Modbus ) : Double
      {
-         return when (values?.format ) {
+         return when (register?.format ) {
              ElementFormat.Int -> {
-                 val (_, value) = device.GetOneInputValue(registerValues)
+                 val (_, value) = device.GetOneInputValue(register?.address + 1)
                  value.toDouble()
              }
              ElementFormat.Float -> {
-                 val (_, value) = device.GetInputSwFloat(registerValues)
+                 val (_, value) = device.GetInputSwFloat(register?.address + 1)
                  value.toDouble()
              }
              ElementFormat.swFloat -> {
-                 val (_, value ) = device.GetInputFloat(registerValues)
+                 val (_, value ) = device.GetInputFloat(register?.address + 1)
                  value.toDouble()
              }
              else ->

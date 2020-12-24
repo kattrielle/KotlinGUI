@@ -22,8 +22,6 @@ javafx {
     version = "11.0.2"
 }
 
-
-
 repositories {
     // Use jcenter for resolving dependencies.
     // You can declare any Maven/Ivy/file repository here.

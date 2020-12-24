@@ -1,8 +1,10 @@
 package kotlinGUI
 
 import javafx.beans.property.SimpleStringProperty
+import javafx.geometry.Insets
 import javafx.scene.control.SelectionMode
 import javafx.scene.control.TabPane
+import javafx.scene.layout.Priority
 import registerCollection.DiscreteOut
 import registerCollection.DiscreteOutViewProperties
 import registerMapTikModscan.CellData
@@ -17,11 +19,17 @@ class FormSelectRegisters : View( "Задание параметров цифр�
         get() = tabPane.selectionModel.selectedIndex
 
     init {
-        FormValues.setpoints.items.clear()
-
         selectDefence.onChange {
             FormValues.setpoints.registerWriteDefence =
                     FormValues.findRegister( selectDefence.value )
+        }
+
+        if ( FormValues.setpoints.items.isNotEmpty() )
+        {
+            FormValues.discreteOutProperties.clear()
+            for ( i in FormValues.setpoints.items.indices ) {
+                addDiscreteOutTab( FormValues.setpoints.items[ i ] )
+            }
         }
     }
 
@@ -31,7 +39,25 @@ class FormSelectRegisters : View( "Задание параметров цифр�
             readonlyColumn("Регистр", CellData::address) //@todo надо сдвинуть адреса на 1, как?
             readonlyColumn("Название", CellData::name)
 
-            selectionModel.selectionMode = SelectionMode.SINGLE
+            contextmenu {
+                item("Автоматический выбор регистров адреса выборки для уставок").action {
+
+                }
+                item("Автоматический выбор регистров значений для уставок").action {
+
+                }
+                item("Автоматический выбор регистров времени установки для уставок").action {
+
+                }
+                item("Автоматический выбор регистров времени снятия для уставок").action {
+
+                }
+                item("Автоматический выбор регистров веса для уставок").action {
+
+                }
+            }
+
+            //selectionModel.selectionMode = SelectionMode.SINGLE
 
             onSelectionChange {
                 println( "at table row selected:" + selectedCell?.row)
@@ -41,12 +67,16 @@ class FormSelectRegisters : View( "Задание параметров цифр�
 
         vbox {
             button("Защита →") {
+                maxWidth = Double.MAX_VALUE
+                hgrow = Priority.ALWAYS
                 action {
                     println( FormValues.getCurrentTime() + "setting defence register to $columnName")
                     selectDefence.set( columnName )
                 }
             }
             button("Выборка →") {
+                maxWidth = Double.MAX_VALUE
+                hgrow = Priority.ALWAYS
                 action {
                     if ( selectedTab > -1 && FormValues.discreteOutProperties.size > selectedTab )
                     {
@@ -56,6 +86,8 @@ class FormSelectRegisters : View( "Задание параметров цифр�
                 }
             }
             button("Адрес →") {
+                maxWidth = Double.MAX_VALUE
+                hgrow = Priority.ALWAYS
                 action {
                     if ( selectedTab > -1 && FormValues.discreteOutProperties.size > selectedTab )
                     {
@@ -66,6 +98,8 @@ class FormSelectRegisters : View( "Задание параметров цифр�
                 }
             }
             button("Уставка →") {
+                maxWidth = Double.MAX_VALUE
+                hgrow = Priority.ALWAYS
                 action {
                     if ( selectedTab > -1 && FormValues.discreteOutProperties.size > selectedTab )
                     {
@@ -76,6 +110,8 @@ class FormSelectRegisters : View( "Задание параметров цифр�
                 }
             }
             button("Время установки →") {
+                maxWidth = Double.MAX_VALUE
+                hgrow = Priority.ALWAYS
                 action {
                     if ( selectedTab > -1 && FormValues.discreteOutProperties.size > selectedTab )
                     {
@@ -86,6 +122,8 @@ class FormSelectRegisters : View( "Задание параметров цифр�
                 }
             }
             button("Время снятия →") {
+                maxWidth = Double.MAX_VALUE
+                hgrow = Priority.ALWAYS
                 action {
                     if ( selectedTab > -1 && FormValues.discreteOutProperties.size > selectedTab )
                     {
@@ -96,6 +134,8 @@ class FormSelectRegisters : View( "Задание параметров цифр�
                 }
             }
             button("Вес →") {
+                maxWidth = Double.MAX_VALUE
+                hgrow = Priority.ALWAYS
                 action {
                     if ( selectedTab > -1 && FormValues.discreteOutProperties.size > selectedTab )
                     {
@@ -106,6 +146,7 @@ class FormSelectRegisters : View( "Задание параметров цифр�
                 }
             }
             gridpaneConstraints {
+                margin = Insets( 5.0 )
                 columnRowIndex(1,0)
             }
         }
@@ -131,10 +172,7 @@ class FormSelectRegisters : View( "Задание параметров цифр�
             button("Добавить уставку") {
                 action {
                     FormValues.setpoints.items.add( DiscreteOut())
-                    FormValues.discreteOutProperties.add(
-                            DiscreteOutViewProperties(FormValues.setpoints.items.last()) )
-                    val param = "discreteOut" to FormValues.discreteOutProperties.last()
-                    tabPane.add( find<DiscreteOutFragment>( param ))
+                    addDiscreteOutTab( FormValues.setpoints.items.last() )
                 }
             }
             add( tabPane )
@@ -144,5 +182,13 @@ class FormSelectRegisters : View( "Задание параметров цифр�
             }
         }
 
+    }
+
+    fun addDiscreteOutTab( discreteOut : DiscreteOut )
+    {
+        FormValues.discreteOutProperties.add(
+                DiscreteOutViewProperties( discreteOut ) )
+        val param = "discreteOut" to FormValues.discreteOutProperties.last()
+        tabPane.add( find<DiscreteOutFragment>( param ))
     }
 }

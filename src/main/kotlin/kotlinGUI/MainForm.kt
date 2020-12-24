@@ -1,10 +1,10 @@
 package kotlinGUI
 
 import com.fasterxml.jackson.dataformat.xml.XmlMapper
-import javafx.scene.control.ToggleGroup
 import javafx.scene.paint.Color
 import javafx.stage.FileChooser
 import registerCollection.DiscreteOutCollection
+import registerCollection.DiscreteOutCollectionMapper
 import registerMapTikModscan.SerializableCellsContainer
 import tornadofx.*
 
@@ -19,11 +19,22 @@ class MainForm: View()
                 item("Загрузить карту регистров") {
                     action {
                         if  (loadTikModscanMap()) {
+                            FormValues.setpoints.items.clear()
+
                             val window = FormSelectRegisters()
                             window.openModal()
                         }
                     }
                 }
+                item("Отредактировать на основе карты регистров") {
+                    action {
+                        if ( loadTikModscanMap() ) {
+                            val window = FormSelectRegisters()
+                            window.openModal()
+                        }
+                    }
+                }
+                separator()
                 item("Открыть...","Shortcut+O") {
                     action {
                         loadDiscreteOutMap()
@@ -67,18 +78,9 @@ class MainForm: View()
         }
         center<CountSetpointFragment>()
         bottom = vbox {
-            vbox {
 
-            }
-            button("big red btn")
-            {
-                textFill = Color.RED
-                action {
-                    openInternalWindow<FormSetValuesToDevice>()
-                }
-            }
         }
-        setMinSize(500.0, 300.0)
+        setMinSize(990.0, 300.0)
     }
 
     private fun loadTikModscanMap() : Boolean
@@ -112,9 +114,9 @@ class MainForm: View()
             FormValues.file = file.first()
             println( FormValues.getCurrentTime() + "selected SetpointsMap file:" + FormValues.file )
             val xmlMapper = XmlMapper()
-            FormValues.setpoints = xmlMapper.readValue(
-                    FormValues.file,
-                    DiscreteOutCollection::class.java)
+            FormValues.setpoints = DiscreteOutCollection(
+                    xmlMapper.readValue( FormValues.file,
+                    DiscreteOutCollectionMapper::class.java) )
         }
     }
 
@@ -129,8 +131,8 @@ class MainForm: View()
             FormValues.file = file.first()
             println( FormValues.getCurrentTime() + "selected SetpointsMap file:" + FormValues.file )
             val xmlMapper = XmlMapper()
-            xmlMapper.writeValue(
-                    FormValues.file, FormValues.setpoints)
+            val map = DiscreteOutCollectionMapper ( FormValues.setpoints )
+            xmlMapper.writeValue( FormValues.file, map )
         }
     }
 
