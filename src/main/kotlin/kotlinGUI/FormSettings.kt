@@ -33,7 +33,7 @@ class FormSettings: View("Параметры") {
             field("Задержка чтения") {
                 textfield( dataComConnection.selectDelayAnswerRead )
             }
-            field("Зажержка записи"){
+            field("Задержка записи"){
                 textfield( dataComConnection.selectDelayAnswerWrite )
             }
         }
@@ -54,5 +54,9 @@ class FormSettings: View("Параметры") {
                 shortcut("Esc")
             }
         }
+    }
+
+    override fun onDock() {
+        dataComConnection.updateModbusParametersFromDevice( FormValues.settings )
     }
 }

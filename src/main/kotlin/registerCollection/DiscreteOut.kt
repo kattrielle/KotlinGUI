@@ -6,6 +6,7 @@ import registerMapTikModscan.CellData
 import registerMapTikModscan.ElementFormat
 import registerMapTikModscan.ElementType
 import tornadofx.getProperty
+import tornadofx.onChange
 import tornadofx.property
 
 class DiscreteOut () {
@@ -15,7 +16,7 @@ class DiscreteOut () {
     var timeSet : CellData? = null //регистр времени устаноки для уставки
     var timeUnset : CellData? = null //регистр времени снятия для уставки
     var weight : CellData? = null //регистр весового коэффициента для уставки
-    lateinit var sample : List<Double>
+    val sample : MutableList<Double> = mutableListOf()
 
     constructor ( mapper : DiscreteOutMapper ) : this() {
         values = mapper.values //регистр выборки
@@ -84,13 +85,33 @@ class DiscreteOut () {
     var valueWeight by property( 0 )
     fun valueWeightProperty() = getProperty( DiscreteOut:: valueWeight )
 
+    var isUsed by property( true )
+    fun isUsedProperty() = getProperty( DiscreteOut::isUsed )
+
+    init {
+        isUsedProperty().onChange {
+            if ( !isUsed ) {
+                valueSetpoint = 0.0
+                valueTimeSet = 0
+                valueTimeUnset = 0
+                valueWeight = 0
+            }
+
+        }
+    }
+
+    fun getSampleValue( device: Modbus ) : Double
+    {
+        return getValue( values, device)
+    }
+
     fun getSample( n : Int, device : Modbus) : List<Double>
     {
         val result = mutableListOf<Double>()
 
         for ( i in 0 until n )
         {
-            val sampleVal = getValue( values, device)
+            val sampleVal = getSampleValue ( device )
             if ( sampleVal != Double.NEGATIVE_INFINITY )
             {
                 result.add( sampleVal )
@@ -99,24 +120,23 @@ class DiscreteOut () {
         return result
     }
 
-    fun getDiscreteOutValues( device : Modbus )
+    fun getDiscreteOutValues( device : Modbus ) : Boolean
     {
+        if ( !device.OpenConnection() )
+        {
+            return false
+        }
         valueSetpointSample = getValue( setpointSample, device ).toInt()
-        valueSetpoint = getValue( setpoint, device )
-        valueTimeSet = getValue ( timeSet, device ).toInt()
-        valueTimeUnset = getValue ( timeUnset, device ).toInt()
-        valueWeight = getValue ( weight, device ).toInt()
-
-        /*valueSetpointSample = 1
-        Thread.sleep(500)
-        valueSetpoint = 2.0
-        Thread.sleep(500)
-        valueTimeSet = 3
-        Thread.sleep(500)
-        valueTimeUnset = 4
-        Thread.sleep(500)
-        valueWeight = 5
-        Thread.sleep(500)*/
+        if ( valueSetpointSample != 0 ) {
+            isUsed = true
+            valueSetpoint = getValue(setpoint, device)
+            valueTimeSet = getValue(timeSet, device).toInt()
+            valueTimeUnset = getValue(timeUnset, device).toInt()
+            valueWeight = getValue(weight, device).toInt()
+        } else {
+            isUsed = false
+        }
+        return true
     }
 
     fun writeDiscreteOutValues( device : Modbus ) : Boolean
@@ -137,7 +157,7 @@ class DiscreteOut () {
 
     fun writeSetpointSampleValue ( device : Modbus ) : Boolean
     {
-        return writeHoldingValue( registerValues.toDouble(), device,
+        return writeHoldingValue( findSetpointSampleValue(), device,
                 setpointSample?.format!!, registerSetpointSample )
     }
 
@@ -154,6 +174,15 @@ class DiscreteOut () {
     fun writeWeightValue ( value : Int, device : Modbus ) : Boolean
     {
         return writeHoldingValue( value.toDouble(), device, weight?.format!!, registerWeigth )
+    }
+
+    private fun findSetpointSampleValue() : Double {
+        return if ( isUsed )
+        {
+            registerValues.toDouble()
+        } else {
+            0.0
+        }
     }
 
     private fun writeHoldingValue(

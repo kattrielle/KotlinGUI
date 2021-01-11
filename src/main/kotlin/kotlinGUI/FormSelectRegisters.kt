@@ -36,10 +36,13 @@ class FormSelectRegisters : View( "Задание параметров цифр�
     override val root = gridpane {
         val registers = FormValues.tikModscanMap?.сellsArray.asList().asObservable()
         tableview ( registers ) {
-            readonlyColumn("Регистр", CellData::address) //@todo надо сдвинуть адреса на 1, как?
+            readonlyColumn("Адрес", CellData::address) //@todo надо сдвинуть адреса на 1, как?
             readonlyColumn("Название", CellData::name)
 
             contextmenu {
+                item("Перенести в уставку").action {
+
+                }
                 item("Автоматический выбор регистров адреса выборки для уставок").action {
 
                 }

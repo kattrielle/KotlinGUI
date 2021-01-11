@@ -51,6 +51,54 @@ class DataComConnection : Controller()
     val selectDelayAnswerRead = SimpleIntegerProperty( FormValues.settings.delayAnswerRead )
     val selectDelayAnswerWrite = SimpleIntegerProperty( FormValues.settings.delayAnswerWrite )
 
+    private fun selectParityFromTextLine() : Int
+    {
+        return when ( selectParity.value )
+        {
+            "None" -> return SerialPort.PARITY_NONE
+            "Even" -> return SerialPort.PARITY_EVEN
+            "Mark" -> return SerialPort.PARITY_MARK
+            "Odd" -> return SerialPort.PARITY_ODD
+            "Space" -> return SerialPort.PARITY_SPACE
+            else -> return SerialPort.PARITY_NONE
+        }
+    }
+
+    private fun selectStopBitsFromTextLine() : Int
+    {
+        return when ( selectStopBits.value )
+        {
+            "1" -> SerialPort.STOPBITS_1
+            "1.5" -> SerialPort.STOPBITS_1_5
+            "2" -> SerialPort.STOPBITS_2
+            else -> SerialPort.STOPBITS_1
+        }
+    }
+
+    private fun selectTextFromParity( parity : Int ) : String
+    {
+        return when ( parity )
+        {
+            SerialPort.PARITY_NONE -> "None"
+            SerialPort.PARITY_EVEN -> "Even"
+            SerialPort.PARITY_MARK -> "Mark"
+            SerialPort.PARITY_ODD -> "Odd"
+            SerialPort.PARITY_SPACE -> "Space"
+            else -> "None"
+        }
+    }
+
+    private fun selectTextFromStopBits( stopBits : Int ) : String
+    {
+        return when ( stopBits )
+        {
+            SerialPort.STOPBITS_1 -> "1"
+            SerialPort.STOPBITS_1_5 -> "1.5"
+            SerialPort.STOPBITS_2 -> "2"
+            else -> "1"
+        }
+    }
+
     fun setModbusParameters() : SettingsModbusRTU
     {
         val settings = SettingsModbusRTU( selectPort.value )
@@ -60,22 +108,21 @@ class DataComConnection : Controller()
         settings.delayAnswerRead = selectDelayAnswerRead.value
         settings.delayAnswerWrite = selectDelayAnswerWrite.value
 
-        when ( selectParity.value )
-        {
-            "None" -> settings.parity = SerialPort.PARITY_NONE
-            "Even" -> settings.parity = SerialPort.PARITY_EVEN
-            "Mark" -> settings.parity = SerialPort.PARITY_MARK
-            "Odd" -> settings.parity = SerialPort.PARITY_ODD
-            "Space" -> settings.parity = SerialPort.PARITY_SPACE
-        }
-
-        when ( selectStopBits.value )
-        {
-            "1" -> settings.stopBits = SerialPort.STOPBITS_1
-            "1.5" -> settings.stopBits = SerialPort.STOPBITS_1_5
-            "2" -> settings.stopBits = SerialPort.STOPBITS_2
-        }
+        settings.parity = selectParityFromTextLine()
+        settings.stopBits = selectStopBitsFromTextLine()
 
         return settings
+    }
+
+    fun updateModbusParametersFromDevice( settings : SettingsModbusRTU )
+    {
+        selectPort.value = settings.name
+        deviceAddress.value = settings.address.toInt()
+        selectBaudrate.value =  settings.baudRate
+        selectParity.value = selectTextFromParity( settings.parity )
+        selectDataBits.value = settings.dataBits
+        selectStopBits.value = selectTextFromStopBits( settings.stopBits )
+        selectDelayAnswerRead.value = settings.delayAnswerRead
+        selectDelayAnswerWrite.value = settings.delayAnswerWrite
     }
 }

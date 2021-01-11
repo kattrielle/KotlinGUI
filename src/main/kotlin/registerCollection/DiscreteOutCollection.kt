@@ -29,22 +29,36 @@ class DiscreteOutCollection () {
         }
     }
 
-    fun getParameterValues( device : Modbus, progress : SimpleDoubleProperty)
+    fun getParameterValues( device : Modbus, progress : SimpleDoubleProperty) : Boolean
     {
+        if ( items.isEmpty() )
+        {
+            return false
+        }
         for ( i in items.indices )
         {
-            items[i].getDiscreteOutValues( device )
+            if ( !items[i].getDiscreteOutValues( device ) )
+            {
+                return false
+            }
             progress.set( (i + 1).toDouble() / items.size )
         }
+        return true
     }
 
-    fun getSamples( n: Int, device : Modbus, progress : SimpleDoubleProperty )
+    fun getSamples( n: Int, device : Modbus, progress : SimpleDoubleProperty ) : Boolean
     {
-        for ( i in items.indices )
+        if ( items.isEmpty() )
         {
-            items[i].sample = items[i].getSample(n, device)
-            progress.set((i + 1 ).toDouble() / items.size)
+            return false
         }
+        items.forEach{ it.sample.clear() }
+        for ( i in 0 until n )
+        {
+            items.filter { it.isUsed }.forEach{ it.sample.add( it.getSampleValue( device ) ) }
+            progress.set( (i+1).toDouble() / n )
+        }
+        return true
     }
 
     fun countSetpointValues( type : String, percent : Double )
@@ -56,15 +70,28 @@ class DiscreteOutCollection () {
         }
     }
 
-    fun writeParameterValues ( device : Modbus, progress : SimpleDoubleProperty )
+    fun writeParameterValues ( device : Modbus, progress : SimpleDoubleProperty ) : Boolean
     {
-        unlockWrite( device )
+        if ( !unlockWrite( device ) )
+        {
+            println( FormValues.getCurrentTime() + "failed to unlock device")
+            return false
+        }
         for ( i in items.indices )
         {
-            items[ i ].writeDiscreteOutValues( device )
+            if ( !items[ i ].writeDiscreteOutValues( device ) )
+            {
+                println( FormValues.getCurrentTime() + "failed at writing operation to ${i+1} register")
+                return false
+            }
             progress.set ( (i+1).toDouble() / items.size )
         }
-        lockWrite( device )
+        if ( !lockWrite( device ) )
+        {
+            println( FormValues.getCurrentTime() + "failed to lock device after writing operation" )
+            return false
+        }
+        return true
     }
 
     fun unlockWrite( device : Modbus ) : Boolean

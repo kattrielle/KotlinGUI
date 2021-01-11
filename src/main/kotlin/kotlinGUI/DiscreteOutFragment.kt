@@ -8,32 +8,27 @@ import tornadofx.*
 class DiscreteOutFragment : Fragment() {
     val discreteOut : DiscreteOutViewProperties by param()
 
-    override val root = vbox {
-        hbox {
-            text( "Набор значений" )
-            textfield(discreteOut.selectValues)
-        }
-        vbox {
-            hbox {
-                text("Уставка - адрес выборки")
+    override val root = form {
+        fieldset {
+            field("Набор значений") {
+                textfield(discreteOut.selectValues)
+            }
+            field ("Уставка - адрес выборки") {
                 textfield(discreteOut.selectSetpointSample)
             }
-            hbox {
-                text("Уставка - значение")
+            field("Уставка - значение") {
                 textfield(discreteOut.selectSetpoint)
             }
-            hbox {
-                text("Уставка - время установки")
+            field("Уставка - время установки") {
                 textfield(discreteOut.selectTimeSet)
             }
-            hbox {
-                text("Уставка - время снятия")
+            field("Уставка - время снятия") {
                 textfield(discreteOut.selectTimeUnset)
             }
-            hbox {
-                text("Уставка - весовой коэффициент")
+            field("Уставка - весовой коэффициент") {
                 textfield(discreteOut.selectWeight)
             }
+
         }
 
     }

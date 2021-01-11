@@ -6,8 +6,7 @@ import tornadofx.*
 class FormShowRegisters : View() {
     private val registerDefence = SimpleIntegerProperty(
             FormValues.setpoints.registerNumDefence)
-
-    override val root = form {
+    private val formContent = form {
         fieldset("Защита записи") {
             field(FormValues.setpoints.descriptionWriteDefence) {
                 textfield(registerDefence)
@@ -15,9 +14,13 @@ class FormShowRegisters : View() {
         }
     }
 
+    override val root = scrollpane {
+        add( formContent )
+    }
+
     init {
         FormValues.setpoints.items.forEach {
-            root.add( ShowDiscreteOutFragment(it) )
+            formContent.add( ShowDiscreteOutFragment(it) )
         }
     }
 }

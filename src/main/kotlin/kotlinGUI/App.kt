@@ -3,15 +3,12 @@
  */
 package kotlinGUI
 
-import externalDevices.ports.PortCOM
-import externalDevices.settings.SettingsCOM
 import tornadofx.*
-import countSetpoints.CountSetpointVariant
-import countSetpoints.CountSetpoints
+import kotlinGUI.styles.VisibleBorder
 
 fun main(args: Array<String>) {
     launch<VisualApplication>(args)
 }
 
-class VisualApplication: App(MainForm::class)
+class VisualApplication: App(MainForm::class, VisibleBorder::class)
 

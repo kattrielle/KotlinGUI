@@ -21,7 +21,6 @@ class FormValues {
         var setpoints = DiscreteOutCollection()
 
         val discreteOutProperties = mutableListOf<DiscreteOutViewProperties>()
-        //val
 
         lateinit var file : File
 

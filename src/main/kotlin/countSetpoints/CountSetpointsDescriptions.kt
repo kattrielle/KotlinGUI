@@ -16,7 +16,7 @@ class CountSetpointsDescriptions {
                     maxMSTName)
         }
 
-        fun getCountDescription( name : String ) : String
+        fun getCountDescription( name : String? ) : String
         {
             return when ( name )
             {

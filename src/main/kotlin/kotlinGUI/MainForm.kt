@@ -1,14 +1,13 @@
 package kotlinGUI
 
 import com.fasterxml.jackson.dataformat.xml.XmlMapper
-import javafx.scene.paint.Color
 import javafx.stage.FileChooser
 import registerCollection.DiscreteOutCollection
 import registerCollection.DiscreteOutCollectionMapper
 import registerMapTikModscan.SerializableCellsContainer
 import tornadofx.*
 
-class MainForm: View()
+class MainForm: View("Настройка уставок")
 {
     private var mainFragment = CountSetpointFragment()
 
@@ -16,7 +15,21 @@ class MainForm: View()
         top = menubar {
             menu("Файл")
             {
-                item("Загрузить карту регистров") {
+                item("Открыть...","Shortcut+O") {
+                    action {
+                        loadDiscreteOutMap()
+                        reloadForm()
+                    }
+                }
+                item("Сохранить","Shortcut+S") {
+                    action {
+                        println("Saving registers")
+                        saveDiscreteOutMap()
+                    }
+
+                }
+                separator()
+                item("Создать из карты регистров") {
                     action {
                         if  (loadTikModscanMap()) {
                             FormValues.setpoints.items.clear()
@@ -33,20 +46,6 @@ class MainForm: View()
                             window.openModal()
                         }
                     }
-                }
-                separator()
-                item("Открыть...","Shortcut+O") {
-                    action {
-                        loadDiscreteOutMap()
-                        reloadForm()
-                    }
-                }
-                item("Сохранить","Shortcut+S") {
-                    action {
-                        println("Saving registers")
-                        saveDiscreteOutMap()
-                    }
-
                 }
                 separator()
                 item("Выход") {
@@ -80,7 +79,6 @@ class MainForm: View()
         bottom = vbox {
 
         }
-        setMinSize(990.0, 300.0)
     }
 
     private fun loadTikModscanMap() : Boolean
@@ -89,34 +87,43 @@ class MainForm: View()
                 "Tik-Modscan Xml Map (*.xml)", "*.xml"))
 
         var file = chooseFile( "", extension )
-        return if ( file.isNotEmpty() )
+        try {
+            return if (file.isNotEmpty()) {
+                FormValues.file = file.first()
+                println(FormValues.getCurrentTime() + "selected Tik-Modscan file:" + FormValues.file)
+                val xmlMapper = XmlMapper()
+                FormValues.tikModscanMap = xmlMapper.readValue(
+                        FormValues.file,
+                        SerializableCellsContainer::class.java)
+                true
+            } else {
+                false
+            }
+        } catch ( e : Exception )
         {
-            FormValues.file = file.first()
-            println( FormValues.getCurrentTime() + "selected Tik-Modscan file:" + FormValues.file )
-            val xmlMapper = XmlMapper()
-            FormValues.tikModscanMap = xmlMapper.readValue(
-                    FormValues.file,
-                    SerializableCellsContainer::class.java)
-            true
-        } else {
-            false
+            println( FormValues.getCurrentTime() + "Error at loading Tik-Modscan Map : ${e.message}" )
+            return false
         }
     }
 
     private fun loadDiscreteOutMap()
     {
         val extension = arrayOf(FileChooser.ExtensionFilter(
-                "Tik-Modscan Xml Map (*.xml)", "*.xml"))
+                "Xml Setpoint Map (*.xml)", "*.xml"))
 
-        var file = chooseFile( "", extension )
-        if ( file.isNotEmpty() )
+        try {
+            var file = chooseFile("", extension)
+            if (file.isNotEmpty()) {
+                FormValues.file = file.first()
+                println(FormValues.getCurrentTime() + "selected SetpointsMap file:" + FormValues.file)
+                val xmlMapper = XmlMapper()
+                FormValues.setpoints = DiscreteOutCollection(
+                        xmlMapper.readValue(FormValues.file,
+                                DiscreteOutCollectionMapper::class.java))
+            }
+        } catch ( e : Exception )
         {
-            FormValues.file = file.first()
-            println( FormValues.getCurrentTime() + "selected SetpointsMap file:" + FormValues.file )
-            val xmlMapper = XmlMapper()
-            FormValues.setpoints = DiscreteOutCollection(
-                    xmlMapper.readValue( FormValues.file,
-                    DiscreteOutCollectionMapper::class.java) )
+            println( FormValues.getCurrentTime() + "Error at loading SetpointMap : ${e.message}" )
         }
     }
 
