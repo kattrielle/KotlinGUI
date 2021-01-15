@@ -7,10 +7,10 @@ import registerCollection.DiscreteOutCollection
 import registerCollection.DiscreteOutViewProperties
 import registerMapTikModscan.CellData
 import registerMapTikModscan.SerializableCellsContainer
-import java.io.File
 import java.time.Instant
 import java.time.ZoneOffset
 import java.time.format.DateTimeFormatter
+import kotlin.math.ceil
 
 class FormValues {
     companion object {
@@ -21,8 +21,6 @@ class FormValues {
         var setpoints = DiscreteOutCollection()
 
         val discreteOutProperties = mutableListOf<DiscreteOutViewProperties>()
-
-        lateinit var file : File
 
         lateinit var tikModscanMap : SerializableCellsContainer
 
@@ -37,12 +35,19 @@ class FormValues {
         fun findRegister( name : String ) : CellData
         {
             println( getCurrentTime() + "searching register \"$name\"")
-            return tikModscanMap?.сellsArray.find { it.name == name } ?: CellData()
+            return tikModscanMap.сellsArray.find { it.name == name } ?: CellData()
         }
 
         fun findSetpoint( name : String ) : DiscreteOut?
         {
             return setpoints.items.find { it?.descriptionValues == name }
+        }
+
+        fun countSampleTime( sampleLen : Int ) : Int
+        {
+            return ceil(sampleLen * setpoints.items.count() * ( ( settings.delayAnswerRead / 1000.0 ) +
+                    ( settings.delayAnswerWrite / 1000.0 ) +
+                    ( 2 * 12 / 8.0 / settings.baudRate ) ) / 60.0 ) .toInt()
         }
 
         fun getCurrentTime() : String

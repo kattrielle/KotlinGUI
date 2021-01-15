@@ -1,9 +1,14 @@
 package kotlinGUI
 
 import countSetpoints.CountSetpointsDescriptions
+import javafx.beans.InvalidationListener
 import javafx.beans.property.SimpleDoubleProperty
+import javafx.collections.ObservableList
+import javafx.event.Event
+import javafx.event.EventTarget
 import javafx.geometry.Insets
 import javafx.geometry.Orientation
+import javafx.scene.control.TableView
 import javafx.scene.input.KeyCode
 import javafx.scene.layout.Priority
 import registerCollection.DiscreteOut
@@ -33,7 +38,6 @@ class CountSetpointFragment : Fragment() {
         action {
             readSamples()
         }
-        enableWhen( countModel.valid )
         maxWidth = Double.MAX_VALUE
         hgrow = Priority.ALWAYS
     }
@@ -45,7 +49,8 @@ class CountSetpointFragment : Fragment() {
     }
 
     private val table = tableview( FormValues.setpoints.items ) {
-        isEditable = true
+        //isEditable = true
+
         column("", DiscreteOut::isUsedProperty ).useCheckbox()
         readonlyColumn("Выборка", DiscreteOut::descriptionValues)
         readonlyColumn("Регистр выборки", DiscreteOut::registerValues)
@@ -60,10 +65,77 @@ class CountSetpointFragment : Fragment() {
         vgrow = Priority.ALWAYS
         hgrow = Priority.ALWAYS
 
-        gridpaneConstraints {
-            columnRowIndex(0,1)
-            columnSpan = 5
+        var isEditing = false
+        enableCellEditing()
+        regainFocusAfterEdit()
+        setOnKeyPressed {
+            if (it.code == KeyCode.ENTER) {
+                isEditing = true
+            }
         }
+        setOnKeyTyped {
+            if (selectedCell != null && it.character.isNotEmpty() && !isEditing) {
+                edit(selectedCell!!.row, selectedCell!!.tableColumn)
+                isEditing = true
+            }
+        }
+
+        onEditCommit {
+            isEditing = false
+        }
+        // In case user selected another cell before commit
+        selectionModel.selectedCells.addListener(InvalidationListener {
+            isEditing = false
+        } )
+
+//        addEventHandler(KeyEvent.KEY_PRESSED) { keyEvent ->
+//            // For editing cell without pressing enter first
+//            if (keyEvent.code.isValidInput()) {
+//                if (editingCell == null) {
+//                    val currentSelectedCell = selectedCell
+//                    if (currentSelectedCell != null && currentSelectedCell.tableColumn.isEditable) {
+//                        println("trying to edit column")
+//                        edit(currentSelectedCell.row, currentSelectedCell.tableColumn)
+//                    }
+//                }
+//            }
+//        }
+
+    }
+
+/*
+    fun <T> EventTarget.exceltableview(items: ObservableList<T>? = null, op: TableView<T>.() -> Unit = {}) =
+        TableView<T>().attachTo(this, op) {
+            println("exceltableview")
+            if (items != null) {
+                if (items is SortedFilteredList<T>) items.bindTo(it)
+                else it.items = items
+            }
+            it.enableExcelBehaviour()
+        }
+
+    // TableView.enableExcelBehaviour
+    fun <T> TableView<T>.enableExcelBehaviour() {
+        enableCellEditing()
+        regainFocusAfterEdit()
+        addEventHandler(KeyEvent.KEY_PRESSED) { keyEvent ->
+            println("first level")
+            // For editing cell without pressing enter first
+            if (keyEvent.code.isValidInput()) {
+                println("hello")
+                if (editingCell == null) {
+                    val currentSelectedCell = selectedCell
+                    if (currentSelectedCell != null && currentSelectedCell.tableColumn.isEditable) {
+                        println("trying to edit column")
+                        edit(currentSelectedCell.row, currentSelectedCell.tableColumn)
+                    }
+                }
+            }
+        }
+    }
+*/
+    private fun KeyCode.isValidInput(): Boolean {
+        return isDigitKey
     }
 
     override val root = gridpane {
@@ -101,10 +173,12 @@ class CountSetpointFragment : Fragment() {
                                 readSamples()
                             }
                         }
+                        textProperty().addListener { _, _, _ ->
+                            countModel.commit( countModel.sampleLen ) }
                     }
                 }
-                field("Примерное время чтения, с") {
-                    textfield()
+                field("Предварительное время чтения, мин") {
+                    textfield( countSetpointProperties.sampleTimeProperty )
                     {
                         isEditable = false
                     }
@@ -158,7 +232,6 @@ class CountSetpointFragment : Fragment() {
                     action {
                         countSetpoints()
                     }
-                    enableWhen( countModel.valid )
                 }
                 padding = Insets( 0.0, 5.0, 0.0, 5.0 )
             }
@@ -185,7 +258,18 @@ class CountSetpointFragment : Fragment() {
                 columnRowIndex(4,0)
             }
         }
-        add(table)
+        hbox {
+            add(table)
+            //table.exceltableview( FormValues.setpoints.items )
+            isFillHeight = true
+
+            gridpaneConstraints {
+                columnRowIndex(0,1)
+                columnSpan = 5
+            }
+        }
+
+        setMinSize(600.0,500.0)
     }
 
     private fun readSetpoints()
@@ -258,9 +342,9 @@ class CountSetpointFragment : Fragment() {
 
     private fun setButtonsStatus( isDisabled : Boolean )
     {
-        //buttonLoadSamples.isDisable = isDisabled
-        //buttonLoadSetpoints.isDisable = isDisabled
-        //buttonSaveSetpoints.isDisable = isDisabled
+        buttonLoadSamples.isDisable = isDisabled
+        buttonLoadSetpoints.isDisable = isDisabled
+        buttonSaveSetpoints.isDisable = isDisabled
     }
 
 }

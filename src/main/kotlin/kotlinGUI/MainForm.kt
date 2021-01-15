@@ -79,6 +79,7 @@ class MainForm: View("Настройка уставок")
         bottom = vbox {
 
         }
+        setMinSize(600.0,500.0)
     }
 
     private fun loadTikModscanMap() : Boolean
@@ -89,12 +90,11 @@ class MainForm: View("Настройка уставок")
         var file = chooseFile( "", extension )
         try {
             return if (file.isNotEmpty()) {
-                FormValues.file = file.first()
-                println(FormValues.getCurrentTime() + "selected Tik-Modscan file:" + FormValues.file)
+                val fileName = file.first()
+                println(FormValues.getCurrentTime() + "selected Tik-Modscan file:" + fileName )
                 val xmlMapper = XmlMapper()
                 FormValues.tikModscanMap = xmlMapper.readValue(
-                        FormValues.file,
-                        SerializableCellsContainer::class.java)
+                        fileName, SerializableCellsContainer::class.java)
                 true
             } else {
                 false
@@ -114,11 +114,11 @@ class MainForm: View("Настройка уставок")
         try {
             var file = chooseFile("", extension)
             if (file.isNotEmpty()) {
-                FormValues.file = file.first()
-                println(FormValues.getCurrentTime() + "selected SetpointsMap file:" + FormValues.file)
+                val fileName = file.first()
+                println(FormValues.getCurrentTime() + "selected SetpointsMap file:" + fileName )
                 val xmlMapper = XmlMapper()
                 FormValues.setpoints = DiscreteOutCollection(
-                        xmlMapper.readValue(FormValues.file,
+                        xmlMapper.readValue( fileName,
                                 DiscreteOutCollectionMapper::class.java))
             }
         } catch ( e : Exception )
@@ -135,11 +135,11 @@ class MainForm: View("Настройка уставок")
 
         if ( file.isNotEmpty() )
         {
-            FormValues.file = file.first()
-            println( FormValues.getCurrentTime() + "selected SetpointsMap file:" + FormValues.file )
+            val fileName = file.first()
+            println( FormValues.getCurrentTime() + "selected SetpointsMap file:" + fileName )
             val xmlMapper = XmlMapper()
             val map = DiscreteOutCollectionMapper ( FormValues.setpoints )
-            xmlMapper.writeValue( FormValues.file, map )
+            xmlMapper.writeValue( fileName, map )
         }
     }
 
