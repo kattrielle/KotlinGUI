@@ -48,6 +48,19 @@ class CountSetpointFragment : Fragment() {
         }
     }
 
+    private val textfieldCountParameter = textfield(countModel.percent) {
+        validator {
+            if ( ! it!!.isDouble() ) {
+                error("Введено не число")
+            } else null
+        }
+        addEventFilter( KeyEvent.KEY_PRESSED ) { event ->
+            if (event.code == KeyCode.ENTER) {
+                countSetpoints()
+            }
+        }
+    }
+
     private val table = tableview( FormValues.setpoints.items ) {
         //isEditable = true
 
@@ -82,6 +95,7 @@ class CountSetpointFragment : Fragment() {
 
         onEditCommit {
             isEditing = false
+
         }
         // In case user selected another cell before commit
         selectionModel.selectedCells.addListener(InvalidationListener {
@@ -202,6 +216,13 @@ class CountSetpointFragment : Fragment() {
                 field("Вариант расчёта") {
                     combobox(countSetpointProperties.selectCountProperty,
                         CountSetpointsDescriptions.getCountTypesList())
+                    {
+                        addEventFilter( KeyEvent.KEY_PRESSED ) { event ->
+                            if (event.code == KeyCode.ENTER) {
+                                textfieldCountParameter.requestFocus()
+                            }
+                        }
+                    }
                 }
                 padding = Insets( 0.0, 5.0, 0.0, 5.0 )
             }
@@ -215,18 +236,7 @@ class CountSetpointFragment : Fragment() {
             }
             fieldset {
                 field("Параметр n") {
-                    textfield(countModel.percent) {
-                        validator {
-                            if ( ! it!!.isDouble() ) {
-                                error("Введено не число")
-                            } else null
-                        }
-                        addEventFilter( KeyEvent.KEY_PRESSED ) { event ->
-                            if (event.code == KeyCode.ENTER) {
-                                countSetpoints()
-                            }
-                        }
-                    }
+                    add( textfieldCountParameter )
                 }
                 button("Расчёт") {
                     action {

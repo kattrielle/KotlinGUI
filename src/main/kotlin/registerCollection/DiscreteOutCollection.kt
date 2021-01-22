@@ -55,7 +55,14 @@ class DiscreteOutCollection () {
         items.forEach{ it.sample.clear() }
         for ( i in 0 until n )
         {
-            items.filter { it.isUsed }.forEach{ it.sample.add( it.getSampleValue( device ) ) }
+            items.filter { it.isUsed }.forEach{
+                val ( success, value ) = it.getSampleValue( device )
+                if ( ! success )
+                {
+                    return false
+                }
+                it.sample.add( value )
+            }
             progress.set( (i+1).toDouble() / n )
         }
         return true

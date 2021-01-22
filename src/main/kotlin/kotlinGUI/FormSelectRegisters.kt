@@ -26,10 +26,7 @@ class FormSelectRegisters : View( "Задание параметров цифр�
 
         if ( FormValues.setpoints.items.isNotEmpty() )
         {
-            FormValues.discreteOutProperties.clear()
-            for ( i in FormValues.setpoints.items.indices ) {
-                addDiscreteOutTab( FormValues.setpoints.items[ i ] )
-            }
+            redrawDiscreteOutTabPane()
         }
     }
 
@@ -193,5 +190,14 @@ class FormSelectRegisters : View( "Задание параметров цифр�
                 DiscreteOutViewProperties( discreteOut ) )
         val param = "discreteOut" to FormValues.discreteOutProperties.last()
         tabPane.add( find<DiscreteOutFragment>( param ))
+    }
+
+    private fun redrawDiscreteOutTabPane()
+    {
+        tabPane.tabs.clear()
+        FormValues.discreteOutProperties.clear()
+        for ( i in FormValues.setpoints.items.indices ) {
+            addDiscreteOutTab( FormValues.setpoints.items[ i ] )
+        }
     }
 }

@@ -45,7 +45,8 @@ class FormValues {
 
         fun countSampleTime( sampleLen : Int ) : Int
         {
-            return ceil(sampleLen * setpoints.items.count() * ( ( settings.delayAnswerRead / 1000.0 ) +
+            val count = setpoints.items.filter { it.isUsed }.count()
+            return ceil(sampleLen * count * ( ( settings.delayAnswerRead / 1000.0 ) +
                     ( settings.delayAnswerWrite / 1000.0 ) +
                     ( 2 * 12 / 8.0 / settings.baudRate ) ) / 60.0 ) .toInt()
         }
