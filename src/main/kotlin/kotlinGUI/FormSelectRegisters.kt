@@ -2,9 +2,9 @@ package kotlinGUI
 
 import javafx.beans.property.SimpleStringProperty
 import javafx.geometry.Insets
-import javafx.scene.control.SelectionMode
 import javafx.scene.control.TabPane
 import javafx.scene.layout.Priority
+import kotlinGUI.viewModel.SearchRegisterProperties
 import registerCollection.DiscreteOut
 import registerCollection.DiscreteOutViewProperties
 import registerMapTikModscan.CellData
@@ -15,8 +15,9 @@ class FormSelectRegisters : View( "Задание параметров цифр�
     private val selectDefence = SimpleStringProperty()
     private val tabPane = TabPane()
     private var columnName = ""
-    private var selectedTab = -1
+    private val selectedTab
         get() = tabPane.selectionModel.selectedIndex
+    private val searchDescriptions = SearchRegisterProperties()
 
     init {
         selectDefence.onChange {
@@ -31,29 +32,31 @@ class FormSelectRegisters : View( "Задание параметров цифр�
     }
 
     override val root = gridpane {
-        val registers = FormValues.tikModscanMap?.сellsArray.asList().asObservable()
+        val registers = FormValues.tikModscanMap.сellsArray.asList().asObservable()
         tableview ( registers ) {
             readonlyColumn("Адрес", CellData::address) //@todo надо сдвинуть адреса на 1, как?
             readonlyColumn("Название", CellData::name)
 
             contextmenu {
-                item("Перенести в уставку").action {
-
-                }
                 item("Автоматический выбор регистров адреса выборки для уставок").action {
-
+                    val registers = findRegistersByDescription( searchDescriptions.setpointSampleDescription.value,
+                            searchDescriptions.baseDescription.value )
                 }
                 item("Автоматический выбор регистров значений для уставок").action {
-
+                    val registers = findRegistersByDescription( searchDescriptions.setpointDescription.value,
+                            searchDescriptions.baseDescription.value )
                 }
                 item("Автоматический выбор регистров времени установки для уставок").action {
-
+                    val registers = findRegistersByDescription( searchDescriptions.timeSetDescription.value,
+                            searchDescriptions.baseDescription.value )
                 }
                 item("Автоматический выбор регистров времени снятия для уставок").action {
-
+                    val registers = findRegistersByDescription( searchDescriptions.timeUnsetDescription.value,
+                            searchDescriptions.baseDescription.value )
                 }
                 item("Автоматический выбор регистров веса для уставок").action {
-
+                    val registers = findRegistersByDescription( searchDescriptions.weightDescription.value,
+                            searchDescriptions.baseDescription.value )
                 }
             }
 
@@ -172,7 +175,8 @@ class FormSelectRegisters : View( "Задание параметров цифр�
             button("Добавить уставку") {
                 action {
                     FormValues.setpoints.items.add( DiscreteOut())
-                    addDiscreteOutTab( FormValues.setpoints.items.last() )
+                    addDiscreteOutTab( FormValues.setpoints.items.last(),
+                            FormValues.setpoints.items.size )
                 }
             }
             add( tabPane )
@@ -184,10 +188,10 @@ class FormSelectRegisters : View( "Задание параметров цифр�
 
     }
 
-    fun addDiscreteOutTab( discreteOut : DiscreteOut )
+    private fun addDiscreteOutTab(discreteOut : DiscreteOut, num : Int )
     {
         FormValues.discreteOutProperties.add(
-                DiscreteOutViewProperties( discreteOut ) )
+                DiscreteOutViewProperties( discreteOut, num ) )
         val param = "discreteOut" to FormValues.discreteOutProperties.last()
         tabPane.add( find<DiscreteOutFragment>( param ))
     }
@@ -197,7 +201,25 @@ class FormSelectRegisters : View( "Задание параметров цифр�
         tabPane.tabs.clear()
         FormValues.discreteOutProperties.clear()
         for ( i in FormValues.setpoints.items.indices ) {
-            addDiscreteOutTab( FormValues.setpoints.items[ i ] )
+            addDiscreteOutTab( FormValues.setpoints.items[ i ], i + 1 )
         }
+    }
+
+    private fun findRegistersByDescription( description : String, baseText : String ) : List<CellData>
+    {
+        val result = mutableListOf<CellData>()
+        for ( cell in FormValues.tikModscanMap.сellsArray )
+        {
+            if (cell.name?.contains(description) == true && cell.name?.contains( baseText) == true)
+            {
+                result.add( cell )
+            }
+        }
+        return result
+    }
+
+    private fun checkSetpointsCount( length : Int )
+    {
+
     }
 }

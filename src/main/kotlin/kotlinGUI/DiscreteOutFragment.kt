@@ -33,6 +33,8 @@ class DiscreteOutFragment : Fragment() {
 
     }
 
-
+    init {
+        title = discreteOut.num.toString()
+    }
 
 }
