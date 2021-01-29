@@ -8,7 +8,7 @@ class SearchRegisterProperties {
 
     val setpointSampleDescription = SimpleStringProperty("адрес")
 
-    val setpointDescription = SimpleStringProperty("значение")
+    val setpointDescription = SimpleStringProperty("уставка")
 
     val timeSetDescription = SimpleStringProperty("время установки")
 
