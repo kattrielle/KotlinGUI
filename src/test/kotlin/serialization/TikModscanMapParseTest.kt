@@ -10,7 +10,7 @@ class TikModscanMapParseTest {
 
     @Test fun testParseCellData()
     {
-        val filepath = "/home/kate/repos/KotlinGUI/src/test/resources/regMap.xml"
+        val filepath = "src/test/resources/regMap.xml"
         val xmlMapper = XmlMapper()
         val map = xmlMapper.readValue(
                 File(filepath),

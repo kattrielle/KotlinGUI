@@ -4,9 +4,10 @@ import javafx.beans.property.SimpleStringProperty
 import javafx.geometry.Insets
 import javafx.scene.control.TabPane
 import javafx.scene.layout.Priority
+import kotlinGUI.viewModel.DiscreteOutProperties
 import kotlinGUI.viewModel.SearchRegisterProperties
 import registerCollection.DiscreteOut
-import registerCollection.DiscreteOutViewProperties
+import kotlinGUI.viewModel.DiscreteOutViewProperties
 import registerMapTikModscan.CellData
 import tornadofx.*
 
@@ -224,6 +225,8 @@ class FormSelectRegisters : View( "Задание параметров цифр�
     private fun addDiscreteOut()
     {
         FormValues.setpoints.items.add( DiscreteOut())
+        FormValues.discreteOutTableViewProperties.add(
+                DiscreteOutProperties(FormValues.setpoints.items.last()) )
         addDiscreteOutTab( FormValues.setpoints.items.last(),
                 FormValues.setpoints.items.size )
     }

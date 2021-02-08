@@ -21,24 +21,28 @@ class MainForm: View("Настройка уставок")
                         reloadForm()
                     }
                 }
+
                 item("Сохранить","Shortcut+S") {
                     action {
                         println("Saving registers")
                         saveDiscreteOutMap()
                     }
-
                 }
+
                 separator()
+
                 item("Создать из карты регистров") {
                     action {
                         if  (loadTikModscanMap()) {
                             FormValues.setpoints.items.clear()
+                            FormValues.discreteOutTableViewProperties.clear()
 
                             val window = FormSelectRegisters()
                             window.openModal()
                         }
                     }
                 }
+
                 item("Отредактировать на основе карты регистров") {
                     action {
                         if ( loadTikModscanMap() ) {
@@ -47,11 +51,14 @@ class MainForm: View("Настройка уставок")
                         }
                     }
                 }
+
                 separator()
+
                 item("Выход") {
                     action { close() }
                 }
             }
+
             menu("Параметры") {
                 item("Просмотр адресов регистров") {
                     action {
@@ -65,7 +72,15 @@ class MainForm: View("Настройка уставок")
                         window.openModal()
                     }
                 }
+                item("Просмотр выборок") {
+                    action {
+                        val window = FormShowSamples()
+                        window.openModal()
+                    }
+                }
+
                 separator()
+
                 item("Настройки")
                 {
                     action {
@@ -120,6 +135,7 @@ class MainForm: View("Настройка уставок")
                 FormValues.setpoints = DiscreteOutCollection(
                         xmlMapper.readValue( fileName,
                                 DiscreteOutCollectionMapper::class.java))
+                FormValues.updateDiscreteOutProperties()
             }
         } catch ( e : Exception )
         {
@@ -130,7 +146,7 @@ class MainForm: View("Настройка уставок")
     private fun saveDiscreteOutMap()
     {
         val extension = arrayOf(FileChooser.ExtensionFilter(
-                "Tik-Modscan Xml Map (*.xml)", "*.xml"))
+                "Xml Setpoint Map (*.xml)", "*.xml"))
         var file = chooseFile( "", extension, mode = FileChooserMode.Save )
 
         if ( file.isNotEmpty() )

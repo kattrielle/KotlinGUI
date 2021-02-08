@@ -1,7 +1,6 @@
 package countSetpoints
 
 import kotlin.test.Test
-import kotlin.test.assertTrue
 import kotlin.test.assertEquals
 
 class CountSetpointsTest {

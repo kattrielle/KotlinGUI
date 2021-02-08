@@ -1,8 +1,6 @@
 package kotlinGUI
 
-import javafx.beans.property.SimpleStringProperty
-import registerCollection.DiscreteOut
-import registerCollection.DiscreteOutViewProperties
+import kotlinGUI.viewModel.DiscreteOutViewProperties
 import tornadofx.*
 
 class DiscreteOutFragment : Fragment() {

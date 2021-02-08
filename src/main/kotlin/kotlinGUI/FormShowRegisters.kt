@@ -3,7 +3,7 @@ package kotlinGUI
 import javafx.beans.property.SimpleIntegerProperty
 import tornadofx.*
 
-class FormShowRegisters : View() {
+class FormShowRegisters : View("Номера регистров") {
     private val registerDefence = SimpleIntegerProperty(
             FormValues.setpoints.registerNumDefence)
     private val formContent = form {
@@ -16,6 +16,8 @@ class FormShowRegisters : View() {
 
     override val root = scrollpane {
         add( formContent )
+
+        maxHeight = 500.0
     }
 
     init {

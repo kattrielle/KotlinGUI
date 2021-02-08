@@ -28,22 +28,22 @@ class DiscreteOut () {
     }
 
     // @TODO может быть, есть смысл вынести дескрипшн и регистр в CellData?ЧТо тогда делать с null?
-    var descriptionValues : String = ""
+    val descriptionValues : String
         get() = values?.name ?: ""
 
-    var descriptionSetpointSample : String = ""
+    val descriptionSetpointSample : String
         get() = setpointSample?.name ?: ""
 
-    var descriptionSetpoint : String = ""
+    val descriptionSetpoint : String
         get() = setpoint?.name ?: ""
 
-    var descriptionTimeSet : String = ""
+    val descriptionTimeSet : String
         get() = timeSet?.name ?: ""
 
-    var descriptionTimeUnset : String = ""
+    val descriptionTimeUnset : String
         get() = timeUnset?.name ?: ""
 
-    var descriptionWeight : String = ""
+    val descriptionWeight : String
         get() = weight?.name ?: ""
 
     var registerValues : Int
@@ -70,25 +70,37 @@ class DiscreteOut () {
         get() = weight?.address?.plus(1) ?: 0
         set(value) { weight?.address = value - 1 }
 
-    var valueSetpointSample by property( 0 )
-    fun valueSetpointSampleProperty() = getProperty( DiscreteOut:: valueSetpointSample )
+    var valueSetpointSample = 0
+
+    var valueSetpoint = 0.0
+
+    var valueTimeSet = 0
+
+    var valueTimeUnset = 0
+
+    var valueWeight = 0
+
+    var isUsed = true
+
+    /*var valueSetpointSample by property( 0 )
+    //fun valueSetpointSampleProperty() = getProperty( DiscreteOut:: valueSetpointSample )
 
     var valueSetpoint by property( 0.0 )
-    fun valueSetpointProperty() = getProperty( DiscreteOut::valueSetpoint )
+    //fun valueSetpointProperty() = getProperty( DiscreteOut::valueSetpoint )
 
     var valueTimeSet by property( 0 )
-    fun valueTimeSetProperty() = getProperty( DiscreteOut::valueTimeSet )
+    //fun valueTimeSetProperty() = getProperty( DiscreteOut::valueTimeSet )
 
     var valueTimeUnset by property( 0 )
-    fun valueTimeUnsetProperty() = getProperty( DiscreteOut::valueTimeUnset )
+    //fun valueTimeUnsetProperty() = getProperty( DiscreteOut::valueTimeUnset )
 
     var valueWeight by property( 0 )
-    fun valueWeightProperty() = getProperty( DiscreteOut:: valueWeight )
+    //fun valueWeightProperty() = getProperty( DiscreteOut:: valueWeight )
 
     var isUsed by property( true )
-    fun isUsedProperty() = getProperty( DiscreteOut::isUsed )
+    //fun isUsedProperty() = getProperty( DiscreteOut::isUsed ) */
 
-    init {
+    /*init {
         isUsedProperty().onChange {
             if ( !isUsed ) {
                 valueSetpoint = 0.0
@@ -98,7 +110,7 @@ class DiscreteOut () {
             }
 
         }
-    }
+    } */
 
     fun getSampleValue( device: Modbus ) : Pair< Boolean, Double >
     {

@@ -1,10 +1,11 @@
-package registerCollection
+package kotlinGUI.viewModel
 
 import javafx.beans.property.SimpleStringProperty
 import kotlinGUI.FormValues
+import registerCollection.DiscreteOut
 import tornadofx.onChange
 
-class DiscreteOutViewProperties( discreteOut : DiscreteOut, val num : Int ) {
+class DiscreteOutViewProperties(discreteOut : DiscreteOut, val num : Int ) {
     val selectValues = SimpleStringProperty(discreteOut.descriptionValues)
     val selectSetpointSample = SimpleStringProperty( discreteOut.descriptionSetpointSample )
     val selectSetpoint = SimpleStringProperty(discreteOut.descriptionSetpoint)

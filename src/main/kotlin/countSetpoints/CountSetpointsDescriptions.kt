@@ -3,10 +3,10 @@ package countSetpoints
 class CountSetpointsDescriptions {
 
     companion object {
-        private val averageName = "Среднее"
-        private val maxName = "Максимум"
-        private val averageMSTName = "СКО от среднего"
-        private val maxMSTName = "СКО от максимума"
+        private const val averageName = "Среднее"
+        private const val maxName = "Максимум"
+        private const val averageMSTName = "СКО от среднего"
+        private const val maxMSTName = "СКО от максимума"
 
         fun getCountTypesList() : List<String>
         {

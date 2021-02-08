@@ -2,11 +2,13 @@ package kotlinGUI
 
 import externalDevices.devices.ModbusRTU
 import externalDevices.settings.SettingsModbusRTU
+import kotlinGUI.viewModel.DiscreteOutProperties
 import registerCollection.DiscreteOut
 import registerCollection.DiscreteOutCollection
-import registerCollection.DiscreteOutViewProperties
+import kotlinGUI.viewModel.DiscreteOutViewProperties
 import registerMapTikModscan.CellData
 import registerMapTikModscan.SerializableCellsContainer
+import tornadofx.asObservable
 import java.time.Instant
 import java.time.ZoneOffset
 import java.time.format.DateTimeFormatter
@@ -21,6 +23,8 @@ class FormValues {
         var setpoints = DiscreteOutCollection()
 
         val discreteOutProperties = mutableListOf<DiscreteOutViewProperties>()
+
+        val discreteOutTableViewProperties = mutableListOf<DiscreteOutProperties>().asObservable()
 
         lateinit var tikModscanMap : SerializableCellsContainer
 
@@ -58,5 +62,16 @@ class FormValues {
                     .withZone(ZoneOffset.ofHours(5))
                     .format(Instant.now())
         }
+
+        fun updateDiscreteOutProperties()
+        {
+            discreteOutTableViewProperties.forEach { it.updateProperties() }
+        }
+
+        fun updateDiscreteOutValues()
+        {
+            discreteOutTableViewProperties.forEach { it.updateBaseValues() }
+        }
+
     }
 }

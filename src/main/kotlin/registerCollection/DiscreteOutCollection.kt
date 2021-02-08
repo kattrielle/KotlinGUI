@@ -18,7 +18,7 @@ class DiscreteOutCollection () {
         get() = registerWriteDefence?.address?.plus(1) ?: 0
         set(value) { registerWriteDefence?.address = value - 1 }
 
-    val items = mutableListOf<DiscreteOut>().asObservable()
+    val items = mutableListOf<DiscreteOut>()
 
     constructor( mapper : DiscreteOutCollectionMapper ) : this()
     {
@@ -43,6 +43,7 @@ class DiscreteOutCollection () {
             }
             progress.set( (i + 1).toDouble() / items.size )
         }
+        FormValues.updateDiscreteOutProperties()
         return true
     }
 
@@ -70,11 +71,12 @@ class DiscreteOutCollection () {
 
     fun countSetpointValues( type : String, percent : Double )
     {
-        for ( out in items ) {
+        for ( out in items.filter { it.isUsed } ) {
             out.valueSetpoint = CountSetpoints.count(
                     CountSetpointsDescriptions.selectCountType(type),
                     out.sample, percent )
         }
+        FormValues.updateDiscreteOutProperties()
     }
 
     fun writeParameterValues ( device : Modbus, progress : SimpleDoubleProperty ) : Boolean

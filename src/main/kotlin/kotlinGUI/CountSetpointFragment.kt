@@ -8,6 +8,7 @@ import javafx.event.Event
 import javafx.event.EventTarget
 import javafx.geometry.Insets
 import javafx.geometry.Orientation
+import javafx.scene.control.Alert
 import javafx.scene.control.TableView
 import javafx.scene.input.KeyCode
 import javafx.scene.layout.Priority
@@ -17,6 +18,7 @@ import javafx.scene.input.KeyEvent
 import kotlinGUI.styles.VisibleBorder
 import kotlinGUI.viewModel.CountSetpointModel
 import kotlinGUI.viewModel.CountSetpointProperties
+import kotlinGUI.viewModel.DiscreteOutProperties
 import kotlin.concurrent.thread
 
 class CountSetpointFragment : Fragment() {
@@ -61,17 +63,17 @@ class CountSetpointFragment : Fragment() {
         }
     }
 
-    private val table = tableview( FormValues.setpoints.items ) {
+    private val table = tableview( FormValues.discreteOutTableViewProperties ) {
         //isEditable = true
 
-        column("", DiscreteOut::isUsedProperty ).useCheckbox()
-        readonlyColumn("Выборка", DiscreteOut::descriptionValues)
-        readonlyColumn("Регистр выборки", DiscreteOut::registerValues)
+        column("", DiscreteOutProperties::isUsedProperty ).useCheckbox()
+        readonlyColumn("Выборка", DiscreteOutProperties::descriptionValues)
+        readonlyColumn("Регистр выборки", DiscreteOutProperties::registerValues)
         // @todo нужна ли всё-таки колонка хранящегося в датчике адреса выборка на уставке? Или отображать только её?
-        column("Значение уставки",DiscreteOut::valueSetpointProperty ).makeEditable()
-        column("Время установки", DiscreteOut::valueTimeSetProperty).makeEditable()
-        column("Время снятия", DiscreteOut::valueTimeUnsetProperty).makeEditable()
-        column( "Вес", DiscreteOut::valueWeightProperty ).makeEditable()
+        column("Значение уставки",DiscreteOutProperties::valueSetpointProperty ).makeEditable()
+        column("Время установки", DiscreteOutProperties::valueTimeSetProperty).makeEditable()
+        column("Время снятия", DiscreteOutProperties::valueTimeUnsetProperty).makeEditable()
+        column( "Вес", DiscreteOutProperties::valueWeightProperty ).makeEditable()
 
         maxHeight( Double.MAX_VALUE )
         maxWidth( Double.MAX_VALUE )
@@ -329,6 +331,7 @@ class CountSetpointFragment : Fragment() {
             setButtonsStatus( true )
             println(FormValues.getCurrentTime() + "writing parameters begin")
             writePropertiesProgress.set(0.0)
+            FormValues.updateDiscreteOutValues()
             if ( !FormValues.setpoints.writeParameterValues(
                     FormValues.device, writePropertiesProgress) )
             {
@@ -347,7 +350,13 @@ class CountSetpointFragment : Fragment() {
         if ( countModel.selectCount.value != null ) {
             FormValues.setpoints.countSetpointValues(
                     countModel.selectCount.value, countModel.percent.value)
+            if ( FormValues.setpoints.items.any { it.isUsed && it.valueSetpoint < 0.5 } )
+            {
+                alert(Alert.AlertType.INFORMATION, "", "Проверьте величины уставок\n"
+                        + "Часть уставок имеет маленькие значения" )
+            }
         }
+
     }
 
     private fun setButtonsStatus( isDisabled : Boolean )
