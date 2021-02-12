@@ -6,6 +6,8 @@ import registerCollection.DiscreteOutCollection
 import registerCollection.DiscreteOutCollectionMapper
 import registerMapTikModscan.SerializableCellsContainer
 import tornadofx.*
+import java.time.Instant
+import kotlin.random.Random
 
 class MainForm: View("Настройка уставок")
 {
@@ -135,7 +137,8 @@ class MainForm: View("Настройка уставок")
                 FormValues.setpoints = DiscreteOutCollection(
                         xmlMapper.readValue( fileName,
                                 DiscreteOutCollectionMapper::class.java))
-                FormValues.updateDiscreteOutProperties()
+                FormValues.discreteOutTableViewProperties.clear()
+                FormValues.updateDiscreteOutTableViewPropertiesList()
             }
         } catch ( e : Exception )
         {

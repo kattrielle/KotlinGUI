@@ -2,6 +2,8 @@ package kotlinGUI
 
 import javafx.beans.property.SimpleStringProperty
 import javafx.geometry.Insets
+import javafx.scene.control.Alert
+import javafx.scene.control.Tab
 import javafx.scene.control.TabPane
 import javafx.scene.layout.Priority
 import kotlinGUI.viewModel.DiscreteOutProperties
@@ -235,8 +237,12 @@ class FormSelectRegisters : View( "Задание параметров цифр�
     {
         FormValues.discreteOutProperties.add(
                 DiscreteOutViewProperties( discreteOut, num ) )
+        val property = FormValues.discreteOutProperties.last()
         val param = "discreteOut" to FormValues.discreteOutProperties.last()
         tabPane.add( find<DiscreteOutFragment>( param ))
+        tabPane.tabs.last().setOnCloseRequest {
+            deleteDiscreteOut( property.description.value.toInt() - 1 )
+        }
     }
 
     private fun redrawDiscreteOutTabPane()
@@ -246,6 +252,19 @@ class FormSelectRegisters : View( "Задание параметров цифр�
         for ( i in FormValues.setpoints.items.indices ) {
             addDiscreteOutTab( FormValues.setpoints.items[ i ], i + 1 )
         }
+    }
+
+    private fun deleteDiscreteOut( num : Int )
+    {
+        FormValues.setpoints.items.removeAt( num )
+        FormValues.discreteOutTableViewProperties.removeAt( num )
+        tabPane.tabs.removeAt( num )
+        FormValues.discreteOutProperties.removeAt( num )
+        for ( i in FormValues.discreteOutProperties.indices )
+        {
+            FormValues.discreteOutProperties[i].description.set( ( i + 1 ).toString() )
+        }
+
     }
 
     private fun findRegistersByDescription( description : String, baseText : String ) : List<CellData>

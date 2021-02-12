@@ -32,7 +32,7 @@ class DiscreteOutFragment : Fragment() {
     }
 
     init {
-        title = discreteOut.num.toString()
+        titleProperty.bind( discreteOut.description )
     }
 
 }

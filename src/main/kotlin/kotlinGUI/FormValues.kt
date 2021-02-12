@@ -63,6 +63,15 @@ class FormValues {
                     .format(Instant.now())
         }
 
+        fun updateDiscreteOutTableViewPropertiesList()
+        {
+            while ( discreteOutTableViewProperties.size < setpoints.items.size )
+            {
+                val index = discreteOutTableViewProperties.size
+                discreteOutTableViewProperties.add( DiscreteOutProperties( setpoints.items[ index ] ) )
+            }
+        }
+
         fun updateDiscreteOutProperties()
         {
             discreteOutTableViewProperties.forEach { it.updateProperties() }

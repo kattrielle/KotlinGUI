@@ -5,13 +5,14 @@ import kotlinGUI.FormValues
 import registerCollection.DiscreteOut
 import tornadofx.onChange
 
-class DiscreteOutViewProperties(discreteOut : DiscreteOut, val num : Int ) {
+class DiscreteOutViewProperties(discreteOut : DiscreteOut, num : Int ) {
     val selectValues = SimpleStringProperty(discreteOut.descriptionValues)
     val selectSetpointSample = SimpleStringProperty( discreteOut.descriptionSetpointSample )
     val selectSetpoint = SimpleStringProperty(discreteOut.descriptionSetpoint)
     val selectTimeSet = SimpleStringProperty(discreteOut.descriptionTimeSet)
     val selectTimeUnset = SimpleStringProperty(discreteOut.descriptionTimeUnset)
     val selectWeight = SimpleStringProperty( discreteOut.descriptionWeight )
+    val description = SimpleStringProperty( num.toString() )
 
     init {
         selectValues.onChange {
