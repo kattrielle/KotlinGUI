@@ -3,16 +3,11 @@ package kotlinGUI
 import countSetpoints.CountSetpointsDescriptions
 import javafx.beans.InvalidationListener
 import javafx.beans.property.SimpleDoubleProperty
-import javafx.collections.ObservableList
-import javafx.event.Event
-import javafx.event.EventTarget
 import javafx.geometry.Insets
 import javafx.geometry.Orientation
 import javafx.scene.control.Alert
-import javafx.scene.control.TableView
 import javafx.scene.input.KeyCode
 import javafx.scene.layout.Priority
-import registerCollection.DiscreteOut
 import tornadofx.*
 import javafx.scene.input.KeyEvent
 import kotlinGUI.styles.VisibleBorder
@@ -295,11 +290,11 @@ class CountSetpointFragment : Fragment() {
             {
                 //alert(Alert.AlertType.ERROR, "Reading Failed")
                 println( FormValues.getCurrentTime() + "an error has occured at reading setpoint values" )
-                getPropertiesProgress.set( 0.0 )
             } else {
                 //alert( Alert.AlertType.INFORMATION, "Success")
                 println(FormValues.getCurrentTime() + "getting parameters is done")
             }
+            getPropertiesProgress.set( 0.0 )
             FormValues.device.CloseConnection()
             setButtonsStatus( false )
         }
@@ -316,10 +311,10 @@ class CountSetpointFragment : Fragment() {
                             FormValues.device, getSampleProgress) )
             {
                 println(FormValues.getCurrentTime() + "getting samples is failed")
-                getSampleProgress.set (0.0)
             } else {
                 println(FormValues.getCurrentTime() + "getting samples is done")
             }
+            getSampleProgress.set (0.0)
             FormValues.device.CloseConnection()
             setButtonsStatus( false )
         }
@@ -336,10 +331,10 @@ class CountSetpointFragment : Fragment() {
                     FormValues.device, writePropertiesProgress) )
             {
                 println(FormValues.getCurrentTime() + "writing parameters failed")
-                writePropertiesProgress.set(0.0)
             } else {
                 println(FormValues.getCurrentTime() + "writing parameters is done")
             }
+            writePropertiesProgress.set(0.0)
             FormValues.device.CloseConnection()
             setButtonsStatus( false )
         }

@@ -1,13 +1,9 @@
 package registerCollection
 
 import externalDevices.devices.Modbus
-import javafx.beans.property.*
 import registerMapTikModscan.CellData
 import registerMapTikModscan.ElementFormat
 import registerMapTikModscan.ElementType
-import tornadofx.getProperty
-import tornadofx.onChange
-import tornadofx.property
 
 class DiscreteOut () {
     var values : CellData? = null //регистр выборки
@@ -81,36 +77,6 @@ class DiscreteOut () {
     var valueWeight = 0
 
     var isUsed = true
-
-    /*var valueSetpointSample by property( 0 )
-    //fun valueSetpointSampleProperty() = getProperty( DiscreteOut:: valueSetpointSample )
-
-    var valueSetpoint by property( 0.0 )
-    //fun valueSetpointProperty() = getProperty( DiscreteOut::valueSetpoint )
-
-    var valueTimeSet by property( 0 )
-    //fun valueTimeSetProperty() = getProperty( DiscreteOut::valueTimeSet )
-
-    var valueTimeUnset by property( 0 )
-    //fun valueTimeUnsetProperty() = getProperty( DiscreteOut::valueTimeUnset )
-
-    var valueWeight by property( 0 )
-    //fun valueWeightProperty() = getProperty( DiscreteOut:: valueWeight )
-
-    var isUsed by property( true )
-    //fun isUsedProperty() = getProperty( DiscreteOut::isUsed ) */
-
-    /*init {
-        isUsedProperty().onChange {
-            if ( !isUsed ) {
-                valueSetpoint = 0.0
-                valueTimeSet = 0
-                valueTimeUnset = 0
-                valueWeight = 0
-            }
-
-        }
-    } */
 
     fun getSampleValue( device: Modbus ) : Pair< Boolean, Double >
     {

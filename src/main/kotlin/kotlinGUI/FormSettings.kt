@@ -4,6 +4,7 @@ import externalDevices.devices.ModbusRTU
 import javafx.scene.input.KeyCode
 import javafx.scene.input.KeyEvent
 import jssc.SerialPortList
+import kotlinGUI.viewModel.DataComConnection
 import kotlinGUI.viewModel.SettingsModel
 import tornadofx.*
 

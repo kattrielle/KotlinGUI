@@ -1,8 +1,6 @@
 package kotlinGUI.viewModel
 
-import kotlinGUI.DataComConnection
 import tornadofx.ItemViewModel
-import javax.xml.crypto.Data
 
 class SettingsModel(properties: DataComConnection) :
     ItemViewModel<DataComConnection>(properties)

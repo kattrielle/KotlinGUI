@@ -8,6 +8,7 @@ import registerCollection.DiscreteOutCollection
 import kotlinGUI.viewModel.DiscreteOutViewProperties
 import registerMapTikModscan.CellData
 import registerMapTikModscan.SerializableCellsContainer
+import saveableProperties.SaveableProperties
 import tornadofx.asObservable
 import java.time.Instant
 import java.time.ZoneOffset
@@ -16,6 +17,8 @@ import kotlin.math.ceil
 
 class FormValues {
     companion object {
+        var savedProperties = SaveableProperties()
+
         var settings = SettingsModbusRTU( "" )
 
         var device = ModbusRTU( "" )

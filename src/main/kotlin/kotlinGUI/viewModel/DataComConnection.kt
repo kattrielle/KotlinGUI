@@ -1,10 +1,11 @@
-package kotlinGUI
+package kotlinGUI.viewModel
 
 import externalDevices.settings.SettingsModbusRTU
 import javafx.beans.property.SimpleIntegerProperty
 import javafx.beans.property.SimpleStringProperty
 import javafx.collections.FXCollections
 import jssc.SerialPort
+import kotlinGUI.FormValues
 import tornadofx.Controller
 
 class DataComConnection : Controller()
@@ -110,6 +111,8 @@ class DataComConnection : Controller()
 
         settings.parity = selectParityFromTextLine()
         settings.stopBits = selectStopBitsFromTextLine()
+
+        FormValues.savedProperties.selectedPortNum = selectPort.value
 
         return settings
     }

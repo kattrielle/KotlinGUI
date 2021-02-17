@@ -5,8 +5,10 @@ package kotlinGUI
 
 import tornadofx.*
 import kotlinGUI.styles.VisibleBorder
+import saveableProperties.PropertiesSaver
 
 fun main(args: Array<String>) {
+    PropertiesSaver.LoadProperties()
     launch<VisualApplication>(args)
 }
 
