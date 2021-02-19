@@ -4,6 +4,7 @@ import javafx.beans.property.SimpleStringProperty
 import javafx.geometry.Insets
 import javafx.scene.control.TabPane
 import javafx.scene.layout.Priority
+import kotlinGUI.viewModel.DiscreteOutModel
 import kotlinGUI.viewModel.DiscreteOutProperties
 import kotlinGUI.viewModel.SearchRegisterProperties
 import registerCollection.DiscreteOut
@@ -227,6 +228,7 @@ class FormSelectRegisters : View( "Задание параметров цифр�
         FormValues.setpoints.items.add( DiscreteOut())
         FormValues.discreteOutTableViewProperties.add(
                 DiscreteOutProperties(FormValues.setpoints.items.last()) )
+        //FormValues.discreteOutModel.add( DiscreteOutModel( FormValues.discreteOutTableViewProperties.last()) )
         addDiscreteOutTab( FormValues.setpoints.items.last(),
                 FormValues.setpoints.items.size )
     }
@@ -256,6 +258,7 @@ class FormSelectRegisters : View( "Задание параметров цифр�
     {
         FormValues.setpoints.items.removeAt( num )
         FormValues.discreteOutTableViewProperties.removeAt( num )
+        //FormValues.discreteOutModel.removeAt( num )
         tabPane.tabs.removeAt( num )
         FormValues.discreteOutProperties.removeAt( num )
         for ( i in FormValues.discreteOutProperties.indices )

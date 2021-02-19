@@ -10,10 +10,12 @@ import javafx.scene.input.KeyCode
 import javafx.scene.layout.Priority
 import tornadofx.*
 import javafx.scene.input.KeyEvent
+import javafx.scene.paint.Color
 import kotlinGUI.styles.VisibleBorder
 import kotlinGUI.viewModel.CountSetpointModel
 import kotlinGUI.viewModel.CountSetpointProperties
 import kotlinGUI.viewModel.DiscreteOutProperties
+import tornadofx.Stylesheet.Companion.tableRowCell
 import kotlin.concurrent.thread
 
 class CountSetpointFragment : Fragment() {
@@ -42,6 +44,7 @@ class CountSetpointFragment : Fragment() {
     private val buttonSaveSetpoints = button("Записать уставки") {
         action {
             writeSetpoints()
+            find(MainForm::class).reloadForm()
         }
     }
 
@@ -57,6 +60,10 @@ class CountSetpointFragment : Fragment() {
             }
         }
     }
+
+    /*private val table2 = tableview( FormValues.discreteOutModel ) {
+        column("Значение уставки", DiscreteOutModel::valueSetpoint ).makeEditable()
+    }*/
 
     private val table = tableview( FormValues.discreteOutTableViewProperties ) {
         //isEditable = true
@@ -79,38 +86,29 @@ class CountSetpointFragment : Fragment() {
         enableCellEditing()
         regainFocusAfterEdit()
         setOnKeyPressed {
-            if (it.code == KeyCode.ENTER) {
+            if (it.code == KeyCode.ENTER && !isEditing) {
                 isEditing = true
             }
+            println("key pressed: " + it.character)
         }
         setOnKeyTyped {
             if (selectedCell != null && it.character.isNotEmpty() && !isEditing) {
                 edit(selectedCell!!.row, selectedCell!!.tableColumn)
                 isEditing = true
+                println( "i`m here and char is: " + it.character )
             }
         }
 
         onEditCommit {
             isEditing = false
-
+            //addClass( VisibleBorder.changedCellHighlight )
+            /*style {
+                backgroundColor += Color.RED }*/
         }
         // In case user selected another cell before commit
         selectionModel.selectedCells.addListener(InvalidationListener {
             isEditing = false
         } )
-
-//        addEventHandler(KeyEvent.KEY_PRESSED) { keyEvent ->
-//            // For editing cell without pressing enter first
-//            if (keyEvent.code.isValidInput()) {
-//                if (editingCell == null) {
-//                    val currentSelectedCell = selectedCell
-//                    if (currentSelectedCell != null && currentSelectedCell.tableColumn.isEditable) {
-//                        println("trying to edit column")
-//                        edit(currentSelectedCell.row, currentSelectedCell.tableColumn)
-//                    }
-//                }
-//            }
-//        }
 
     }
 
@@ -266,9 +264,14 @@ class CountSetpointFragment : Fragment() {
             }
         }
         hbox {
+            //add( table2 )
             add(table)
             //table.exceltableview( FormValues.setpoints.items )
             isFillHeight = true
+            maxWidth = Double.MAX_VALUE
+            maxHeight = Double.MAX_VALUE
+            hgrow = Priority.ALWAYS
+            vgrow = Priority.ALWAYS
 
             gridpaneConstraints {
                 columnRowIndex(0,1)

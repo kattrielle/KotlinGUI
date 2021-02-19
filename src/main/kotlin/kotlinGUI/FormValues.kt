@@ -2,6 +2,7 @@ package kotlinGUI
 
 import externalDevices.devices.ModbusRTU
 import externalDevices.settings.SettingsModbusRTU
+import kotlinGUI.viewModel.DiscreteOutModel
 import kotlinGUI.viewModel.DiscreteOutProperties
 import registerCollection.DiscreteOut
 import registerCollection.DiscreteOutCollection
@@ -28,6 +29,8 @@ class FormValues {
         val discreteOutProperties = mutableListOf<DiscreteOutViewProperties>()
 
         val discreteOutTableViewProperties = mutableListOf<DiscreteOutProperties>().asObservable()
+
+        //val discreteOutModel = mutableListOf<DiscreteOutModel>().asObservable()
 
         lateinit var tikModscanMap : SerializableCellsContainer
 
@@ -72,6 +75,7 @@ class FormValues {
             {
                 val index = discreteOutTableViewProperties.size
                 discreteOutTableViewProperties.add( DiscreteOutProperties( setpoints.items[ index ] ) )
+                //discreteOutModel.add( DiscreteOutModel( discreteOutTableViewProperties[index] ) )
             }
         }
 

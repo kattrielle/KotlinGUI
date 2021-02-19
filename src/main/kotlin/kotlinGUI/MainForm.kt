@@ -36,6 +36,7 @@ class MainForm: View("Настройка уставок")
                         if  (loadTikModscanMap()) {
                             FormValues.setpoints.items.clear()
                             FormValues.discreteOutTableViewProperties.clear()
+                            //FormValues.discreteOutModel.clear()
 
                             val window = FormSelectRegisters()
                             window.openModal()
@@ -56,7 +57,7 @@ class MainForm: View("Настройка уставок")
 
                 item("Выход") {
                     action {
-                        WorkCompletion()
+                        workCompletion()
                         close()
                     }
                 }
@@ -102,7 +103,7 @@ class MainForm: View("Настройка уставок")
 
     override fun onDock() {
         currentWindow?.setOnCloseRequest {
-            WorkCompletion()
+            workCompletion()
         }
         loadDiscreteOutMap( FormValues.savedProperties.selectedSetpointMapFile )
         reloadForm()
@@ -159,6 +160,7 @@ class MainForm: View("Настройка уставок")
                     xmlMapper.readValue(file,
                             DiscreteOutCollectionMapper::class.java))
             FormValues.discreteOutTableViewProperties.clear()
+            //FormValues.discreteOutModel.clear()
             FormValues.updateDiscreteOutTableViewPropertiesList()
         } catch (e: Exception) {
             println(FormValues.getCurrentTime() + "Error at loading SetpointMap : ${e.message}")
@@ -187,7 +189,7 @@ class MainForm: View("Настройка уставок")
         root.center.add( CountSetpointFragment() )
     }
 
-    fun WorkCompletion()
+    private fun workCompletion()
     {
         PropertiesSaver.SaveProperties()
     }
