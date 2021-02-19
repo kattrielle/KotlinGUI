@@ -35,4 +35,13 @@ class CountSetpointsTest {
 
         assertEquals( 8.240399840127873, result )
     }
+
+    @Test fun testToDoubleFun()
+    {
+        assertEquals( 1.5, "1.5".toDoubleOrNull() )
+        assertEquals( null, "text".toDoubleOrNull() )
+        assertEquals( 5.0, "5".toDouble() )
+        assertEquals( null, "1,3".toDoubleOrNull() )
+        assertEquals( null, "12hello3".toDoubleOrNull() )
+    }
 }

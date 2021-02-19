@@ -18,8 +18,9 @@ plugins {
 }
 
 javafx {
-    modules("javafx.controls", "javafx.graphics") 
-    version = "11.0.2"
+    modules("javafx.controls", "javafx.graphics")
+    //version = "11.0.2"
+    version = "15"
 }
 
 repositories {

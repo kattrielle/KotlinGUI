@@ -12,9 +12,7 @@ import tornadofx.*
 import javafx.scene.input.KeyEvent
 import javafx.scene.paint.Color
 import kotlinGUI.styles.VisibleBorder
-import kotlinGUI.viewModel.CountSetpointModel
-import kotlinGUI.viewModel.CountSetpointProperties
-import kotlinGUI.viewModel.DiscreteOutProperties
+import kotlinGUI.viewModel.*
 import tornadofx.Stylesheet.Companion.tableRowCell
 import kotlin.concurrent.thread
 
@@ -72,10 +70,10 @@ class CountSetpointFragment : Fragment() {
         readonlyColumn("Выборка", DiscreteOutProperties::descriptionValues)
         readonlyColumn("Регистр выборки", DiscreteOutProperties::registerValues)
         // @todo нужна ли всё-таки колонка хранящегося в датчике адреса выборка на уставке? Или отображать только её?
-        column("Значение уставки",DiscreteOutProperties::valueSetpointProperty ).makeEditable()
-        column("Время установки", DiscreteOutProperties::valueTimeSetProperty).makeEditable()
-        column("Время снятия", DiscreteOutProperties::valueTimeUnsetProperty).makeEditable()
-        column( "Вес", DiscreteOutProperties::valueWeightProperty ).makeEditable()
+        column("Значение уставки",DiscreteOutProperties::valueSetpointProperty ).makeEditable( ToDoubleConverter )
+        column("Время установки", DiscreteOutProperties::valueTimeSetProperty).makeEditable( ToIntConverter )
+        column("Время снятия", DiscreteOutProperties::valueTimeUnsetProperty).makeEditable( ToIntConverter )
+        column( "Вес", DiscreteOutProperties::valueWeightProperty ).makeEditable( ToIntConverter )
 
         maxHeight( Double.MAX_VALUE )
         maxWidth( Double.MAX_VALUE )
