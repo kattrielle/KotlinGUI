@@ -6,14 +6,18 @@ import javafx.beans.property.SimpleDoubleProperty
 import javafx.geometry.Insets
 import javafx.geometry.Orientation
 import javafx.scene.control.Alert
+import javafx.scene.control.TableCell
 import javafx.scene.input.KeyCode
 import javafx.scene.layout.Priority
 import tornadofx.*
 import javafx.scene.input.KeyEvent
 import javafx.scene.paint.Color
+import javafx.scene.text.FontWeight
 import kotlinGUI.styles.VisibleBorder
 import kotlinGUI.viewModel.*
 import tornadofx.Stylesheet.Companion.tableRowCell
+import java.awt.Color.green
+import java.awt.Color.red
 import kotlin.concurrent.thread
 
 class CountSetpointFragment : Fragment() {
@@ -23,6 +27,8 @@ class CountSetpointFragment : Fragment() {
 
     private val countSetpointProperties = CountSetpointProperties()
     private val countModel = CountSetpointModel( countSetpointProperties )
+
+    private var valChanged = false
 
     private val buttonLoadSetpoints = button("Загрузить уставки") {
         action {
@@ -74,6 +80,19 @@ class CountSetpointFragment : Fragment() {
         column("Время установки", DiscreteOutProperties::valueTimeSetProperty).makeEditable( ToIntConverter )
         column("Время снятия", DiscreteOutProperties::valueTimeUnsetProperty).makeEditable( ToIntConverter )
         column( "Вес", DiscreteOutProperties::valueWeightProperty ).makeEditable( ToIntConverter )
+            .cellDecorator {
+                if (valChanged) {
+                    if (Math.random() < 0.5) {
+                        style {
+                            backgroundColor += c("red");
+                        }
+                    } else {
+                        style {
+                            backgroundColor += c("yellow");
+                        }
+                    }
+                }
+            }
 
         maxHeight( Double.MAX_VALUE )
         maxWidth( Double.MAX_VALUE )
@@ -95,13 +114,16 @@ class CountSetpointFragment : Fragment() {
                 isEditing = true
                 println( "i`m here and char is: " + it.character )
             }
+            valChanged = true
         }
 
         onEditCommit {
             isEditing = false
+            println( valChanged )
             //addClass( VisibleBorder.changedCellHighlight )
             /*style {
                 backgroundColor += Color.RED }*/
+
         }
         // In case user selected another cell before commit
         selectionModel.selectedCells.addListener(InvalidationListener {
