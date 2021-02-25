@@ -77,19 +77,34 @@ class CountSetpointFragment : Fragment() {
         readonlyColumn("Регистр выборки", DiscreteOutProperties::registerValues)
         // @todo нужна ли всё-таки колонка хранящегося в датчике адреса выборка на уставке? Или отображать только её?
         column("Значение уставки",DiscreteOutProperties::valueSetpointProperty ).makeEditable( ToDoubleConverter )
+                .cellDecorator {
+                    if (valChanged) {
+                        style {
+                            backgroundColor += Color.LIGHTGREEN
+                        }
+                    }
+                }
         column("Время установки", DiscreteOutProperties::valueTimeSetProperty).makeEditable( ToIntConverter )
+                .cellDecorator {
+                    if (valChanged) {
+                        style {
+                            backgroundColor += Color.LIGHTGREEN
+                        }
+                    }
+                }
         column("Время снятия", DiscreteOutProperties::valueTimeUnsetProperty).makeEditable( ToIntConverter )
+                .cellDecorator {
+                    if (valChanged) {
+                        style {
+                            backgroundColor += Color.LIGHTGREEN
+                        }
+                    }
+                }
         column( "Вес", DiscreteOutProperties::valueWeightProperty ).makeEditable( ToIntConverter )
             .cellDecorator {
                 if (valChanged) {
-                    if (Math.random() < 0.5) {
-                        style {
-                            backgroundColor += c("red");
-                        }
-                    } else {
-                        style {
-                            backgroundColor += c("yellow");
-                        }
+                    style {
+                        backgroundColor += Color.LIGHTGREEN
                     }
                 }
             }
@@ -115,15 +130,11 @@ class CountSetpointFragment : Fragment() {
                 println( "i`m here and char is: " + it.character )
             }
             valChanged = true
+            println( "typed char is: " + it.character )
         }
 
         onEditCommit {
             isEditing = false
-            println( valChanged )
-            //addClass( VisibleBorder.changedCellHighlight )
-            /*style {
-                backgroundColor += Color.RED }*/
-
         }
         // In case user selected another cell before commit
         selectionModel.selectedCells.addListener(InvalidationListener {

@@ -10,6 +10,7 @@ class ConverterTest {
     {
         assertEquals( 5.0, ToDoubleConverter.fromString("5") )
         assertEquals( 4.0, ToDoubleConverter.fromString("4.0") )
+        assertEquals( 1.3, ToDoubleConverter.fromString("1,3") )
         assertEquals( 0.0, ToDoubleConverter.fromString("test") )
         assertEquals( 0.0, ToDoubleConverter.fromString("12xy") )
         assertEquals( "5.0", ToDoubleConverter.toString( 5.0 ) )

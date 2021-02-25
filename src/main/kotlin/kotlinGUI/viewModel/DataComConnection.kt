@@ -56,12 +56,12 @@ class DataComConnection : Controller()
     {
         return when ( selectParity.value )
         {
-            "None" -> return SerialPort.PARITY_NONE
-            "Even" -> return SerialPort.PARITY_EVEN
-            "Mark" -> return SerialPort.PARITY_MARK
-            "Odd" -> return SerialPort.PARITY_ODD
-            "Space" -> return SerialPort.PARITY_SPACE
-            else -> return SerialPort.PARITY_NONE
+            "None" -> SerialPort.PARITY_NONE
+            "Even" -> SerialPort.PARITY_EVEN
+            "Mark" -> SerialPort.PARITY_MARK
+            "Odd" -> SerialPort.PARITY_ODD
+            "Space" -> SerialPort.PARITY_SPACE
+            else -> SerialPort.PARITY_NONE
         }
     }
 
