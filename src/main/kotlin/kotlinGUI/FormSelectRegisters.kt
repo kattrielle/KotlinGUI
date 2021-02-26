@@ -14,7 +14,7 @@ import tornadofx.*
 
 class FormSelectRegisters : View( "Задание параметров цифровых выходов" )
 {
-    private val selectDefence = SimpleStringProperty()
+    private val selectDefence = SimpleStringProperty( FormValues.setpoints.descriptionWriteDefence )
     private val tabPane = TabPane()
     private var columnName = ""
     private val selectedTab
@@ -31,6 +31,10 @@ class FormSelectRegisters : View( "Задание параметров цифр�
         {
             redrawDiscreteOutTabPane()
         }
+    }
+
+    override fun onDock() {
+        setWindowMinSize( 650.0, 400.0 )
     }
 
     override val root = gridpane {
@@ -186,7 +190,7 @@ class FormSelectRegisters : View( "Задание параметров цифр�
                 }
             }
             gridpaneConstraints {
-                margin = Insets( 5.0 )
+                margin = Insets( 10.0, 0.0, 10.0, 10.0 )
                 columnRowIndex(1,0)
             }
         }
@@ -204,17 +208,19 @@ class FormSelectRegisters : View( "Задание параметров цифр�
         }
 
         vbox {
-            hbox {
-                text("Регистр защиты от записи")
-                textfield( selectDefence )
-            }
-
-            button("Добавить уставку") {
-                action {
-                    addDiscreteOut()
+            form {
+                fieldset {
+                    field("Регистр защиты от записи") {
+                        textfield( selectDefence )
+                    }
                 }
+                button("Добавить уставку") {
+                    action {
+                        addDiscreteOut()
+                    }
+                }
+                add( tabPane )
             }
-            add( tabPane )
 
             gridpaneConstraints {
                 columnRowIndex(2,0)

@@ -89,5 +89,13 @@ class FormValues {
             discreteOutTableViewProperties.forEach { it.updateBaseValues() }
         }
 
+        fun clearDiscreteOutCollection()
+        {
+            setpoints.items.clear()
+            setpoints.registerWriteDefence = null
+            discreteOutTableViewProperties.clear()
+            //discreteOutModel.clear()
+        }
+
     }
 }

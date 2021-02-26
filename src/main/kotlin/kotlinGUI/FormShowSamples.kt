@@ -30,6 +30,10 @@ class FormShowSamples : View("Отображение выборок") {
         } }
     }
 
+    override fun onDock() {
+        setWindowMinSize( 600.0, 450.0 )
+    }
+
     private fun addCheckBoxes( layout : Parent )
     {
         for ( i in FormValues.setpoints.items.indices ) {

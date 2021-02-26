@@ -3,6 +3,7 @@
  */
 package kotlinGUI
 
+import javafx.stage.Stage
 import tornadofx.*
 import kotlinGUI.styles.VisibleBorder
 import saveableProperties.PropertiesSaver
@@ -13,4 +14,11 @@ fun main(args: Array<String>) {
 }
 
 class VisualApplication: App(MainForm::class, VisibleBorder::class)
+{
+    override fun start(stage: Stage) {
+        stage.minWidth = 750.0
+        stage.minHeight = 500.0
+        super.start(stage)
+    }
+}
 

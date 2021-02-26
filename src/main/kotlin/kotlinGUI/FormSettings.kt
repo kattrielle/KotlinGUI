@@ -161,5 +161,7 @@ class FormSettings: View("Параметры") {
 
     override fun onDock() {
         dataComConnection.updateModbusParametersFromDevice( FormValues.settings )
+
+        setWindowMinSize( 250.0, 450.0 )
     }
 }

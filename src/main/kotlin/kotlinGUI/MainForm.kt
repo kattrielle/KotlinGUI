@@ -34,9 +34,7 @@ class MainForm: View("Настройка уставок")
                 item("Создать из карты регистров") {
                     action {
                         if  (loadTikModscanMap()) {
-                            FormValues.setpoints.items.clear()
-                            FormValues.discreteOutTableViewProperties.clear()
-                            //FormValues.discreteOutModel.clear()
+                            FormValues.clearDiscreteOutCollection()
 
                             val window = FormSelectRegisters()
                             window.openModal()
