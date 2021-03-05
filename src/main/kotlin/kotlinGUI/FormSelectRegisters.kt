@@ -45,8 +45,8 @@ class FormSelectRegisters : View( "Задание параметров цифр�
             readonlyColumn("Название", CellData::name)
 
             contextmenu {
-                item("Автоматический выбор регистров адреса выборки для уставок").action {
-                    val registersList = findRegistersByDescription( searchDescriptions.setpointSampleDescription.value,
+                item( "Автоматический выбор регистров для полной карты уставок" ).action {
+                    var registersList = findRegistersByDescription( searchDescriptions.setpointSampleDescription.value,
                             searchDescriptions.baseDescription.value )
                     checkSetpointsCount( registersList.size )
                     for ( i in registersList.indices )
@@ -55,9 +55,8 @@ class FormSelectRegisters : View( "Задание параметров цифр�
                                 "setting register of sample address at setpoint to ${registersList[i].name}")
                         FormValues.discreteOutProperties[ i ].selectSetpointSample.set( registersList[i].name )
                     }
-                }
-                item("Автоматический выбор регистров значений для уставок").action {
-                    val registersList = findRegistersByDescription( searchDescriptions.setpointDescription.value,
+
+                    registersList = findRegistersByDescription( searchDescriptions.setpointDescription.value,
                             searchDescriptions.baseDescription.value )
                     checkSetpointsCount( registersList.size )
                     for ( i in registersList.indices )
@@ -66,9 +65,8 @@ class FormSelectRegisters : View( "Задание параметров цифр�
                                 "setting register of setpoint value to ${registersList[i].name}")
                         FormValues.discreteOutProperties[ i ].selectSetpoint.set( registersList[i].name )
                     }
-                }
-                item("Автоматический выбор регистров времени установки для уставок").action {
-                    val registersList = findRegistersByDescription( searchDescriptions.timeSetDescription.value,
+
+                    registersList = findRegistersByDescription( searchDescriptions.timeSetDescription.value,
                             searchDescriptions.baseDescription.value )
                     checkSetpointsCount( registersList.size )
                     for ( i in registersList.indices )
@@ -77,9 +75,8 @@ class FormSelectRegisters : View( "Задание параметров цифр�
                                 "setting register of setpoint time set to ${registersList[i].name}")
                         FormValues.discreteOutProperties[ i ].selectTimeSet.set( registersList[i].name )
                     }
-                }
-                item("Автоматический выбор регистров времени снятия для уставок").action {
-                    val registersList = findRegistersByDescription( searchDescriptions.timeUnsetDescription.value,
+
+                    registersList = findRegistersByDescription( searchDescriptions.timeUnsetDescription.value,
                             searchDescriptions.baseDescription.value )
                     checkSetpointsCount( registersList.size )
                     for ( i in registersList.indices )
@@ -88,9 +85,8 @@ class FormSelectRegisters : View( "Задание параметров цифр�
                                 "setting register of setpoint time unset to ${registersList[i].name}")
                         FormValues.discreteOutProperties[ i ].selectTimeUnset.set( registersList[i].name )
                     }
-                }
-                item("Автоматический выбор регистров веса для уставок").action {
-                    val registersList = findRegistersByDescription( searchDescriptions.weightDescription.value,
+
+                    registersList = findRegistersByDescription( searchDescriptions.weightDescription.value,
                             searchDescriptions.baseDescription.value )
                     checkSetpointsCount( registersList.size )
                     for ( i in registersList.indices )
@@ -99,6 +95,15 @@ class FormSelectRegisters : View( "Задание параметров цифр�
                                 "setting register of setpoint weight to ${registersList[i].name}")
                         FormValues.discreteOutProperties[ i ].selectWeight.set( registersList[i].name )
                     }
+                }
+                item( "Перенос выделенных регистров в текущую уставку" ).action {
+
+                }
+                item( "Перенос выделенных регистров в новую уставку" ).action {
+
+                }
+                item( "Перенос выделенных регистров в выборки" ).action {
+
                 }
             }
 

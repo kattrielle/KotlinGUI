@@ -1,10 +1,7 @@
 package kotlinGUI
 
-import javafx.beans.property.SimpleIntegerProperty
-import javafx.beans.property.SimpleStringProperty
 import kotlinGUI.viewModel.DiscreteOutCellsProperties
 import kotlinGUI.viewModel.RegisterDescriptions
-import registerCollection.DiscreteOut
 import tornadofx.*
 
 class ShowDiscreteOutFragment : Fragment() {
@@ -65,14 +62,5 @@ class ShowDiscreteOutFragment : Fragment() {
         field( "Формат регистра" ) {
             combobox( cells.weightFormat, RegisterDescriptions.formats )
         }
-    }
-
-    override fun onSave() {
-        saveParams()
-    }
-
-    fun saveParams()
-    {
-        cells.saveParams()
     }
 }

@@ -55,7 +55,7 @@ open class Modbus : Device() {
     ):Array<Byte>
     {
         val result: Array<Byte> = Array( values.size * 2) {0}
-        var byteBuffer = ByteBuffer.allocate(2)
+        val byteBuffer = ByteBuffer.allocate(2)
         for ( i in values.indices) {
             byteBuffer.putShort(values[i].toShort())
             result[2 * i + 1] = byteBuffer[0]

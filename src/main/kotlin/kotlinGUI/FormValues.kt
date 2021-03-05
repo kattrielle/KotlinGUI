@@ -34,14 +34,6 @@ class FormValues {
 
         lateinit var tikModscanMap : SerializableCellsContainer
 
-        fun getRegisterMapDescriptions() : List<String>
-        {
-            val descriptions = mutableListOf<String>()
-            tikModscanMap?.сellsArray.forEach { descriptions.add(it.name.toString()) }
-
-            return descriptions
-        }
-
         fun findRegister( name : String ) : CellData
         {
             println( getCurrentTime() + "searching register \"$name\"")

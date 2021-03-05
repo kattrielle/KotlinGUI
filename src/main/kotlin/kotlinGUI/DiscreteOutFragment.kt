@@ -8,7 +8,7 @@ class DiscreteOutFragment : Fragment() {
 
     override val root = form {
         fieldset {
-            field("Набор значений") {
+            field("Выборка") {
                 textfield(discreteOut.selectValues)
             }
             field ("Уставка - адрес выборки") {
