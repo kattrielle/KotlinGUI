@@ -35,6 +35,7 @@ class FormSelectRegisters : View( "Задание параметров цифр�
 
     override fun onDock() {
         setWindowMinSize( 650.0, 400.0 )
+        setWindowMaxSize(900.0, 500.0 )
     }
 
     override val root = gridpane {
@@ -204,6 +205,7 @@ class FormSelectRegisters : View( "Задание параметров цифр�
             }
             gridpaneConstraints {
                 columnRowIndex(0,1)
+                margin = Insets( 10.0 )
             }
         }
 

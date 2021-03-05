@@ -50,7 +50,7 @@ class FormValues {
 
         fun findSetpoint( name : String ) : DiscreteOut?
         {
-            return setpoints.items.find { it?.descriptionValues == name }
+            return setpoints.items.find { it.descriptionValues == name }
         }
 
         fun countSampleTime( sampleLen : Int ) : Int

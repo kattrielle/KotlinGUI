@@ -84,6 +84,7 @@ class FormShowRegisters : View("Номера регистров") {
 
     override fun onDock() {
         setWindowMinSize( 580.0, 400.0 )
+        setWindowMaxSize( 580.0, 900.0 )
     }
 
     private fun saveChanges()

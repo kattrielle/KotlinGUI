@@ -163,5 +163,6 @@ class FormSettings: View("Параметры") {
         dataComConnection.updateModbusParametersFromDevice( FormValues.settings )
 
         setWindowMinSize( 250.0, 450.0 )
+        setWindowMaxSize( 400.0, 450.0 )
     }
 }

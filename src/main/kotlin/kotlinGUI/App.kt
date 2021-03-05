@@ -18,6 +18,9 @@ class VisualApplication: App(MainForm::class, VisibleBorder::class)
     override fun start(stage: Stage) {
         stage.minWidth = 750.0
         stage.minHeight = 500.0
+        stage.maxWidth = 835.0
+        stage.maxHeight = 655.0
+
         super.start(stage)
     }
 }

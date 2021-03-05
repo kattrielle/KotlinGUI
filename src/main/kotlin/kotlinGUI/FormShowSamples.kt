@@ -32,6 +32,7 @@ class FormShowSamples : View("Отображение выборок") {
 
     override fun onDock() {
         setWindowMinSize( 600.0, 450.0 )
+        setWindowMaxSize( 600.0, 450.0 )
     }
 
     private fun addCheckBoxes( layout : Parent )

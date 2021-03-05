@@ -96,7 +96,6 @@ class MainForm: View("Настройка уставок")
         bottom = vbox {
 
         }
-        setMinSize(600.0,500.0)
     }
 
     override fun onDock() {
